@@ -7,10 +7,10 @@ const currentPath = rawPath === "/" ? "/" : rawPath.replace(/\/$/, "");
 
 const navLinks = [
   { name: "Home", path: "/" },
+  { name: "Pricing", path: "/pricing" },
   { name: "Services", path: "/services" },
-  { name: "Work", path: "/work" },
   { name: "Process", path: "/process" },
-  { name: "About", path: "/about" },
+  { name: "Contact", path: "/contact" },
 ];
 ---
 
@@ -47,7 +47,7 @@ const navLinks = [
           ))
         }
         <a href="/contact">
-          <Button variant="primary" size="sm"> Get a Quote </Button>
+          <Button variant="primary" size="sm">Get Started</Button>
         </a>
       </nav>
 
@@ -107,7 +107,7 @@ const navLinks = [
         ))
       }
       <a href="/contact" class="block pt-4">
-        <Button variant="primary" class="w-full"> Get a Quote </Button>
+        <Button variant="primary" class="w-full">Get Started</Button>
       </a>
     </div>
   </div>
@@ -130,7 +130,7 @@ const navLinks = [
         "bg-navy/95",
         "backdrop-blur-md",
         "shadow-lg",
-        "py-3"
+        "py-3",
       );
       header.classList.remove("py-5");
     } else {
@@ -138,7 +138,7 @@ const navLinks = [
         "bg-navy/95",
         "backdrop-blur-md",
         "shadow-lg",
-        "py-3"
+        "py-3",
       );
       header.classList.add("py-5");
     }
