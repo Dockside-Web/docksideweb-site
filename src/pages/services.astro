@@ -16,40 +16,40 @@ interface ServiceFeature {
 
 const services: ServiceFeature[] = [
   {
-    title: "Custom Website Development",
+    title: "Custom Business Website",
     description:
       "A professionally designed website built specifically for your business.",
     features: [
-      "Flawless on Mobile, Tablet, and Desktop",
-      "Clean, Easy-to-Use Layout",
-      "Fast, Reliable Performance",
-      "Designed to Turn Visitors into Customers",
+      "Looks great on phones and computers",
+      "Simple, easy-to-use layout",
+      "Fast loading pages",
+      "Built to help turn visitors into calls and messages",
     ],
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
   },
   {
-    title: "Performance & SEO",
+    title: "Google Visibility & Speed",
     description:
-      "Optimized for speed, visibility, and long-term growth so customers can find you and trust you.",
+      "We set your site up to load quickly and be easy for Google to understand, so more people can find you.",
     features: [
-      "Built for Higher Google Rankings",
-      "Blazing Fast Load Speeds",
-      "Search-Engine Friendly Structure",
-      "Clear Visitor Insights & Analytics",
+      "Fast load times",
+      "SEO basics set up the right way",
+      "Clean page structure",
+      "Simple traffic reports (so you know what’s working)",
     ],
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
   },
   {
-    title: "Maintenance & Support",
+    title: "Website Care & Support",
     description:
-      "Ongoing care to keep your website secure, updated, and performing at its best.",
+      "We keep your website updated and running smoothly, and we’re here when you need changes.",
     features: [
-      "Proactive Security Updates",
-      "Content Changes On Request",
-      "Fast Issue Resolution",
-      "Continuous Performance Monitoring",
+      "Security and maintenance updates",
+      "Edits when you need them",
+      "Quick fixes if something breaks",
+      "Ongoing checkups to keep things running well",
     ],
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
@@ -68,9 +68,8 @@ const services: ServiceFeature[] = [
       Full-Service Web Solutions
     </Heading>
     <Text class="text-slate-300 mb-10">
-      From design to deployment to ongoing support, we handle every aspect of
-      your online presence. No outsourcing, no templates—just precision
-      hand-coded websites built for performance.
+      From your first idea to launch day (and beyond), we take care of your
+      website so you don’t have to.
     </Text>
     <!-- Wave Divider -->
     <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
@@ -88,41 +87,36 @@ const services: ServiceFeature[] = [
   </Section>
 
   <Section>
-    <div class="space-y-24">
+    <div class="max-w-6xl mx-auto space-y-20">
       {
         services.map((service, index) => (
           <div
-            class={`flex flex-col ${index % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row"} gap-12 items-center`}
+            class={`grid lg:grid-cols-2 gap-8 lg:gap-12 items-start ${index % 2 === 1 ? "lg:grid-flow-dense" : ""}`}
           >
-            <div class="flex-1">
-              <h2 class="text-3xl font-bold text-navy mb-4">{service.title}</h2>
-              <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+            <div class={index % 2 === 1 ? "lg:col-start-2" : ""}>
+              <h2 class="text-3xl lg:text-3xl font-bold text-navy mb-4 leading-tight">
+                {service.title}
+              </h2>
+              <p class="text-lg text-slate-600 mb-8 leading-relaxed">
                 {service.description}
               </p>
 
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-100">
-                <h4 class="font-bold text-navy mb-4 text-sm uppercase tracking-wide">
-                  What's Included:
-                </h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {service.features.map((feature, i) => (
-                    <div class="flex items-center space-x-2">
-                      <Check class="h-4 w-4 text-gold" />
-                      <span class="text-slate-700 text-sm">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <ul class="space-y-3">
+                {service.features.map((feature) => (
+                  <li class="flex items-start gap-3">
+                    <Check class="h-5 w-5 text-gold flex-shrink-0 mt-0.5" />
+                    <span class="text-slate-700">{feature}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div class="flex-1 w-full">
-              <div class="aspect-video bg-slate-100 rounded-lg shadow-lg overflow-hidden relative group">
-                <div class="absolute inset-0 bg-navy/5 group-hover:bg-transparent transition-colors duration-500 z-10" />
-
+            <div class={index % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""}>
+              <div class="rounded-lg overflow-hidden shadow-md border border-slate-200">
                 <img
                   src={service.image}
                   alt={service.title}
-                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  class="w-full h-full object-cover aspect-[4/3]"
                 />
               </div>
             </div>
@@ -145,14 +139,14 @@ const services: ServiceFeature[] = [
 
     <div class="grid md:grid-cols-3 gap-8">
       <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
-        <div class="text-4xl font-bold text-teal mb-2">2-4</div>
+        <div class="text-4xl font-bold text-teal mb-2">3-4</div>
         <div
           class="text-sm font-semibold text-navy uppercase tracking-wide mb-2"
         >
           Weeks
         </div>
         <p class="text-slate-600">
-          From kickoff to launch, we move fast without cutting corners.
+          Most projects launch in 3–4 weeks, depending on pages and content.
         </p>
       </div>
 
@@ -164,7 +158,7 @@ const services: ServiceFeature[] = [
           PageSpeed
         </div>
         <p class="text-slate-600">
-          Every site we build scores 98+ on Google's performance metrics.
+          Every site we build aims to score above 98 on Google's performance metrics.
         </p>
       </div>
 
@@ -181,6 +175,6 @@ const services: ServiceFeature[] = [
       </div>
     </div>
   </Section>
-  
+
   <CTAAboveFooter />
 </Layout>

@@ -96,7 +96,7 @@ const pricingPlans: Plan[] = [
             </div>
             {plan.features.map((feature) => (
               <div class="flex items-start space-x-3">
-                <Check class="h-5 w-5 text-gold shrink-0 mt-0.5" />
+                <Check class="h-5 w-5 text-gold mt-0.5" />
                 <span class="text-slate-600 text-sm">{feature}</span>
               </div>
             ))}
@@ -105,7 +105,7 @@ const pricingPlans: Plan[] = [
                 <div class="border-t border-slate-200 my-4" />
                 {plan.optionalFeatures.map((feature) => (
                   <div class="flex items-start space-x-3">
-                    <Plus class="h-5 w-5 text-teal shrink-0 mt-0.5" />
+                    <Plus class="h-5 w-5 text-teal mt-0.5" />
                     <span class="text-slate-600 text-sm">{feature}</span>
                   </div>
                 ))}

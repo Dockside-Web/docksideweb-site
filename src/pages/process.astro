@@ -12,7 +12,7 @@ import {
   Code2,
   Rocket,
   Headphones,
-  CheckCircle2,
+  Check,
   ArrowRight,
 } from 'lucide-astro';
 
@@ -25,102 +25,90 @@ interface Step {
   iconBg: string;
   iconGlow: string;
   borderColor: string;
-  badgeBg: string;
   boxBg: string;
-  checkColor: string;
 }
 
 const steps: Step[] = [
-  {
-    number: '01',
-    icon: Search,
-    title: 'Discovery & Planning',
-    desc: 'We start by diving deep into your business goals, target audience, and technical requirements. This phase is all about asking the right questions and mapping out a clear roadmap.',
-    details: [
-      'Stakeholder Interviews',
-      'Requirements Gathering',
-      'Technical Feasibility',
-      'Project Roadmap',
-    ],
-    iconBg: 'bg-[var(--color-navy)]',
-    iconGlow: 'bg-[var(--color-navy)]/20',
-    borderColor: 'border-[var(--color-teal)]',
-    badgeBg: 'bg-[var(--color-gold)]',
-    boxBg: 'bg-[var(--color-teal-light)]',
-    checkColor: 'text-[var(--color-teal)]'
-  },
-  {
-    number: '02',
-    icon: Palette,
-    title: 'Design & Architecture',
-    desc: 'Our designers and architects work together to create both the visual identity and technical foundation. Every pixel and every line of code is intentional.',
-    details: [
-      'UI/UX Design',
-      'System Architecture',
-      'Interactive Prototyping',
-      'Tech Stack Selection',
-    ],
-    iconBg: 'bg-[var(--color-teal)]',
-    iconGlow: 'bg-[var(--color-teal)]/20',
-    borderColor: 'border-[var(--color-gold)]',
-    badgeBg: 'bg-[var(--color-navy)]',
-    boxBg: 'bg-[var(--color-gold-light)]',
-    checkColor: 'text-[var(--color-gold)]'
-  },
-  {
-    number: '03',
-    icon: Code2,
-    title: 'Development',
-    desc: 'Our engineering team brings the design to life using clean, scalable code. We work in agile sprints with regular check-ins to keep you in the loop.',
-    details: [
-      'Frontend & Backend Dev',
-      'API Integration',
-      'Code Reviews',
-      'Sprint Demos',
-    ],
-    iconBg: 'bg-[var(--color-navy)]',
-    iconGlow: 'bg-[var(--color-navy)]/20',
-    borderColor: 'border-[var(--color-navy)]',
-    badgeBg: 'bg-[var(--color-gold)]',
-    boxBg: 'bg-[var(--color-navy)]/15',
-    checkColor: 'text-[var(--color-navy)]'
-  },
-  {
-    number: '04',
-    icon: Rocket,
-    title: 'Testing & Launch',
-    desc: 'Before launch, we rigorously test across devices, browsers, and scenarios. We check for bugs, performance issues, and security vulnerabilities.',
-    details: [
-      'Quality Assurance',
-      'Cross-browser Testing',
-      'Performance Optimization',
-      'Deployment',
-    ],
-    iconBg: 'bg-[var(--color-teal)]',
-    iconGlow: 'bg-[var(--color-teal)]/20',
-    borderColor: 'border-[var(--color-teal)]',
-    badgeBg: 'bg-[var(--color-gold)]',
-    boxBg: 'bg-[var(--color-teal-light)]',
-    checkColor: 'text-[var(--color-teal)]'
-  },
-  {
-    number: '05',
-    icon: Headphones,
-    title: 'Support & Growth',
-    desc: "Our relationship doesn't end at launch. We provide ongoing support, monitoring, and optimization to ensure your digital product continues to thrive.",
-    details: [
-      '24/7 Monitoring',
-      'Regular Updates',
-      'Performance Analytics',
-      'Feature Enhancements',
-    ],
-    iconBg: 'bg-[var(--color-navy)]',
-    iconGlow: 'bg-[var(--color-navy)]/20',
-    borderColor: 'border-[var(--color-gold)]',
-    badgeBg: 'bg-[var(--color-teal)]',
-    boxBg: 'bg-[var(--color-gold-light)]',
-    checkColor: 'text-[var(--color-gold)]'
-  },
+{
+  number: '01',
+  icon: Search,
+  title: 'Discovery & Planning',
+  desc: "We start with a conversation about your business, your customers, and what you want the website to achieve. Then we turn that into a clear plan, so you know what’s happening and what to expect.",
+  details: [
+    'Kickoff Call',
+    'Goals & Priorities',
+    'Content & Page Planning',
+    'Project Timeline',
+  ],
+  iconBg: 'bg-[var(--color-teal)]',
+  iconGlow: 'bg-[var(--color-teal)]/20',
+  borderColor: 'border-[var(--color-teal)]',
+  boxBg: 'bg-[var(--color-teal)]/[0.05]',
+},
+{
+  number: '02',
+  icon: Palette,
+  title: 'Design & Structure',
+  desc: "Next, we design how your site will look and map out how people will move through it. You’ll see a preview before anything is finalized, so we can make sure it feels like your brand.",
+  details: [
+    'Look & Feel (Brand Styling)',
+    'Page Layouts',
+    'Navigation & Site Map',
+    'Clickable Preview',
+  ],
+  iconBg: 'bg-[var(--color-navy)]',
+  iconGlow: 'bg-[var(--color-navy)]/20',
+  borderColor: 'border-[var(--color-navy)]',
+  boxBg: 'bg-[var(--color-navy)]/[0.05]',
+},
+{
+  number: '03',
+  icon: Code2,
+  title: 'Build',
+  desc: "Once the design is approved, we build your website and connect any tools you need (like forms, scheduling, or email signups). We’ll share progress along the way and get your feedback at key points.",
+  details: [
+    'Website Build',
+    'Forms & Integrations',
+    'Progress Updates',
+    'Review Checkpoints',
+  ],
+  iconBg: 'bg-[var(--color-teal)]',
+  iconGlow: 'bg-[var(--color-teal)]/20',
+  borderColor: 'border-[var(--color-teal)]',
+  boxBg: 'bg-[var(--color-teal)]/[0.05]',
+},
+{
+  number: '04',
+  icon: Rocket,
+  title: 'Review & Launch',
+  desc: "Before we launch, we review everything to make sure it looks great and works smoothly on phones, tablets, and computers. Then we publish the site and confirm everything is running properly.",
+  details: [
+    'Final Review',
+    'Mobile & Browser Checks',
+    'Speed & Cleanup',
+    'Go Live',
+  ],
+  iconBg: 'bg-[var(--color-navy)]',
+  iconGlow: 'bg-[var(--color-navy)]/20',
+  borderColor: 'border-[var(--color-navy)]',
+  boxBg: 'bg-[var(--color-navy)]/[0.05]',
+},
+{
+  number: '05',
+  icon: Headphones,
+  title: 'Support & Improvements',
+  desc: "After launch, we’re here to help. Whether you need updates, new pages, or improvements over time, we’ll keep your site healthy and moving in the right direction.",
+  details: [
+    'Ongoing Help',
+    'Edits & Updates',
+    'Simple Reporting',
+    'New Features Over Time',
+  ],
+  iconBg: 'bg-[var(--color-teal)]',
+  iconGlow: 'bg-[var(--color-teal)]/20',
+  borderColor: 'border-[var(--color-teal)]',
+  boxBg: 'bg-[var(--color-teal)]/[0.05]',
+},
 ];
 ---
 
@@ -136,8 +124,7 @@ const steps: Step[] = [
         From Concept to Launch
       </Heading>
       <Text class="text-slate-300 mb-10">
-        A transparent, collaborative approach designed to deliver
-        excellence on time and on budget. Here's exactly how we work.
+        You’ll always know what we’re working on, what’s coming next, and when things will be ready. We keep it simple, stay in touch, and build a site that fits your budget and your timeline.
       </Text>
     </div>
     <!-- Wave Divider -->
@@ -171,7 +158,7 @@ const steps: Step[] = [
                       <step.icon class="h-14 w-14 text-white" />
                     </div>
                     <!-- Number badge in corner with gold accent -->
-                    <div class={`absolute -top-3 -right-3 w-16 h-16 ${step.badgeBg} rounded-full flex items-center justify-center text-white font-black text-2xl shadow-lg border-4 border-white`}>
+                    <div class="absolute -top-3 -right-3 w-16 h-16 bg-gold rounded-full flex items-center justify-center text-white font-black text-2xl shadow-lg border-4 border-white">
                       {step.number}
                     </div>
                   </div>
@@ -189,7 +176,7 @@ const steps: Step[] = [
 
                 <div class={`p-6 rounded-xl border-2 ${step.borderColor} ${step.boxBg}`}>
                   <h4 class="font-bold text-[var(--color-navy)] mb-4 flex items-center gap-2">
-                    <CheckCircle2 class={`h-5 w-5 ${step.checkColor}`} />
+                    <Check class="h-5 w-5 text-gold mt-0.5" />
                     What's Included:
                   </h4>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
