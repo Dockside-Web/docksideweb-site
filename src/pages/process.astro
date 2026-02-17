@@ -22,12 +22,11 @@ interface Step {
   title: string;
   desc: string;
   details: string[];
-  color: string;
-  bgColor: string;
-  glowColor: string;
+  iconBg: string;
+  iconGlow: string;
   borderColor: string;
+  badgeBg: string;
   boxBg: string;
-  dotColor: string;
   checkColor: string;
 }
 
@@ -43,12 +42,11 @@ const steps: Step[] = [
       'Technical Feasibility',
       'Project Roadmap',
     ],
-    color: 'teal',
-    bgColor: 'bg-[var(--color-teal)]',
-    glowColor: 'bg-[var(--color-teal)]/20',
+    iconBg: 'bg-[var(--color-navy)]',
+    iconGlow: 'bg-[var(--color-navy)]/20',
     borderColor: 'border-[var(--color-teal)]',
+    badgeBg: 'bg-[var(--color-gold)]',
     boxBg: 'bg-[var(--color-teal-light)]',
-    dotColor: 'bg-[var(--color-teal)]',
     checkColor: 'text-[var(--color-teal)]'
   },
   {
@@ -62,12 +60,11 @@ const steps: Step[] = [
       'Interactive Prototyping',
       'Tech Stack Selection',
     ],
-    color: 'gold',
-    bgColor: 'bg-[var(--color-gold)]',
-    glowColor: 'bg-[var(--color-gold)]/20',
+    iconBg: 'bg-[var(--color-teal)]',
+    iconGlow: 'bg-[var(--color-teal)]/20',
     borderColor: 'border-[var(--color-gold)]',
+    badgeBg: 'bg-[var(--color-navy)]',
     boxBg: 'bg-[var(--color-gold-light)]',
-    dotColor: 'bg-[var(--color-gold)]',
     checkColor: 'text-[var(--color-gold)]'
   },
   {
@@ -81,12 +78,11 @@ const steps: Step[] = [
       'Code Reviews',
       'Sprint Demos',
     ],
-    color: 'navy',
-    bgColor: 'bg-[var(--color-navy)]',
-    glowColor: 'bg-[var(--color-navy)]/20',
+    iconBg: 'bg-[var(--color-navy)]',
+    iconGlow: 'bg-[var(--color-navy)]/20',
     borderColor: 'border-[var(--color-navy)]',
+    badgeBg: 'bg-[var(--color-gold)]',
     boxBg: 'bg-[var(--color-navy)]/15',
-    dotColor: 'bg-[var(--color-navy)]',
     checkColor: 'text-[var(--color-navy)]'
   },
   {
@@ -100,12 +96,11 @@ const steps: Step[] = [
       'Performance Optimization',
       'Deployment',
     ],
-    color: 'teal',
-    bgColor: 'bg-[var(--color-teal)]',
-    glowColor: 'bg-[var(--color-teal)]/20',
+    iconBg: 'bg-[var(--color-teal)]',
+    iconGlow: 'bg-[var(--color-teal)]/20',
     borderColor: 'border-[var(--color-teal)]',
+    badgeBg: 'bg-[var(--color-gold)]',
     boxBg: 'bg-[var(--color-teal-light)]',
-    dotColor: 'bg-[var(--color-teal)]',
     checkColor: 'text-[var(--color-teal)]'
   },
   {
@@ -119,26 +114,17 @@ const steps: Step[] = [
       'Performance Analytics',
       'Feature Enhancements',
     ],
-    color: 'gold',
-    bgColor: 'bg-[var(--color-gold)]',
-    glowColor: 'bg-[var(--color-gold)]/20',
+    iconBg: 'bg-[var(--color-navy)]',
+    iconGlow: 'bg-[var(--color-navy)]/20',
     borderColor: 'border-[var(--color-gold)]',
+    badgeBg: 'bg-[var(--color-teal)]',
     boxBg: 'bg-[var(--color-gold-light)]',
-    dotColor: 'bg-[var(--color-gold)]',
     checkColor: 'text-[var(--color-gold)]'
   },
 ];
-
-const timeline = [
-  { phase: 'Discovery', duration: '1-2 weeks' },
-  { phase: 'Design', duration: '2-3 weeks' },
-  { phase: 'Development', duration: '4-8 weeks' },
-  { phase: 'Testing', duration: '1-2 weeks' },
-  { phase: 'Launch', duration: '1 week' },
-];
 ---
 
-<Layout title="Our Process">
+<Layout>
   <!-- Hero Header -->
   <Section bg="navy" class="text-center">
     <div
@@ -168,7 +154,6 @@ const timeline = [
       </svg>
     </div>
   </Section>
-  
 
   <!-- Process Steps -->
   <Section bg="light">
@@ -180,12 +165,13 @@ const timeline = [
               <!-- Step Number & Icon -->
               <div class={`flex items-center justify-center lg:justify-start ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
                 <div class="relative">
-                  <div class={`absolute inset-0 ${step.glowColor} rounded-3xl blur-xl opacity-50`}></div>
+                  <div class={`absolute inset-0 ${step.iconGlow} rounded-3xl blur-xl opacity-50`}></div>
                   <div class={`relative bg-white rounded-3xl p-12 shadow-xl border-4 ${step.borderColor}`}>
-                    <div class={`w-20 h-20 ${step.bgColor} rounded-2xl flex items-center justify-center mb-6 mx-auto`}>
-                      <step.icon class="h-10 w-10 text-white" />
+                    <div class={`w-28 h-28 ${step.iconBg} rounded-2xl flex items-center justify-center mx-auto shadow-lg`}>
+                      <step.icon class="h-14 w-14 text-white" />
                     </div>
-                    <div class="text-6xl font-bold text-slate-100 text-center">
+                    <!-- Number badge in corner with gold accent -->
+                    <div class={`absolute -top-3 -right-3 w-16 h-16 ${step.badgeBg} rounded-full flex items-center justify-center text-white font-black text-2xl shadow-lg border-4 border-white`}>
                       {step.number}
                     </div>
                   </div>
@@ -201,7 +187,7 @@ const timeline = [
                   {step.desc}
                 </p>
 
-                <div class={`p-6 rounded-xl border ${step.boxBg}`}>
+                <div class={`p-6 rounded-xl border-2 ${step.borderColor} ${step.boxBg}`}>
                   <h4 class="font-bold text-[var(--color-navy)] mb-4 flex items-center gap-2">
                     <CheckCircle2 class={`h-5 w-5 ${step.checkColor}`} />
                     What's Included:
@@ -209,7 +195,7 @@ const timeline = [
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {step.details.map((detail) => (
                       <div class="flex items-center space-x-2 text-slate-700">
-                        <div class={`w-1.5 h-1.5 ${step.dotColor} rounded-full`}></div>
+                        <div class={`w-2 h-2 ${step.iconBg} rounded-full`}></div>
                         <span class="text-sm font-medium">{detail}</span>
                       </div>
                     ))}
@@ -218,10 +204,10 @@ const timeline = [
               </div>
             </div>
 
-            <!-- Connecting Line -->
+            <!-- Connecting Arrow with Gold -->
             {index < steps.length - 1 && (
               <div class="hidden lg:block absolute left-1/2 -bottom-12 transform -translate-x-1/2">
-                <ArrowRight class="h-8 w-8 text-[var(--color-gold)] rotate-90" />
+                <ArrowRight class="h-8 w-8 text-[var(--color-gold)] rotate-90 drop-shadow-lg" />
               </div>
             )}
           </div>
