@@ -3,9 +3,10 @@ interface Props {
   class?: string;
   bg?: "white" | "light" | "navy" | "teal";
   id?: string;
+  pad?: boolean;
 }
 
-const { class: className = "", bg = "light", id } = Astro.props;
+const { class: className = "", bg = "light", id, pad = true } = Astro.props;
 
 const bgStyles = {
   white: "bg-white",
@@ -14,13 +15,10 @@ const bgStyles = {
   teal: "bg-teal text-white",
 };
 
-const sectionClasses = `${bgStyles[bg]} py-12 md:py-20 ${className} relative`;
+const sectionClasses = `${bgStyles[bg]} ${pad ? "py-12 md:py-20" : ""} ${className} relative`;
 ---
 
-<section
-  id={id}
-  class={sectionClasses}
->
+<section id={id} class={sectionClasses}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <slot />
   </div>
