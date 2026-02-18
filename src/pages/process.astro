@@ -10,7 +10,6 @@ import {
   Code2,
   Rocket,
   Headphones,
-  Check,
   ArrowRight,
 } from 'lucide-astro';
 
@@ -63,10 +62,10 @@ const steps: Step[] = [
   number: '03',
   icon: Code2,
   title: 'Build',
-  desc: "Once the design is approved, we build your website and connect any tools you need (like forms, scheduling, or email signups). We’ll share progress along the way and get your feedback at key points.",
+  desc: "Once the design is approved, we build your website and share progress updates along the way to get your feedback at key points.",
   details: [
     'Website Build',
-    'Forms & Integrations',
+    'Contact Form Integration',
     'Progress Updates',
     'Review Checkpoints',
   ],
@@ -95,12 +94,13 @@ const steps: Step[] = [
   number: '05',
   icon: Headphones,
   title: 'Support & Improvements',
-  desc: "After launch, we’re here to help. Whether you need updates, new pages, or improvements over time, we’ll keep your site healthy and moving in the right direction.",
+  desc: "After launch, we keep your site healthy and up-to-date with ongoing support and updates.",
   details: [
+    'Unlimited Minor Updates',
     'Ongoing Help',
-    'Edits & Updates',
-    'Simple Reporting',
-    'New Features Over Time',
+    'Monthly Check-Ins',
+    'Simple Reporting'
+
   ],
   iconBg: 'bg-[var(--color-teal)]',
   iconGlow: 'bg-[var(--color-teal)]/20',
@@ -151,7 +151,6 @@ const steps: Step[] = [
 
                 <div class={`p-6 rounded-xl border-2 ${step.borderColor} ${step.boxBg}`}>
                   <h4 class="font-bold text-[var(--color-navy)] mb-4 flex items-center gap-2">
-                    <Check class="h-5 w-5 text-gold mt-0.5" />
                     What's Included:
                   </h4>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">

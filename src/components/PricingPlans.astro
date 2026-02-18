@@ -22,7 +22,7 @@ const pricingPlans: Plan[] = [
       "Custom website (up to 6 pages)",
       "Unlimited minor content edits*",
       "Hosting, domain, & SSL",
-      "2–3 business day turnaround",
+      "Deliverery in 4-5 weeks",
       "$100 one-time fee per page after the first 6",
     ],
     optionalFeatures: [],
@@ -36,13 +36,13 @@ const pricingPlans: Plan[] = [
       "Ideal for established businesses that want no monthly commitment.",
     features: [
       "Custom website (up to 6 pages)",
+      "Deliverery in 4-5 weeks",
       "$100 one-time fee per page after the first 6",
     ],
     optionalFeatures: [
       "Optional $75/month website care plan",
       "Hosting, domain, & SSL",
       "Unlimited minor content edits*",
-      "2–3 business day turnaround",
     ],
     highlighted: false
   },
@@ -96,16 +96,19 @@ const pricingPlans: Plan[] = [
             </div>
             {plan.features.map((feature) => (
               <div class="flex items-start space-x-3">
-                <Check class="h-5 w-5 text-gold mt-0.5" />
+                <Check class="h-5 w-5 text-teal mt-0.5" />
                 <span class="text-slate-600 text-sm">{feature}</span>
               </div>
             ))}
             {plan.optionalFeatures.length > 0 && (
               <>
                 <div class="border-t border-slate-200 my-4" />
+                <div class="text-sm font-bold text-slate-900 uppercase tracking-wide mb-4">
+              Add-Ons (Optional):
+            </div>
                 {plan.optionalFeatures.map((feature) => (
                   <div class="flex items-start space-x-3">
-                    <Plus class="h-5 w-5 text-teal mt-0.5" />
+                    <Plus class="h-5 w-5 text-gold mt-0.5" />
                     <span class="text-slate-600 text-sm">{feature}</span>
                   </div>
                 ))}
@@ -118,6 +121,6 @@ const pricingPlans: Plan[] = [
   }
 </div>
 <span class="text-slate-500 text-sm text-center block px-8 mt-8">
-  * Minor edits have a 2-3 business day turnaround and include text and image
+  * Minor content edits have a 4-5 business day turnaround and include text and image
   updates only; no new pages or structural layout changes.
 </span>

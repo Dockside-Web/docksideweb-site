@@ -4,7 +4,7 @@ import Heading from "../components/ui/Heading.astro";
 import Text from "../components/ui/Text.astro";
 import Section from "../components/ui/Section.astro";
 import ContactForm from "../components/ContactForm.astro";
-import { Mail, Phone } from "lucide-astro";
+import { Mail, Phone, MapPin } from "lucide-astro";
 import HeroSecondary from "../components/HeroSecondary.astro";
 ---
 
@@ -20,8 +20,8 @@ import HeroSecondary from "../components/HeroSecondary.astro";
       <div>
         <Heading class="mb-6">Get in Touch</Heading>
         <Text class="mb-8">
-          We usually reply within 1 business day. Share your goals and business needs,
-          and we’ll take it from there.
+          We usually reply within 1 business day. Share your goals and business
+          needs, and we’ll take it from there.
         </Text>
 
         <div class="space-y-8">
@@ -61,6 +61,37 @@ import HeroSecondary from "../components/HeroSecondary.astro";
               <div>
                 <h4 class="font-bold text-navy">Call Us</h4>
                 <p>+1 (443) 844-7850</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Charleston -->
+          <div class="flex space-x-4">
+            <a
+              href="tel:+14438447850"
+              class="group flex items-center space-x-4 no-underline">
+              <div class="bg-teal/10 p-3 rounded-lg transition-colors group-hover:bg-yellow-500/10">
+                <MapPin class="h-6 w-6 text-teal transition-colors group-hover:text-gold" />
+              </div>
+              <h4 class="font-bold text-navy items-center">Charleston, SC</h4>
+            </a>
+          </div>
+
+          <!-- Baltimore -->
+          <div class="flex items-start space-x-4">
+            <a
+              href="tel:+14438447850"
+              class="group flex items-center space-x-4 no-underline"
+            >
+              <div
+                class="bg-teal/10 p-3 rounded-lg transition-colors group-hover:bg-yellow-500/10"
+              >
+                <MapPin
+                  class="h-6 w-6 text-teal transition-colors group-hover:text-gold"
+                />
+              </div>
+              <div>
+                <h4 class="font-bold text-navy">Baltimore, MD</h4>
               </div>
             </a>
           </div>
