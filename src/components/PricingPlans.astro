@@ -1,5 +1,6 @@
 ---
 import { Check, Plus } from "lucide-astro";
+import Button from "./ui/Button.astro";
 
 type Plan = {
   name: string;
@@ -13,106 +14,133 @@ type Plan = {
 
 const pricingPlans: Plan[] = [
   {
-    name: "Monthly",
+    name: "The Beacon",
+    price: "$79",
+    payment: "Per Month",
+    description:
+      "A simple, professional one‑page site that gets you online fast with hosting, updates, and support built in.",
+    features: [
+      "Custom single page website",
+      "Unlimited minor content edits*",
+      "Hosting, domain, & SSL",
+      "Delivery in 1-2 weeks",
+    ],
+    optionalFeatures: [
+      "Contact form",
+    ],
+    highlighted: false,
+  },
+  {
+    name: "The Navigator",
     price: "$165",
     payment: "Per Month",
     description:
-      "Best for businesses that want a professional site with zero upfront cost.",
+      "A complete small-business site with continuous updates so your website stays accurate and ready to convert.",
     features: [
       "Custom website (up to 6 pages)",
       "Unlimited minor content edits*",
       "Hosting, domain, & SSL",
       "Delivery in 3-4 weeks",
     ],
-    optionalFeatures: [
-      "$100 one-time fee per page after the first 6"
-    ],
-    highlighted: true
+    optionalFeatures: ["$100 one-time fee for each extra page"],
+    highlighted: true,
   },
   {
-    name: "One-Time Website Build",
+    name: "The Vessel",
     price: "$2,750",
     payment: "One Time Cost",
     description:
-      "Ideal for established businesses that want no monthly commitment.",
+      "A one-time build for established businesses that want a polished website with no monthly commitment.",
     features: [
       "Custom website (up to 6 pages)",
       "Delivery in 3-4 weeks",
     ],
     optionalFeatures: [
-    "$100 one-time fee per page after the first 6",
+      "$100 one-time fee for each extra page",
       "$80/month website care plan includes:",
       "Hosting, domain, & SSL",
       "Unlimited minor content edits*",
     ],
-    highlighted: false
+    highlighted: false,
   },
 ];
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto px-4 lg:items-stretch">
   {
     pricingPlans.map((plan) => (
-      <div
-        class={`relative bg-light rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full ${
-          plan.highlighted
-            ? "border-4 border-teal-500"
-            : "border border-slate-200"
-        }`}
-      >
-        {plan.highlighted && (
-          <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-            <span class="bg-teal-500 text-white px-4 py-1 rounded-full text-sm font-bold">
+      <div class={plan.highlighted ? "lg:-my-6 relative z-10" : ""}>
+        <div
+          class={`rounded-2xl flex flex-col h-full transition-shadow duration-300 p-8 ${
+            plan.highlighted
+              ? "bg-navy text-white shadow-2xl"
+              : "bg-light border border-navy/10 text-navy hover:shadow-md"
+          }`}
+        >
+          {/* Badge */}
+          {plan.highlighted && (
+            <span class="inline-block self-start mb-4 bg-gold text-navy text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full">
               Most Popular
             </span>
-          </div>
-        )}
+          )}
 
-        <div class="p-8 flex-1">
-          <h3 class="text-2xl font-bold text-slate-900 mb-2">{plan.name}</h3>
-          <p class="text-slate-600 text-sm mb-6">{plan.description}</p>
+          {/* Name & description */}
+          <h3 class="text-2xl font-semibold mb-1">{plan.name}</h3>
+          <p class={`text-sm mb-6 leading-relaxed ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}>
+            {plan.description}
+          </p>
 
+          {/* Price */}
           <div class="mb-6">
-            <span class="text-5xl font-bold text-slate-900">{plan.price}</span>
+            <span class={`text-5xl tracking-tight ${plan.highlighted ? "text-white" : "text-navy"}`}>
+              {plan.price}
+            </span>
             {plan.price !== "Custom" && (
-              <span class="text-slate-600 ml-2">{plan.payment}</span>
+              <span class={`text-sm ml-2 ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}>
+                {plan.payment}
+              </span>
             )}
           </div>
 
-          <a href="/contact">
-            <button
-              class={`w-full mb-8 px-6 py-3 rounded-lg font-semibold transition-all duration-200 cursor-pointer ${
-                plan.highlighted
-                  ? "bg-teal-500 text-white hover:bg-teal-600"
-                  : "border-2 border-teal-500 text-teal-500 hover:bg-teal-50"
-              }`}
-            >
+          {/* CTA */}
+          <a href="/contact" class="mb-8">
+            <Button variant={plan.highlighted ? "primary" : "outline"} class="w-full" >
               Get Started
-            </button>
+            </Button>
           </a>
 
-          <div class="space-y-4">
-            <div class="text-sm font-bold text-slate-900 uppercase tracking-wide mb-4">
-              What's Included:
+          {/* Features */}
+          <div class="flex-1">
+            <p class={`text-xs font-semibold uppercase tracking-widest mb-4 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}>
+              What's Included
+            </p>
+            <div class="space-y-3">
+              {plan.features.map((feature) => (
+                <div class="flex items-start gap-3">
+                  <Check class="h-4 w-4 mt-0.5 shrink-0 text-teal" />
+                  <span class={`text-sm leading-snug ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}>
+                    {feature}
+                  </span>
+                </div>
+              ))}
             </div>
-            {plan.features.map((feature) => (
-              <div class="flex items-start space-x-3">
-                <Check class="h-5 w-5 text-teal mt-0.5" />
-                <span class="text-slate-600 text-sm">{feature}</span>
-              </div>
-            ))}
+
             {plan.optionalFeatures.length > 0 && (
               <>
-                <div class="border-t border-slate-200 my-4" />
-                <div class="text-sm font-bold text-slate-900 uppercase tracking-wide mb-4">
-              Add-Ons (Optional):
-            </div>
-                {plan.optionalFeatures.map((feature) => (
-                  <div class="flex items-start space-x-3">
-                    <Plus class="h-5 w-5 text-gold mt-0.5" />
-                    <span class="text-slate-600 text-sm">{feature}</span>
-                  </div>
-                ))}
+                <div class={`border-t my-5 ${plan.highlighted ? "border-white/10" : "border-navy/10"}`} />
+                <p class={`text-xs font-semibold uppercase tracking-widest mb-4 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}>
+                  Add-Ons (Optional)
+                </p>
+                <div class="space-y-3">
+                  {plan.optionalFeatures.map((feature) => (
+                    <div class="flex items-start gap-3">
+                      <Plus class="h-4 w-4 mt-0.5 shrink-0 text-gold" />
+                      <span class={`text-sm leading-snug ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}>
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </>
             )}
           </div>
@@ -121,7 +149,8 @@ const pricingPlans: Plan[] = [
     ))
   }
 </div>
-<span class="text-slate-500 text-sm text-center block px-8 mt-8">
+
+<p class="text-gray-400 text-s text-center px-8 mt-10 lg:mt-12 mx-auto">
   * Minor content edits have a 4-5 business day turnaround and include text and image
   updates only; no new pages or structural layout changes.
-</span>
+</p>
