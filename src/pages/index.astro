@@ -114,8 +114,8 @@ const processSteps = [
 
 <Layout>
   <!-- Hero Section -->
-  <section class="relative bg-navy min-h-[75vh] flex items-center overflow-hidden pb-24"
-           style={`background-image: url(${marinaImage.src}); background-attachment: fixed; background-size: cover; background-position: center;`} >\
+  <section class="hero-section relative bg-navy min-h-[75vh] flex items-center overflow-hidden pb-24"
+           style={`background-image: url(${marinaImage.src});`} >
 
     <!-- Subtle Pattern Overlay -->
     <div class="absolute inset-0 bg-navy/85"></div>
@@ -402,4 +402,18 @@ const processSteps = [
   .trust-indicator:nth-child(3) {
     animation-delay: 0.7s;
   }
+
+  .hero-section {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Default to scroll for safety */
+    background-attachment: scroll; 
+  }
+
+  @media (hover: hover) and (min-width: 1024px){
+  .hero-section {
+    background-attachment: fixed;
+  }
+}
 </style>
