@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin } from "lucide-astro";
 
 const currentYear = new Date().getFullYear();
 
-const navigationLinks = ["Home", "Services", "Work", "Process", "About"];
+const navigationLinks = ["Home", "Services", "Pricing", "Process", "Contact"];
 const serviceLinks = [
   "Custom Website Design",
   "SEO & Performance",
@@ -25,7 +25,8 @@ const serviceLinks = [
       <!-- Background Wave (Lightest - Furthest/Horizon) -->
       <path
         fill="#91C9CF"
-        d="M0,180 C360,150 1080,210 1440,180 L1440,320 L0,320 Z"></path>
+        d="M0,180 C360,150 1080,210 1440,180 L1440,320 L0,320 Z"
+      ></path>
 
       <path
         fill="#5197A6"
@@ -47,7 +48,7 @@ const serviceLinks = [
         d="M0,230 C180,260 360,200 540,230 C720,260 900,200 1080,230 C1260,260 1350,220 1440,230 L1440,320 L0,320 Z"
       ></path>
 
-      <!-- Foreground Wave (Darkest - Closest, Matches beginning of gradient for ooter) -->
+      <!-- Foreground Wave (Darkest - Closest, Matches beginning of gradient for footer) -->
       <path
         fill="#1e3556"
         d="M0,260 C240,240 480,280 720,260 C960,240 1200,280 1440,260 L1440,320 L0,320 Z"
@@ -60,6 +61,8 @@ const serviceLinks = [
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+
+        <!-- Logo / CTA — left-aligned -->
         <div class="space-y-4">
           <a href="/" class="flex items-center space-x-2">
             <Logo class="h-25 w-auto" aria-label="Dockside Web Solutions Logo" />
@@ -70,73 +73,83 @@ const serviceLinks = [
           <Button variant="primary" size="sm">Get Started Today</Button>
         </div>
 
-        <div>
-          <h3 class="text-gold font-bold uppercase tracking-wider text-sm mb-6">
-            Navigation
-          </h3>
-          <ul class="space-y-3">
-            {
-              navigationLinks.map((item) => (
-                <li>
-                  <a
-                    href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                    class="text-slate-300 hover:text-teal-400 transition-colors text-sm"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
+        <!-- Navigation — centered -->
+        <div class="md:flex md:flex-col md:items-center">
+          <div>
+            <h3 class="text-gold font-bold uppercase tracking-wider text-sm mb-6">
+              Navigation
+            </h3>
+            <ul class="space-y-3">
+              {
+                navigationLinks.map((item) => (
+                  <li>
+                    <a
+                      href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                      class="text-slate-300 hover:text-teal transition-colors text-sm"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <h3 class="text-gold font-bold uppercase tracking-wider text-sm mb-6">
-            Services
-          </h3>
-          <ul class="space-y-3">
-            {
-              serviceLinks.map((item) => (
-                <li>
-                  <a
-                    href="/services"
-                    class="text-slate-300 hover:text-teal-400 transition-colors text-sm"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
+        <!-- Services — centered -->
+        <div class="md:flex md:flex-col md:items-center">
+          <div>
+            <h3 class="text-gold font-bold uppercase tracking-wider text-sm mb-6">
+              Services
+            </h3>
+            <ul class="space-y-3">
+              {
+                serviceLinks.map((item) => (
+                  <li>
+                    <a
+                      href="/services"
+                      class="text-slate-300 hover:text-teal transition-colors text-sm"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <h3 class="text-gold font-bold uppercase tracking-wider text-sm mb-6">
-            Contact
-          </h3>
-          <ul class="space-y-4">
-            <li class="flex items-start space-x-3 text-slate-300 text-sm">
-              <Mail class="h-5 w-5 text-teal-400 shrink-0" />
-              <a href="mailto:contact@docksideweb.com" class="hover:text-teal-400">
-                contact@docksideweb.com
-              </a>
-            </li>
-            <li class="flex items-start space-x-3 text-slate-300 text-sm">
-              <Phone class="h-5 w-5 text-teal-400 shrink-0" />
-              <a href="tel:+14438447850" class="hover:text-teal-400">
-                +1 (443) 844-7850
-              </a>
-            </li>
-            <li class="flex items-start space-x-3 text-slate-300 text-sm">
-              <MapPin class="h-5 w-5 text-teal-400 shrink-0" />
-              <span>Baltimore, MD</span>
-            </li>
-            <li class="flex items-start space-x-3 text-slate-300 text-sm">
-              <MapPin class="h-5 w-5 text-teal-400 shrink-0" />
-              <span>Charleston, SC</span>
-            </li>
-          </ul>
+        <!-- Contact — right-aligned -->
+        <div class="md:flex md:flex-col md:items-end">
+          <div>
+            <h3 class="text-gold font-bold uppercase tracking-wider text-sm mb-6">
+              Contact
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start space-x-3 text-slate-300 text-sm">
+                <Mail class="h-5 w-5 text-teal shrink-0" />
+                <a href="mailto:contact@docksideweb.com" class="hover:text-teal">
+                  contact@docksideweb.com
+                </a>
+              </li>
+              <li class="flex items-start space-x-3 text-slate-300 text-sm">
+                <Phone class="h-5 w-5 text-teal shrink-0" />
+                <a href="tel:+14438447850" class="hover:text-teal">
+                  +1 (443) 844-7850
+                </a>
+              </li>
+              <li class="flex items-start space-x-3 text-slate-300 text-sm">
+                <MapPin class="h-5 w-5 text-teal shrink-0" />
+                <span>Baltimore, MD</span>
+              </li>
+              <li class="flex items-start space-x-3 text-slate-300 text-sm">
+                <MapPin class="h-5 w-5 text-teal shrink-0" />
+                <span>Charleston, SC</span>
+              </li>
+            </ul>
+          </div>
         </div>
+
       </div>
 
       <div
