@@ -70,7 +70,7 @@ function getStepColors(index: number) {
 }
 ---
 
-<Layout>
+<Layout title="Process" description="See how we take your project from concept to launch. Our data-driven process ensures a seamless voyage from initial builds to a live, optimized site." >
   <HeroSecondary
     label="Our Process"
     heading="From Concept to Launch"
@@ -94,11 +94,11 @@ function getStepColors(index: number) {
                     <div class={`w-14 h-14 ${colors.iconBg} rounded-xl flex items-center justify-center shadow-md`}>
                       <step.icon class="h-7 w-7 text-white" />
                     </div>
-                    <div class="absolute -top-2 -right-2 w-6 h-6 bg-[var(--color-gold)] rounded-full flex items-center justify-center text-white font-black text-xs shadow border-2 border-white">
+                    <div class="absolute -top-2 -right-2 w-6 h-6 bg-gold rounded-full flex items-center justify-center text-white font-black text-xs shadow border-2 border-white">
                       {step.number}
                     </div>
                   </div>
-                  <h3 class="text-xl font-bold text-[var(--color-navy)] leading-tight">
+                  <h3 class="text-xl font-bold text-navy leading-tight">
                     {step.title}
                   </h3>
                 </div>
@@ -110,7 +110,7 @@ function getStepColors(index: number) {
 
                 <!-- Details box -->
                 <div class={`p-5 rounded-xl border-2 ${colors.borderColor} ${colors.boxBg}`}>
-                  <h4 class="font-bold text-[var(--color-navy)] mb-3 text-sm">What's Included:</h4>
+                  <h4 class="font-bold text-navy mb-3 text-sm">What's Included:</h4>
                   <div class="grid grid-cols-2 gap-2">
                     {step.details.map((detail) => (
                       <div class="flex items-center gap-2 text-slate-700">
@@ -132,7 +132,7 @@ function getStepColors(index: number) {
                       <div class={`w-28 h-28 ${colors.iconBg} rounded-2xl flex items-center justify-center mx-auto shadow-lg`}>
                         <step.icon class="h-14 w-14 text-white" />
                       </div>
-                      <div class="absolute -top-3 -right-3 w-16 h-16 bg-[var(--color-gold)] rounded-full flex items-center justify-center text-white font-black text-2xl shadow-lg border-4 border-white">
+                      <div class="absolute -top-3 -right-3 w-16 h-16 bg-gold rounded-full flex items-center justify-center text-white font-black text-2xl shadow-lg border-4 border-white">
                         {step.number}
                       </div>
                     </div>
@@ -141,14 +141,14 @@ function getStepColors(index: number) {
 
                 <!-- Content -->
                 <div class={index % 2 === 1 ? 'lg:order-1 lg:text-right' : ''}>
-                  <h3 class="text-3xl font-bold text-[var(--color-navy)] mb-4">
+                  <h3 class="text-3xl font-bold text-navy mb-4">
                     {step.title}
                   </h3>
                   <p class="text-slate-600 text-lg mb-8 leading-relaxed">
                     {step.desc}
                   </p>
                   <div class={`p-6 rounded-xl border-2 ${colors.borderColor} ${colors.boxBg}`}>
-                    <h4 class="font-bold text-[var(--color-navy)] mb-4">What's Included:</h4>
+                    <h4 class="font-bold text-navy mb-4">What's Included:</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {step.details.map((detail) => (
                         <div class="flex items-center space-x-2 text-slate-700">
@@ -164,7 +164,7 @@ function getStepColors(index: number) {
               <!-- Connecting Arrow -->
               {index < steps.length - 1 && (
                 <div class="hidden lg:block absolute left-1/2 -bottom-12 transform -translate-x-1/2">
-                  <ArrowRight class="h-8 w-8 text-[var(--color-gold)] rotate-90 drop-shadow-lg" />
+                  <ArrowRight class="h-8 w-8 text-gold rotate-90 drop-shadow-lg" />
                 </div>
               )}
 

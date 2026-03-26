@@ -1,15 +1,14 @@
-// @ts-check
-import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
+import sitemap from "@astrojs/sitemap";
 
-// https://astro.build/config
 export default defineConfig({
-  build: {
-    // Inlines all CSS files smaller than 10kb directly into the HTML
-    inlineStylesheets: 'always' 
-  },
+  // UPDATE THIS FOR EVERY NEW CLIENT
+  site: "https://www.docksideweb.com",
+  trailingSlash: 'always',
+  output: "static",
   vite: {
-    plugins: [tailwindcss()]
-  }
+    plugins: [tailwindcss()],
+  },
+  integrations: [sitemap()],
 });
-

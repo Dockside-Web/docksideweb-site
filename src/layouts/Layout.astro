@@ -2,13 +2,9 @@
 import "../styles/global.css";
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
+import SEO from "../components/SEO.astro";
 
-// 2. Define Props (allows you to change the title per page)
-interface Props {
-	title?: string;
-}
-
-const { title = "Dockside Web Solutions" } = Astro.props;
+const { title = "", description = "" } = Astro.props;
 ---
 
 <!doctype html>
@@ -20,16 +16,7 @@ const { title = "Dockside Web Solutions" } = Astro.props;
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..700&family=Source+Sans+3:wght@400;500;600;700&display=swap" />
 
-		<link rel="icon" href="/favicon.ico" sizes="any">
-		<link rel="icon" href="/favicon-32x32.png" type="image/png">
-		<link rel="icon" href="/favicon-16x16.png" type="image/png">
-
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-		<link rel="manifest" href="/site.webmanifest">
-
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<SEO title={title} description={description} />
 
 		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" async defer></script>
 	</head>
