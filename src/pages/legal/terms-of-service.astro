@@ -5,9 +5,12 @@ import SectionLabel from "../../components/ui/SectionLabel.astro";
 import Heading from "../../components/ui/Heading.astro";
 import Text from "../../components/ui/Text.astro";
 import CTAAboveFooter from "../../components/CTAAboveFooter.astro";
+
+const pageTitle = "Terms of Service";
+const metaDescription = "View the official Terms of Use for Dockside Web Solutions. Review our service agreement, user responsibilities, and legal conditions for our web services.";
 ---
 
-<Layout title="Terms of Service" description="Terms of Service for Dockside Web Solutions, LLC">
+<Layout title={pageTitle} description={metaDescription}>
   <Section bg="navy" class="text-center">
     <div
       class="absolute inset-0 opacity-12 bg-[url('https://www.transparenttextures.com/patterns/white-wave.png')]"

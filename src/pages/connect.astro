@@ -4,10 +4,14 @@ import Button from "../components/ui/Button.astro";
 import CTAAboveFooter from "../components/CTAAboveFooter.astro";
 import marinaImage from "../assets/hero-marina.webp";
 import { CheckCircle } from "lucide-astro";
+
+const pageTitle = "Connect";
+const metaDescription = "Ready to start your next digital project? Contact Dockside Web Solutions today for a consultation and let’s build something exceptional together.";
 ---
 
-<Layout title="Connect" description="Ready to start your next digital project? Contact Dockside Web Solutions today for a consultation and let’s build something exceptional together." >
-  <!-- Hero Section -->
+<Layout title={pageTitle} description={metaDescription}>
+
+  <!-- HERO SECTION -->
   <section class="hero-section relative bg-navy min-h-[75vh] flex items-center overflow-hidden pb-24 bg-cover bg-center bg-no-repeat bg-scroll lg:bg-fixed"
             style={`background-image: url(${marinaImage.src});`}>
             

@@ -56,9 +56,12 @@ const services: ServiceFeature[] = [
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
   },
 ];
+
+const pageTitle = "Services";
+const metaDescription = "Affordable web design for small businesses. We provide custom site development plus ongoing monthly maintenance to ensure your site stays fast and updated.";
 ---
 
-<Layout title="Services" description="Affordable web design for small businesses. We provide custom site development plus ongoing monthly maintenance to ensure your site stays fast and updated.">
+<Layout title={pageTitle} description={metaDescription}>
 
   <HeroSecondary
     label="Our Services"

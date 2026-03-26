@@ -1,14 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Heading from "../components/ui/Heading.astro";
-import Text from "../components/ui/Text.astro";
 import Section from "../components/ui/Section.astro";
 import ContactForm from "../components/ContactForm.astro";
 import { Mail, Phone, MapPin } from "lucide-astro";
 import HeroSecondary from "../components/HeroSecondary.astro";
+
+const pageTitle = "Contact";
+const metaDescription = "Ready to start your next digital project? Contact Dockside Web Solutions today for a consultation and let’s build something exceptional together.";
 ---
 
-<Layout title="Contact" description="Ready to start your next digital project? Contact Dockside Web Solutions today for a consultation and let’s build something exceptional together.">
+<Layout title={pageTitle} description={metaDescription}>
   <HeroSecondary
     label="Contact Us"
     heading="Talk With Our Team"

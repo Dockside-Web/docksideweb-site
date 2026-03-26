@@ -68,9 +68,12 @@ function getStepColors(index: number) {
     boxBg: isTeal ? 'bg-[var(--color-teal)]/[0.05]' : 'bg-[var(--color-navy)]/[0.05]',
   };
 }
+
+const pageTitle = "Process";
+const metaDescription = "See how we take your project from concept to launch. Our data-driven process ensures a seamless voyage from initial builds to a live, optimized site.";
 ---
 
-<Layout title="Process" description="See how we take your project from concept to launch. Our data-driven process ensures a seamless voyage from initial builds to a live, optimized site." >
+<Layout title={pageTitle} description={metaDescription}>
   <HeroSecondary
     label="Our Process"
     heading="From Concept to Launch"

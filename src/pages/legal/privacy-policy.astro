@@ -5,9 +5,12 @@ import SectionLabel from "../../components/ui/SectionLabel.astro";
 import Heading from "../../components/ui/Heading.astro";
 import Text from "../../components/ui/Text.astro";
 import CTAAboveFooter from "../../components/CTAAboveFooter.astro";
+
+const pageTitle = "Privacy Policy";
+const metaDescription = "Read the Dockside Web Solutions Privacy Policy to learn how we collect, use, and protect your data. We are committed to transparency and digital security.";
 ---
 
-<Layout title="Privacy Policy" description="Privacy Policy for for Dockside Web Solutions, LLC">
+<Layout title={pageTitle} description={metaDescription}>
   <Section bg="navy" class="text-center">
     <div
       class="absolute inset-0 opacity-12 bg-[url('https://www.transparenttextures.com/patterns/white-wave.png')]"

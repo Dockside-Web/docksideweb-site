@@ -110,9 +110,11 @@ const processSteps = [
     desc: "We provide ongoing updates and performance checks to keep your site working hard for you.",
   },
 ];
+
+const metaDescription = "Modern, high-performance web development for small businesses in Charleston and beyond. We build custom sites designed to scale your brand.";
 ---
 
-<Layout description="Modern, high-performance web development for small businesses in Charleston and beyond. We build custom sites designed to scale your brand.">
+<Layout description={metaDescription}>
   <!-- Hero Section -->
   <section class="hero-section relative bg-navy min-h-[75vh] flex items-center overflow-hidden pb-24 bg-cover bg-center bg-no-repeat bg-scroll lg:bg-fixed"
             style={`background-image: url(${marinaImage.src});`}>
