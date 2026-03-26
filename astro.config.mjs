@@ -4,7 +4,6 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://www.docksideweb.com",
-  adapter: cloudflare(),
   trailingSlash: 'always',
   output: "static",
   build: {
