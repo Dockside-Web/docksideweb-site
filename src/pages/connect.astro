@@ -1,4 +1,7 @@
 ---
+import Section from "../components/ui/Section.astro";
+import SectionLabel from "../components/ui/SectionLabel.astro";
+import Heading from "../components/ui/Heading.astro";
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/ui/Button.astro";
 import CTAAboveFooter from "../components/CTAAboveFooter.astro";
@@ -38,7 +41,7 @@ const metaDescription = "Welcome to Dockside Web Solutions. View our portfolio, 
             Built to load fast, show up on Google, and make it easy for customers to contact you.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 items-center lg:items-start justify-center lg:justify-start">
-            <a href="/contact/">
+            <a href="/">
               <Button variant="primary" size="lg" class="w-full sm:w-auto">View Homepage</Button>
             </a>
             <a href="/pricing/">
@@ -79,6 +82,24 @@ const metaDescription = "Welcome to Dockside Web Solutions. View our portfolio, 
       </svg>
     </div>
   </section>
+
+  <Section>
+    <SectionLabel>
+      Coming Soon
+    </SectionLabel>
+    <Heading>
+      Our Work
+    </Heading>
+  </Section>
+
+  <Section bg="light">
+    <SectionLabel>
+      Coming Soon
+    </SectionLabel>
+    <Heading>
+      Testimonials
+    </Heading>
+  </Section>
 
   <CTAAboveFooter />
 </Layout>
