@@ -5,6 +5,7 @@ import Heading from "../components/ui/Heading.astro";
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/ui/Button.astro";
 import CTAAboveFooter from "../components/CTAAboveFooter.astro";
+import TestimonialCards from "../components/TestimonialCards.astro";
 import marinaImage from "../assets/hero-marina.webp";
 import { CheckCircle } from "lucide-astro";
 
@@ -84,21 +85,38 @@ const metaDescription = "Welcome to Dockside Web Solutions. View our portfolio, 
   </section>
 
   <Section>
+    <div class="text-center max-w-3xl mx-auto mb-16">
     <SectionLabel>
       Coming Soon
     </SectionLabel>
     <Heading>
       Our Work
     </Heading>
+    </div>
+    
   </Section>
 
   <Section bg="light">
-    <SectionLabel>
-      Coming Soon
-    </SectionLabel>
-    <Heading>
-      Testimonials
-    </Heading>
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <SectionLabel>
+        Coming Soon
+      </SectionLabel>
+      <Heading>
+        Testimonials
+      </Heading>
+    </div>
+    <TestimonialCards />
+  </Section>
+
+  <Section>
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <SectionLabel>
+        FAQS
+      </SectionLabel>
+      <Heading>
+        Frequently Asked Questions
+      </Heading>
+    </div>
   </Section>
 
   <CTAAboveFooter />
