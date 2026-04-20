@@ -1,0 +1,180 @@
+---
+import { Image } from 'astro:assets';
+import cjcMockup from '../assets/clientImages/cjc-mockup.png';
+import scsMockup from '../assets/clientImages/scs-mockup.png';
+import scaMockup from '../assets/clientImages/sca-mockup.png';
+import SectionLabel from "./ui/SectionLabel.astro";
+import Heading from "./ui/Heading.astro";
+import Text from "./ui/Text.astro";
+import Button from "./ui/Button.astro";
+
+const websites = [
+  {
+    category: "Vacation Rental",
+    title: "Sweet Caroline Seaport",
+    description: "We refreshed this coastal rental's online presence with a look that drives direct bookings and keeps guests coming back.",
+    tags: ["SEO", "Branding", "UI/UX"],
+    image: scsMockup,
+    bgClass: "bg-navy",
+    zClass: "z-10",
+    url: "https://sweetcarolineseaport.com",
+    textColor: "light"
+  },
+  {
+    category: "Car Detailing",
+    title: "CJC Detailing",
+    description: "A sharp site for a detail-obsessed business. Customers can go from 'I need my car cleaned' to a confirmed appointment without lifting a finger.",  
+    tags: ["CRM Integration", "Automation", "Web App"],
+    image: cjcMockup,
+    bgClass: "bg-teal",
+    zClass: "z-20",
+    url: "https://cjcdetailing.com",
+    textColor: "light"
+  },
+  {
+    category: "Financial Advisor",
+    title: "Seaside Creek Advisors",
+    description: "We built this focused landing page to make a strong first impression and turn visitors into qualified leads.",
+    tags: ["Lead Gen", "WaaS", "Landing Page"],
+    image: scaMockup,
+    bgClass: "bg-gold",
+    zClass: "z-30",
+    url: "https://seasidecreek.com",
+    textColor: "light"
+  }
+];
+---
+
+<!-- SVG clip path definitions -->
+<svg class="absolute w-0 h-0 overflow-hidden" aria-hidden="true">
+  <defs>
+    <!-- Card 01: wave on top only -->
+    <clipPath id="wave-0" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.04 C0.15,0 0.35,0.07 0.5,0.03 C0.65,-0.01 0.85,0.06 1,0.02 L1,1 L0,1 Z" />
+    </clipPath>
+    <!-- Card 02 -->
+    <clipPath id="wave-1" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.04 C0.15,0 0.35,0.07 0.5,0.03 C0.65,-0.01 0.85,0.06 1,0.02 L1,1 L0,1 Z" />
+    </clipPath>
+    <!-- Card 03 -->
+    <clipPath id="wave-2" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.03 C0.2,0.07 0.4,0 0.55,0.04 C0.7,0.08 0.85,0.01 1,0.04 L1,1 L0,1 Z" />
+    </clipPath>
+  </defs>
+</svg>
+ 
+<div class="sticky top-[15vh] z-0 min-h-[30vh] flex items-center justify-center px-6 pb-20">
+  <div class="text-center max-w-3xl mx-auto">
+    <SectionLabel>Our Portfolio</SectionLabel>
+    <Heading>Teams We've Worked With</Heading>
+    <div class="mb-6">
+      <Text>Check out some of our latest projects and see how we can help your business grow.</Text>
+    </div>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/contact/">
+        <Button variant="primary">Start Your Project</Button>
+      </a>
+      <a href="/pricing/">
+        <Button variant="navyOutline">See Pricing</Button>
+      </a>
+    </div>
+  </div>
+</div>
+ 
+<section class="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
+  <div class="relative">
+    {websites.map((website, index) => (
+      <div
+        style={`clip-path: url(#wave-${index});`}
+        class={`sticky top-0 min-h-[70vh] flex items-center px-6 lg:px-16
+          ${website.zClass} ${website.bgClass}
+          ${index !== 0 ? '-mt-10 shadow-[0_-30px_60px_rgba(0,0,0,0.35)]' : ''}`}
+      >
+        {/* Bottom wave overlay on last card only */}
+        {index === websites.length - 1 && (
+          <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none z-10">
+            <svg
+              viewBox="0 0 1440 64"
+              class="w-full h-16 block"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,32 C180,64 360,0 540,32 C720,64 900,0 1080,32 C1260,64 1380,16 1440,32 L1440,64 L0,64 Z"
+                class="fill-slate-50"
+              />
+            </svg>
+          </div>
+        )}
+ 
+        <div class={`mx-auto max-w-7xl w-full grid md:grid-cols-2 gap-10 items-center py-10 md:py-14
+          ${index !== 0 ? 'pt-16 md:pt-20' : 'pt-10 md:pt-14'}`}>
+ 
+          {/* ── TEXT SIDE ── */}
+          <div class={`space-y-6 ${index % 2 === 0 ? 'justify-self-start' : 'justify-self-end'}`}>
+            <div class="flex items-center gap-3">
+              <span class="h-px w-9 bg-gold"></span>
+              <span class={`font-mono text-[10px] tracking-[0.2em] uppercase text-gold/70 ${website.textColor === 'dark' ? 'text-navy' : 'text-white'}`}>
+                {website.category}
+              </span>
+            </div>
+ 
+            {/* Title */}
+            <h3 class={`text-3xl md:text-4xl font-bold tracking-tight ${website.textColor === 'dark' ? 'text-navy' : 'text-white'}`}>
+                {website.title}
+            </h3>
+ 
+            <div class="flex flex-wrap gap-2">
+              {website.tags.map((tag) => (
+                <span class={`inline-flex items-center px-3 py-1 rounded-full text-[11px] tracking-wide uppercase font-medium ${website.textColor === 'dark' ? 'text-navy border border-navy' : 'text-white border border-white'}`}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+            
+            <p class={`text-base md:text-lg leading-relaxed max-w-md font-light ${website.textColor === 'dark' ? 'text-navy' : 'text-white'}`}>
+              {website.description}
+            </p>
+ 
+            <a
+              href={website.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant={website.textColor === 'dark' ? 'navyOutline' : 'whiteOutline'} size="sm" class="flex items-center gap-2.5">
+                  Visit Site
+                <svg 
+                  viewBox="0 0 32 32" 
+                  fill="none" 
+                  class="w-4 h-4"
+                >
+                  <path 
+                    stroke="currentColor" 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    stroke-width="2.5" 
+                    d="M22 3h7v7M27.5 4.5L20 12M17 5H8a3 3 0 00-3 3v16a3 3 0 003 3h16a3 3 0 003-3v-9"
+                  />
+                </svg>
+              </Button>
+            </a>
+          </div>
+ 
+          {/* ── IMAGE SIDE ── */}
+          <div class={`relative group overflow-hidden rounded-xl
+            ${index % 2 === 0 ? 'md:-order-1' : 'md:order-1'}`}
+          >
+            <Image
+              src={website.image}
+              alt={website.title}
+              width={1000}
+              height={500}
+              class="w-full object-cover group-hover:opacity-100 transition-all duration-700"
+            />
+            <div class="absolute inset-0 pointer-events-none"></div>
+          </div>
+ 
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

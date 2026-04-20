@@ -1,0 +1,176 @@
+---
+import { Image } from 'astro:assets';
+import scLogo from '../assets/clientImages/scLogo.svg';
+import wpLogo from '../assets/clientImages/wpLogo.png';
+
+const testimonials = [
+  {
+    logo: scLogo,
+    biz: "CJC Detailing",
+    role: "Forest Hill, MD",
+    quote: "Riley is by far your best expert when it comes to website design. Riley with Dockside Web Solutions has been our website manager and developer for CJC Detailing for years. He made our first website, and revamped our website in previous months. He is always looking out for how to make your website better and more efficient - so that you (the business owner) can focus on your clients and driving in revenue, while he always focuses on your website and it’s image. The design was top tier, the process of it all has always been so easy and painless - smooth sailing. And bar none - Riley’s communication was a 1000/10. He is efficient at extreme heat and speedy communication. He will always be our website developer and go to for all of our website needs."
+  },
+  {
+    logo: wpLogo,
+    biz: "Woodhome Preschool Center",
+    role: "Parkville, MD",
+    quote: "I highly recommend. If you are looking for a company to help with your website, you don't have to look any further because you've found the best with Dockside. Riley was amazing to work with and made communication very easy. The process was fast because of his responsiveness, and we were able to use it to bring in new business quickly as a result. Our website needed a total overhaul, and Dockside brought it to life and incorporated our new logo and colors in a fun and effective way."
+  },
+//   {
+//     logo: scLogo,
+//     biz: "Sweet Caroline Seaport",
+//     role: "Key West, FL",
+//     quote: "I came to Riley with a vague vision and a shoestring budget. What I got back was a beautiful, mobile-first site that genuinely feels like me. My class bookings have nearly doubled."
+//   },
+//   {
+//     logo: scLogo,
+//     biz: "Seaside Creek Advisors",
+//     role: "Charleston, SC",
+//     quote: "Working with Dockside was the smoothest vendor experience we've had. Our online store launched ahead of schedule and the design is exactly on-brand. We'll be back for phase two."
+//   }
+];
+---
+
+<section class="w-full max-w-6xl mx-auto px-4 select-none" aria-label="Client testimonials">
+  <div class="relative flex flex-col md:flex-row items-center group gap-4 md:gap-0">
+    
+    <button id="prev" class="hidden md:flex shrink-0 w-12 h-12 rounded-full bg-white border border-slate-200 items-center justify-center cursor-pointer z-10 transition-all hover:bg-slate-50 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed shadow-md" aria-label="Previous">
+      <svg class="w-6 h-6 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+
+    <div id="viewport" class="overflow-hidden flex-1 w-full md:mx-4">
+      <div id="track" class="flex gap-6 items-stretch transition-transform duration-500 ease-in-out h-full py-4">
+        {testimonials.map((t) => (
+          <div class="ts-card shrink-0 bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-10 flex flex-col gap-6 shadow-sm min-h-112 h-full">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-full overflow-hidden border border-slate-100 shrink-0 bg-slate-50 shadow-sm">
+                <Image 
+                  src={t.logo} 
+                  alt={`${t.biz} logo`} 
+                  class="w-full h-full object-contain p-1"
+                />
+              </div>
+              <div>
+                <p class="text-lg font-bold text-slate-900 leading-tight">{t.biz}</p>
+                <p class="text-sm text-slate-500">{t.role}</p>
+              </div>
+            </div>
+            
+            <div class="flex gap-0.5">
+              {[...Array(5)].map(() => (
+                <svg class="w-4 h-4 fill-gold" viewBox="0 0 24 24">
+                  <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+                </svg>
+              ))}
+            </div>
+
+            <p class="text-[16px] text-slate-600 leading-relaxed flex-1">
+              "{t.quote}"
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <button id="next" class="hidden md:flex shrink-0 w-12 h-12 rounded-full bg-white border border-slate-200 items-center justify-center cursor-pointer z-10 transition-all hover:bg-slate-50 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed shadow-md" aria-label="Next">
+      <svg class="w-6 h-6 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+
+    <div class="flex md:hidden items-center justify-center gap-6 mt-4">
+      <button id="prev-mobile" class="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-md active:scale-95 disabled:opacity-30" aria-label="Previous">
+        <svg class="w-6 h-6 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button id="next-mobile" class="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-md active:scale-95 disabled:opacity-30" aria-label="Next">
+        <svg class="w-6 h-6 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="dots" class="flex justify-center gap-2 mt-8 md:mt-10"></div>
+</section>
+
+<script>
+  const track = document.getElementById('track') as HTMLElement;
+  const viewport = document.getElementById('viewport') as HTMLElement;
+  const dotsEl = document.getElementById('dots') as HTMLElement;
+  
+  // Desktop buttons
+  const prevBtn = document.getElementById('prev') as HTMLButtonElement;
+  const nextBtn = document.getElementById('next') as HTMLButtonElement;
+  
+  // Mobile buttons
+  const prevBtnMobile = document.getElementById('prev-mobile') as HTMLButtonElement;
+  const nextBtnMobile = document.getElementById('next-mobile') as HTMLButtonElement;
+
+  const cards = Array.from(track.children) as HTMLElement[];
+  const GAP = 24; 
+  let current = 0;
+
+  function getVisibleCount() {
+    if (window.innerWidth >= 768) return 2;
+    return 1;
+  }
+
+  function getCardWidth() {
+    const n = getVisibleCount();
+    return Math.floor((viewport.offsetWidth - GAP * (n - 1)) / n);
+  }
+
+  function updateLayout() {
+    const w = getCardWidth();
+    cards.forEach(c => {
+      c.style.width = `${w}px`;
+    });
+    
+    let maxHeight = 0;
+    cards.forEach(c => {
+      c.style.height = 'auto'; 
+      if (c.offsetHeight > maxHeight) maxHeight = c.offsetHeight;
+    });
+    cards.forEach(c => {
+      c.style.height = `${maxHeight}px`;
+    });
+
+    buildDots();
+    goTo(Math.min(current, getMaxIndex()));
+  }
+
+  function getMaxIndex() {
+    return cards.length - getVisibleCount();
+  }
+
+  function buildDots() {
+    dotsEl.innerHTML = '';
+    const count = getMaxIndex() + 1;
+    for (let i = 0; i < count; i++) {
+      const d = document.createElement('button');
+      d.className = `h-2 rounded-full transition-all duration-300 ${i === current ? 'w-8 bg-teal' : 'w-2 bg-slate-300'}`;
+      d.onclick = () => goTo(i);
+      dotsEl.appendChild(d);
+    }
+  }
+
+  function goTo(idx: number) {
+    current = Math.max(0, Math.min(idx, getMaxIndex()));
+    const offset = current * (getCardWidth() + GAP);
+    track.style.transform = `translateX(-${offset}px)`;
+    
+    Array.from(dotsEl.children).forEach((d, i) => {
+      (d as HTMLElement).className = `h-2 rounded-full transition-all duration-300 ${i === current ? 'w-8 bg-teal' : 'w-2 bg-slate-300'}`;
+    });
+
+    // Update disabled states for all button sets
+    [prevBtn, prevBtnMobile].forEach(btn => { if(btn) btn.disabled = current === 0 });
+    [nextBtn, nextBtnMobile].forEach(btn => { if(btn) btn.disabled = current === getMaxIndex() });
+  }
+
+  // Event Listeners
+  prevBtn.onclick = () => goTo(current - 1);
+  nextBtn.onclick = () => goTo(current + 1);
+  if(prevBtnMobile) prevBtnMobile.onclick = () => goTo(current - 1);
+  if(nextBtnMobile) nextBtnMobile.onclick = () => goTo(current + 1);
+
+  updateLayout();
+  window.addEventListener('load', updateLayout);
+  window.addEventListener('resize', updateLayout);
+</script>

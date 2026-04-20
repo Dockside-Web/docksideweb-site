@@ -2,40 +2,116 @@
 import Button from "./ui/Button.astro";
 import Logo from "../assets/logo/logo-horizontal-light.svg";
 
+// 1. Define the shape of your data
+interface NavItem {
+  name: string;
+  path: string;
+  children?: { name: string; path: string }[];
+}
+
 const rawPath = Astro.url.pathname;
 const currentPath = rawPath === "/" ? "/" : rawPath.replace(/\/$/, "");
 
-const navLinks = [
+// 2. Apply the type to your array
+const navigation: NavItem[] = [
   { name: "Home", path: "/" },
+  { 
+    name: "Our Work", 
+    path: "", 
+    children: [
+      { name: "Portfolio", path: "/connect/#portfolio" },
+      { name: "Reviews", path: "/connect/#reviews" },
+      { name: "FAQ", path: "/connect/#faq" },
+    ]
+  },
   { name: "Services", path: "/services/" },
   { name: "Pricing", path: "/pricing/" },
-  { name: "Process", path: "/process/" },
-  { name: "Contact", path: "/contact/" },
 ];
+
+// 3. Add the type to the helper function parameter
+const isActive = (item: NavItem) => {
+  const normalizedPath = item.path.replace(/\/$/, "");
+  if (currentPath === normalizedPath) return true;
+  if (item.children) {
+    return item.children.some(child => currentPath === child.path.replace(/\/$/, ""));
+  }
+  return false;
+};
 ---
 
-<header id="main-header" class="fixed w-full z-50 transition-all duration-500 bg-navy py-4">
+<header id="main-header" class="fixed w-full z-50 transition-all duration-500 bg-navy py-6">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center">
       <a href="/" class="flex items-center group">
-        <Logo 
-          class="h-12 md:h-16 w-auto transition-all duration-300 group-hover:opacity-90" 
-          aria-label="Dockside Web Solutions Logo" 
+        <Logo
+          class="h-12 md:h-16 w-auto transition-all duration-300 group-hover:opacity-90"
+          aria-label="Dockside Web Solutions Logo"
         />
       </a>
 
       <nav class="hidden md:flex items-center space-x-10">
-        {
-          navLinks.map((link) => (
-            <a href={link.path} class={`text-sm font-semibold tracking-wide uppercase transition-colors hover:text-gold ${currentPath === link.path ? "text-gold" : "text-slate-200"}`}
+        {navigation.map((item) => (
+          item.children ? (
+            /* Dropdown Item */
+            <div class="relative group" id="about-dropdown-wrapper">
+  <button
+    id="about-dropdown-btn"
+    aria-expanded="false"
+    aria-haspopup="true"
+    class={`flex items-center gap-1 text-sm font-semibold tracking-wide uppercase transition-colors hover:text-gold cursor-pointer bg-transparent border-none ${
+      isActive(item) ? "text-gold" : "text-slate-200"
+    }`}
+  >
+    {item.name}
+    <svg
+      id="about-chevron"
+      class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <div
+    id="about-dropdown-menu"
+    class="absolute top-full left-1/2 -translate-x-1/2 w-44 bg-navy border border-white/10 rounded-xl shadow-2xl overflow-hidden z-10 
+    hidden group-hover:block animate-in fade-in slide-in-from-top-2 duration-200"
+  >
+    <div class="absolute -top-4 left-0 w-full h-4"></div>
+    
+    <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-navy border-l border-t border-white/10 rotate-45"></div>
+    <div class="py-2 relative">
+      {item.children.map((child) => (
+        <a
+          href={child.path}
+          class={`block px-4 py-2.5 text-sm font-medium tracking-wide transition-colors hover:bg-white/5 hover:text-gold ${
+            currentPath === child.path.replace(/\/$/, "") ? "text-gold" : "text-slate-200"
+          }`}
+        >
+          {child.name}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+          ) : (
+            /* Standard Link */
+            <a
+              href={item.path}
+              class={`text-sm font-semibold tracking-wide uppercase transition-colors hover:text-gold ${
+                isActive(item) ? "text-gold" : "text-slate-200"
+              }`}
             >
-              {link.name}
+              {item.name}
             </a>
-          ))
-        }
+          )
+        ))}
+
         <a href="/contact/">
           <Button variant="primary" size="sm" class="shadow-md hover:shadow-gold/20">
-            Get Started
+            Contact
           </Button>
         </a>
       </nav>
@@ -61,33 +137,64 @@ const navLinks = [
     class="md:hidden absolute top-full left-0 w-full bg-navy/98 backdrop-blur-xl border-t border-white/5 shadow-2xl hidden"
   >
     <div class="px-6 py-8 space-y-6">
-      {
-        navLinks.map((link) => (
-          <a
-            href={link.path}
-            class={`block text-lg font-medium tracking-tight ${
-              currentPath === link.path ? "text-gold" : "text-slate-200"
-            }`}
+      {navigation.map((item) => (
+        item.children ? (
+          /* Mobile Dropdown (Accordion) */
+          <div>
+            <button
+              id="mobile-about-btn"
+              class={`flex items-center gap-2 w-full text-lg font-medium tracking-tight ${
+                isActive(item) ? "text-gold" : "text-slate-200"
+              }`}
+            >
+              {item.name}
+              <svg
+                id="mobile-about-chevron"
+                class="w-4 h-4 transition-transform duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div id="mobile-about-links" class="hidden mt-3 ml-4 space-y-4">
+              {item.children.map((child) => (
+                <a
+                  href={child.path}
+                  class={`block text-base font-medium ${
+                    currentPath === child.path.replace(/\/$/, "") ? "text-gold" : "text-slate-300"
+                  }`}
+                >
+                  {child.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          /* Mobile Standard Link */
+          <a 
+            href={item.path} 
+            class={`block text-lg font-medium tracking-tight ${isActive(item) ? "text-gold" : "text-slate-200"}`}
           >
-            {link.name}
+            {item.name}
           </a>
-        ))
-      }
+        )
+      ))}
+
       <a href="/contact/" class="block pt-2">
-        <Button variant="primary" class="w-full py-4 text-base">Get Started</Button>
+        <Button variant="primary" class="w-full py-4 text-base">Contact</Button>
       </a>
     </div>
   </div>
 
-  <div class="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-gold/20 to-transparent"></div>
+  <div class="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-gold/20 to-transparent z-0"></div>
 </header>
 
 <script>
   function handleScroll() {
     const header = document.getElementById("main-header");
     if (!header) return;
-
-    // Use a slightly larger scroll threshold for a smoother "docking" feel
     if (window.scrollY > 50) {
       header.classList.add("bg-navy/95", "backdrop-blur-md", "shadow-xl", "py-3");
       header.classList.remove("py-6");
@@ -102,7 +209,6 @@ const navLinks = [
     const mobileMenu = document.getElementById("mobile-menu");
     const menuIcon = document.getElementById("menu-icon");
     const closeIcon = document.getElementById("close-icon");
-
     if (!menuButton || !mobileMenu || !menuIcon || !closeIcon) return;
 
     menuButton.onclick = () => {
@@ -110,12 +216,9 @@ const navLinks = [
       menuIcon.classList.toggle("hidden", !isHidden);
       closeIcon.classList.toggle("hidden", isHidden);
       menuButton.setAttribute("aria-expanded", String(!isHidden));
-      
-      // Prevent body scroll when menu is open
       document.body.style.overflow = isHidden ? "" : "hidden";
     };
 
-    // Close menu when clicking outside
     document.addEventListener("click", (e) => {
       if (!menuButton.contains(e.target as Node) && !mobileMenu.contains(e.target as Node)) {
         mobileMenu.classList.add("hidden");
@@ -126,13 +229,60 @@ const navLinks = [
     });
   }
 
-  // Initializations
+  function setupAboutDropdown() {
+    const btn = document.getElementById("about-dropdown-btn");
+    const menu = document.getElementById("about-dropdown-menu");
+    const chevron = document.getElementById("about-chevron");
+    
+    if (btn && menu && chevron) {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = !menu.classList.contains("hidden");
+        menu.classList.toggle("hidden", isOpen);
+        chevron.classList.toggle("rotate-180", !isOpen);
+        btn.setAttribute("aria-expanded", String(!isOpen));
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!btn.contains(e.target as Node) && !menu.contains(e.target as Node)) {
+          menu.classList.add("hidden");
+          chevron.classList.remove("rotate-180");
+          btn.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          menu.classList.add("hidden");
+          chevron.classList.remove("rotate-180");
+          btn.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
+    const mobileBtn = document.getElementById("mobile-about-btn");
+    const mobileLinks = document.getElementById("mobile-about-links");
+    const mobileChevron = document.getElementById("mobile-about-chevron");
+    if (mobileBtn && mobileLinks && mobileChevron) {
+      mobileBtn.onclick = () => {
+        const isOpen = !mobileLinks.classList.contains("hidden");
+        mobileLinks.classList.toggle("hidden", isOpen);
+        mobileChevron.classList.toggle("rotate-180", !isOpen);
+      };
+    }
+  }
+
+  // Initial Setup
   handleScroll();
   setupMobileMenu();
-  window.addEventListener("scroll", handleScroll, { passive: true });
+  setupAboutDropdown();
 
+  // Re-run on View Transitions
   document.addEventListener("astro:page-load", () => {
     handleScroll();
     setupMobileMenu();
+    setupAboutDropdown();
   });
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
 </script>

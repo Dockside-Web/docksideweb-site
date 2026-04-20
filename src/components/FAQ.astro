@@ -1,0 +1,221 @@
+---
+// FAQ.astro — uses CSS custom property names from Dockside theme
+
+const categories = [
+  "General",
+  "Pricing & Payments",
+  "Services",
+  "Getting Started",
+  "CFO Advisory",
+];
+
+const faqs = [
+  {
+    category: "General",
+    question: "What is a fractional CFO?",
+    answer:
+      "A fractional CFO is an experienced chief financial officer who works with your business on a part-time or project basis. You get senior-level financial leadership — strategic planning, forecasting, and cash flow management — without the overhead of a full-time executive hire.",
+  },
+  {
+    category: "General",
+    question: "What size businesses do you typically work with?",
+    answer:
+      "We primarily serve small to mid-size businesses in the $1M–$20M revenue range. Whether you're preparing for growth, navigating a transition, or simply need cleaner financials, Seaside Creek Advisors can help.",
+  },
+  {
+    category: "Pricing & Payments",
+    question: "How is your pricing structured?",
+    answer:
+      "We offer monthly retainer engagements as well as project-based pricing for one-time needs like financial audits or fundraising prep. Retainers are billed at the beginning of each month.",
+  },
+  {
+    category: "Pricing & Payments",
+    question: "What happens if I need to pause or cancel?",
+    answer:
+      "Retainer agreements require 30 days written notice to pause or cancel. There are no long-term contracts or cancellation penalties.",
+  },
+  {
+    category: "Pricing & Payments",
+    question: "Do you offer a free initial consultation?",
+    answer:
+      "Yes — we offer a complimentary 30-minute discovery call to understand your goals and determine if we're a good fit. No pressure, no commitment.",
+  },
+  {
+    category: "Services",
+    question: "What does your ongoing CFO advisory include?",
+    answer:
+      "Monthly engagements typically include cash flow monitoring, financial reporting review, budget vs. actuals analysis, strategic guidance, and regular check-in calls with your team.",
+  },
+  {
+    category: "Services",
+    question: "Can you help us prepare for a fundraise or sale?",
+    answer:
+      "Absolutely. We have experience preparing businesses for investor due diligence, M&A transactions, and SBA loan applications — including building investor-ready financial models and cleaning up historical records.",
+  },
+  {
+    category: "Getting Started",
+    question: "How quickly can we get started?",
+    answer:
+      "After our discovery call and a signed engagement letter, most clients are fully onboarded within one to two weeks. We move at your pace.",
+  },
+  {
+    category: "Getting Started",
+    question: "What do you need from us to begin?",
+    answer:
+      "We'll typically request access to your accounting software (QuickBooks, Xero, etc.), recent bank statements, and any existing financial reports. We'll walk you through exactly what we need during onboarding.",
+  },
+  {
+    category: "CFO Advisory",
+    question: "Will I work directly with a senior advisor?",
+    answer:
+      "Yes. At Seaside Creek Advisors, you work directly with a senior fractional CFO — not a junior analyst. You'll have a dedicated point of contact who knows your business deeply.",
+  },
+  {
+    category: "CFO Advisory",
+    question: "Can you work alongside our existing bookkeeper or accountant?",
+    answer:
+      "Absolutely. We frequently collaborate with in-house bookkeepers and external CPAs. We operate at the strategic layer, complementing your existing team.",
+  },
+];
+
+const firstCategory = categories[0];
+---
+
+<!-- Category Filters -->
+<div class="flex flex-wrap gap-3 justify-center mb-10" role="tablist" aria-label="FAQ categories">
+  {categories.map((cat, idx) => (
+    <button
+      class={`faq-filter px-6 py-2.5 rounded-full border text-base font-semibold transition-colors duration-200 cursor-pointer ${
+        idx === 0 ? "filter-active" : "filter-inactive"
+      }`}
+      data-category={cat}
+      role="tab"
+      aria-selected={idx === 0 ? "true" : "false"}
+    >
+      {cat}
+    </button>
+  ))}
+</div>
+
+<!-- Accordion -->
+<div>
+  {faqs.map((item, i) => (
+    <div
+      class="faq-item border-b border-navy/10"
+      data-category={item.category}
+      hidden={item.category !== firstCategory}
+    >
+      <button
+        class="faq-question flex justify-between items-center w-full py-5 text-left text-lg font-semibold text-color-navy hover:text-teal transition-colors duration-200 gap-4 cursor-pointer bg-transparent border-none"
+        aria-expanded="false"
+        aria-controls={`faq-answer-${i}`}
+        id={`faq-btn-${i}`}
+      >
+        <span>{item.question}</span>
+        <span class="faq-chevron shrink-0 text-teal transition-transform duration-300">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+
+      <div
+        class="overflow-hidden max-h-0 transition-[max-height] duration-300 ease-in-out"
+        id={`faq-answer-${i}`}
+        role="region"
+        aria-labelledby={`faq-btn-${i}`}
+      >
+        <p class="pb-5 text-navy text-[0.9375rem] leading-7">
+          {item.answer}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .filter-active {
+    background-color: var(--color-navy);
+    border-color: var(--color-navy);
+    color: white;
+  }
+
+  .filter-inactive {
+    border-color: color-mix(in srgb, var(--color-navy) 30%, transparent);
+    color: var(--color-navy);
+  }
+
+  .filter-inactive:hover {
+    border-color: var(--color-navy);
+  }
+</style>
+
+<script>
+  // ── Filter logic ──
+  const filters = document.querySelectorAll<HTMLButtonElement>(".faq-filter");
+  const items = document.querySelectorAll<HTMLElement>(".faq-item");
+
+  filters.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // Reset all
+      filters.forEach((b) => {
+        b.classList.remove("filter-active");
+        b.classList.add("filter-inactive");
+        b.setAttribute("aria-selected", "false");
+      });
+      // Activate clicked
+      btn.classList.remove("filter-inactive");
+      btn.classList.add("filter-active");
+      btn.setAttribute("aria-selected", "true");
+
+      // Show/hide items and close any open answers
+      const selected = btn.dataset.category;
+      items.forEach((item) => {
+        const match = item.dataset.category === selected;
+        if (match) {
+          item.removeAttribute("hidden");
+        } else {
+          item.setAttribute("hidden", "");
+          const answer = item.querySelector<HTMLElement>("[id^='faq-answer-']")!;
+          const question = item.querySelector<HTMLButtonElement>(".faq-question")!;
+          const chevron = question.querySelector<HTMLElement>(".faq-chevron")!;
+          answer.style.maxHeight = "0px";
+          question.setAttribute("aria-expanded", "false");
+          chevron.classList.remove("rotate-180");
+        }
+      });
+    });
+  });
+
+  // ── Accordion logic ──
+  const questions = document.querySelectorAll<HTMLButtonElement>(".faq-question");
+
+  questions.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+      const answer = document.getElementById(btn.getAttribute("aria-controls")!) as HTMLElement;
+      const chevron = btn.querySelector<HTMLElement>(".faq-chevron")!;
+
+      // Close all others
+      questions.forEach((other) => {
+        if (other !== btn) {
+          other.setAttribute("aria-expanded", "false");
+          const otherAnswer = document.getElementById(other.getAttribute("aria-controls")!) as HTMLElement;
+          otherAnswer.style.maxHeight = "0px";
+          other.querySelector<HTMLElement>(".faq-chevron")!.classList.remove("rotate-180");
+        }
+      });
+
+      // Toggle current
+      if (isOpen) {
+        answer.style.maxHeight = "0px";
+        btn.setAttribute("aria-expanded", "false");
+        chevron.classList.remove("rotate-180");
+      } else {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+        btn.setAttribute("aria-expanded", "true");
+        chevron.classList.add("rotate-180");
+      }
+    });
+  });
+</script>

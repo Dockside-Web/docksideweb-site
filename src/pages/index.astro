@@ -6,11 +6,12 @@ import Text from "../components/ui/Text.astro";
 import Button from "../components/ui/Button.astro";
 import SectionLabel from "../components/ui/SectionLabel.astro";
 import PricingPlans from "../components/PricingPlans.astro";
+import OurWork from "../components/OurWork.astro";
+import TestimonialCards from "../components/TestimonialCards.astro";
 import CTAAboveFooter from "../components/CTAAboveFooter.astro";
 import marinaImage from "../assets/hero-marina.webp";
 
 import {
-  ArrowRight,
   Smartphone,
   CheckCircle,
   RefreshCw,
@@ -89,25 +90,6 @@ const benefits = [
   {
     title: "Money Back Guarantee",
     desc: "If we can't design something you like, you get your money back. We stand by our work.",
-  },
-];
-
-const processSteps = [
-  {
-    title: "Discovery",
-    desc: "We clarify your goals and budget so every page supports your business objectives.",
-  },
-  {
-    title: "Design & Build",
-    desc: "We craft a modern, mobile‑first website tailored to your brand, optimized for speed and SEO.",
-  },
-  {
-    title: "Launch",
-    desc: "We handle testing and deployment, so your new site goes live smoothly and reliably.",
-  },
-  {
-    title: "Support",
-    desc: "We provide ongoing updates and performance checks to keep your site working hard for you.",
   },
 ];
 
@@ -233,7 +215,7 @@ const metaDescription = "Modern, high-performance web development for small busi
   </Section>
 
   <!-- Why Choose Us -->
-  <Section class="white">
+  <Section bg="white">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
       {/* Left side - Large professional image */}
       <div class="relative animate-fade-in-left">
@@ -320,38 +302,8 @@ const metaDescription = "Modern, high-performance web development for small busi
     </div>
   </Section>
 
-  <!-- Process Preview -->
-  <Section bg="navy" class="relative">
-    <div class="text-center max-w-3xl mx-auto mb-16 relative z-10">
-      <SectionLabel>Our Process</SectionLabel>
-      <Heading class="text-white">Charting the Course</Heading>
-      <Text class="mt-4 text-white">
-        A simple, straightforward process designed for busy small business
-        owners.
-      </Text>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
-      {
-        processSteps.map((step, i) => (
-          <div class="relative">
-            <div class="bg-navy-light p-8 rounded-lg border border-white/10 hover:border-gold/50 transition-colors duration-300 h-full group hover:bg-navy-light/80">
-              <span class="text-6xl font-bold text-white/5 absolute top-4 right-4 group-hover:text-gold/10 transition-colors">
-                {i + 1}
-              </span>
-              <h3 class="text-xl font-bold text-white mb-4 relative z-10 group-hover:text-gold transition-colors">
-                {step.title}
-              </h3>
-              <p class="text-slate-400 text-sm relative z-10">{step.desc}</p>
-            </div>
-            {i < 3 && (
-              <div class="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-20">
-                <ArrowRight class="text-gold h-6 w-6" />
-              </div>
-            )}
-          </div>
-        ))
-      }
-    </div>
+  <Section bg="light" class="pb-0!">
+    <OurWork />
   </Section>
 
   <!-- Pricing -->
@@ -365,6 +317,18 @@ const metaDescription = "Modern, high-performance web development for small busi
       </Text>
     </div>
     <PricingPlans />
+  </Section>
+
+  <Section bg="white" id="reviews">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <SectionLabel>
+        Real Growth, Real Results
+      </SectionLabel>
+      <Heading>
+        Client Testimonials
+      </Heading>
+    </div>
+    <TestimonialCards />
   </Section>
 
   <CTAAboveFooter />

@@ -5,6 +5,7 @@ import Text from "../components/ui/Text.astro";
 import Section from "../components/ui/Section.astro";
 import SectionLabel from "../components/ui/SectionLabel.astro";
 import CTAAboveFooter from "../components/CTAAboveFooter.astro";
+import Process from "../components/Process.astro";
 import HeroSecondary from "../components/HeroSecondary.astro";
 import { Check } from "lucide-astro";
 
@@ -113,11 +114,11 @@ const metaDescription = "Affordable web design for small businesses. We provide 
     </div>
   </Section>
 
-  <Section bg="light">
+  <Section bg="navy">
     <div class="text-center max-w-3xl mx-auto mb-16">
       <SectionLabel>Why Small Businesses Choose Dockside</SectionLabel>
-      <Heading>Everything Your Small Business Needs Online</Heading>
-      <Text class="mt-4">
+      <Heading class="text-white">Everything Your Small Business Needs Online</Heading>
+      <Text class="mt-4  text-white">
         We're not a faceless agency. When you call, you get the owner and
         developer directly. No project managers, no account reps—just honest
         communication and quality work.
@@ -155,6 +156,20 @@ const metaDescription = "Affordable web design for small businesses. We provide 
         </p>
       </div>
     </div>
+  </Section>
+
+  <Section class="relative">
+    <div class="text-center max-w-3xl mx-auto mb-16 relative z-10">
+      <SectionLabel>Our Process</SectionLabel>
+      <Heading>Charting the Course</Heading>
+      <Text class="mt-4">
+        A simple, straightforward process designed for busy small business
+        owners.
+      </Text>
+    </div>
+
+    <Process />
+
   </Section>
 
   <CTAAboveFooter />

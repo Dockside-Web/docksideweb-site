@@ -23,18 +23,13 @@
 }
 /* Custom Scrollbar Styles */
 /* Webkit Browsers (Chrome, Safari, Edge) */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
   background-color: var(--color-gold);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-gold-hover);
-}
-
-/* Firefox */
-* {
-  scrollbar-color: var(--color-gold) transparent;
-}
+} */
 
 /* Force hover to work on all devices (especially laptops with touchscreens) */
 @variant hover (&:hover);
