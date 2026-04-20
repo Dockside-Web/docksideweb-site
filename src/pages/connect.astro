@@ -20,8 +20,6 @@ const metaDescription = "Welcome to Dockside Web Solutions. View our portfolio, 
   <!-- HERO SECTION -->
   <section class="hero-section relative bg-navy min-h-[75vh] flex items-center overflow-hidden pb-24 bg-cover bg-center bg-no-repeat bg-scroll lg:bg-fixed"
             style={`background-image: url(${marinaImage.src});`}>
-            
-    <!-- Subtle Pattern Overlay -->
     <div class="absolute inset-0 bg-navy/85"></div>
     <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
 
@@ -54,15 +52,17 @@ const metaDescription = "Welcome to Dockside Web Solutions. View our portfolio, 
             </a>
           </div>
           <div class="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-8 text-white/80 mt-6 items-center justify-center lg:justify-start">
-            <div class="flex items-center space-x-2 trust-indicator opacity-0">
+            <div class="flex items-center space-x-2 animate-fade-in-up [animation-delay:0.5s]">
               <CheckCircle class="w-5 h-5 text-gold shrink-0" />
               <span class="text-sm">Delivered in 3-4 weeks</span>
             </div>
-            <div class="flex items-center space-x-2 trust-indicator opacity-0">
+
+            <div class="flex items-center space-x-2 animate-fade-in-up [animation-delay:0.6s]">
               <CheckCircle class="w-5 h-5 text-gold shrink-0" />
               <span class="text-sm">Upfront, transparent pricing</span>
             </div>
-            <div class="flex items-center space-x-2 trust-indicator opacity-0">
+
+            <div class="flex items-center space-x-2 animate-fade-in-up [animation-delay:0.7s]">
               <CheckCircle class="w-5 h-5 text-gold shrink-0" />
               <span class="text-sm">Support & updates available</span>
             </div>
@@ -116,21 +116,3 @@ const metaDescription = "Welcome to Dockside Web Solutions. View our portfolio, 
 
   <CTAAboveFooter />
 </Layout>
-
-<style>
-  @keyframes fade-in-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .animate-fade-in-up {
-    animation: fade-in-up 0.6s ease-out forwards;
-  }
-
-  .trust-indicator {
-    animation: fade-in-up 0.5s ease-out forwards;
-  }
-  .trust-indicator:nth-child(1) { animation-delay: 0.5s; }
-  .trust-indicator:nth-child(2) { animation-delay: 0.6s; }
-  .trust-indicator:nth-child(3) { animation-delay: 0.7s; }
-</style>

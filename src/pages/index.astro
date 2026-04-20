@@ -98,7 +98,7 @@ const metaDescription = "Modern, high-performance web development for small busi
 
 <Layout description={metaDescription}>
   <!-- Hero Section -->
-  <section class="hero-section relative bg-navy min-h-[75vh] flex items-center overflow-hidden pb-24 bg-cover bg-center bg-no-repeat bg-scroll lg:bg-fixed"
+  <section class="hero-section relative bg-navy min-h-[75vh] flex items-center overflow-hidden pb-24 bg-cover bg-center bg-no-repeat bg-scroll lg:bg-fixed hero-parallax"
             style={`background-image: url(${marinaImage.src});`}>
             
     <!-- Subtle Pattern Overlay -->
@@ -136,15 +136,15 @@ const metaDescription = "Modern, high-performance web development for small busi
             </a>
           </div>
           <div class="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-8 text-white/80 mt-6 items-center justify-center lg:justify-start">
-            <div class="flex items-center space-x-2 trust-indicator opacity-0">
+            <div class="flex items-center space-x-2 animate-fade-in-up [animation-delay:0.5s] opacity-0 [animation-fill-mode:forwards]">
               <CheckCircle class="w-5 h-5 text-gold shrink-0" />
               <span class="text-sm">Delivered in 3-4 weeks</span>
             </div>
-            <div class="flex items-center space-x-2 trust-indicator opacity-0">
+            <div class="flex items-center space-x-2 animate-fade-in-up [animation-delay:0.6s] opacity-0 [animation-fill-mode:forwards]">
               <CheckCircle class="w-5 h-5 text-gold shrink-0" />
               <span class="text-sm">Upfront, transparent pricing</span>
             </div>
-            <div class="flex items-center space-x-2 trust-indicator opacity-0">
+            <div class="flex items-center space-x-2 animate-fade-in-up [animation-delay:0.7s] opacity-0 [animation-fill-mode:forwards]">
               <CheckCircle class="w-5 h-5 text-gold shrink-0" />
               <span class="text-sm">Support & updates available</span>
             </div>
@@ -334,50 +334,3 @@ const metaDescription = "Modern, high-performance web development for small busi
   <CTAAboveFooter />
 
 </Layout>
-
-<style>
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in-up {
-    animation: fade-in-up 0.6s ease-out forwards;
-  }
-
-  .trust-indicator {
-    animation: fade-in-up 0.5s ease-out forwards;
-  }
-
-  .trust-indicator:nth-child(1) {
-    animation-delay: 0.5s;
-  }
-
-  .trust-indicator:nth-child(2) {
-    animation-delay: 0.6s;
-  }
-
-  .trust-indicator:nth-child(3) {
-    animation-delay: 0.7s;
-  }
-
-  .hero-section {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* Default to scroll for safety */
-    background-attachment: scroll; 
-  }
-
-  @media (hover: hover) and (min-width: 1024px){
-  .hero-section {
-    background-attachment: fixed;
-  }
-}
-</style>
