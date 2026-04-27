@@ -1,23 +1,25 @@
 ---
 import { Image } from 'astro:assets';
-import scLogo from '../assets/clientImages/scLogo.svg';
-import wpLogo from '../assets/clientImages/wpLogo.webp';
+import sweetCarolineSeaportLogo from '../assets/clientImages/sweetCarolineSeaport-logo.webp';
+import woodhomePreschoolLogo from '../assets/clientImages/woodhomePreschool-logo.webp';
+import cjcDetailingLogo from '../assets/clientImages/cjcDetailing-logo.webp';
+import seasideCreekLogo from '../assets/clientImages/seasideCreek-logo.svg';
 
 const testimonials = [
   {
-    logo: scLogo,
+    logo: cjcDetailingLogo,
     biz: "CJC Detailing",
     role: "Forest Hill, MD",
     quote: "Riley is by far your best expert when it comes to website design. Riley with Dockside Web Solutions has been our website manager and developer for CJC Detailing for years. He made our first website, and revamped our website in previous months. He is always looking out for how to make your website better and more efficient - so that you (the business owner) can focus on your clients and driving in revenue, while he always focuses on your website and it’s image. The design was top tier, the process of it all has always been so easy and painless - smooth sailing. And bar none - Riley’s communication was a 1000/10. He is efficient at extreme heat and speedy communication. He will always be our website developer and go to for all of our website needs."
   },
   {
-    logo: wpLogo,
+    logo: sweetCarolineSeaportLogo,
     biz: "Sweet Caroline Seaport",
     role: "Key West, FL",
     quote: "I couldn’t be happier with the website built for my Key West rental property. The design perfectly captures the coastal vibe I was looking for, and everything works exactly as it should. Riley, the owner, was incredible to work with! His communication was lightning-fast, and he made the entire process stress-free. The best part is that he handles all the maintenance now that the site is live, so I don't have to lift a finger. It’s a total weight off my shoulders. If you need a high quality site with a personal touch, I highly recommend Dockside Web Solutions!"
   },
   {
-    logo: wpLogo,
+    logo: woodhomePreschoolLogo,
     biz: "Woodhome Preschool Center",
     role: "Parkville, MD",
     quote: "I highly recommend. If you are looking for a company to help with your website, you don't have to look any further because you've found the best with Dockside. Riley was amazing to work with and made communication very easy. The process was fast because of his responsiveness, and we were able to use it to bring in new business quickly as a result. Our website needed a total overhaul, and Dockside brought it to life and incorporated our new logo and colors in a fun and effective way."
@@ -41,7 +43,7 @@ const testimonials = [
                 <Image 
                   src={t.logo} 
                   alt={`${t.biz} logo`} 
-                  class="w-full h-full object-contain p-1"
+                  class="w-full h-full object-contain"
                 />
               </div>
               <div>
@@ -52,7 +54,7 @@ const testimonials = [
             
             <div class="flex gap-0.5">
               {[...Array(5)].map(() => (
-                <svg class="w-4 h-4 fill-gold" viewBox="0 0 24 24">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" style={{ fill: '#FFD700' }}>
                   <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
                 </svg>
               ))}
