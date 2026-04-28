@@ -58,7 +58,6 @@ const isActive = (item: NavItem) => {
       />
     </a>
 
-    <!-- Desktop Nav -->
     <nav class="hidden md:flex items-center gap-8">
       {navigation.map((item) => (
         item.children ? (
@@ -121,7 +120,6 @@ const isActive = (item: NavItem) => {
       </a>
     </nav>
 
-    <!-- Mobile Toggle -->
     <button
       id="mobile-toggle"
       aria-label="Toggle menu"
@@ -161,7 +159,6 @@ const isActive = (item: NavItem) => {
     </button>
   </div>
 
-  <!-- Mobile Menu -->
   <div
     id="mobile-menu"
     class="md:hidden overflow-hidden max-h-0 transition-[max-height] duration-500 ease-in-out bg-navy/98 backdrop-blur-xl"
@@ -230,7 +227,20 @@ const isActive = (item: NavItem) => {
 
     if (!header || !mobileToggle || !mobileMenu) return;
 
+    // Accessibility Fix: Select all focusable elements inside the mobile menu
+    const menuFocusables = mobileMenu.querySelectorAll('button, a');
+
     let isOpen = false;
+
+    // Helper to manage focusability (prevents tabbing into hidden menu)
+    function updateMenuFocus(opened: boolean) {
+      menuFocusables.forEach(el => {
+        el.setAttribute('tabindex', opened ? '0' : '-1');
+      });
+    }
+
+    // Run once on init to ensure menu starts un-tabbable
+    updateMenuFocus(false);
 
     // Scroll behavior
     function handleScroll() {
@@ -247,6 +257,10 @@ const isActive = (item: NavItem) => {
       isOpen = !isOpen;
       mobileToggle.setAttribute("aria-expanded", String(isOpen));
       mobileMenu.setAttribute("aria-hidden", String(!isOpen));
+      
+      // Update tabindex for all children
+      updateMenuFocus(isOpen);
+
       mobileMenu.style.maxHeight = isOpen ? `${mobileMenu.scrollHeight}px` : "0";
       iconOpen?.classList.toggle("hidden", isOpen);
       iconClose?.classList.toggle("hidden", !isOpen);
@@ -254,7 +268,7 @@ const isActive = (item: NavItem) => {
       handleScroll();
     });
 
-    // Desktop dropdowns — generic, works for any number of them
+    // Desktop dropdowns
     document.querySelectorAll("[data-dropdown-btn]").forEach((btn) => {
       const wrapper = btn.closest(".relative");
       const menu = wrapper?.querySelector("[data-dropdown-menu]") as HTMLElement | null;
@@ -265,7 +279,7 @@ const isActive = (item: NavItem) => {
       btn.addEventListener("click", (e) => {
         e.stopPropagation();
         const isHidden = menu.classList.contains("hidden");
-        // Close all other dropdowns first
+        // Close all other dropdowns
         document.querySelectorAll("[data-dropdown-menu]").forEach((m) => m.classList.add("hidden"));
         document.querySelectorAll("[data-dropdown-chevron]").forEach((c) => c.classList.remove("rotate-180"));
         document.querySelectorAll("[data-dropdown-btn]").forEach((b) => b.setAttribute("aria-expanded", "false"));
@@ -278,12 +292,14 @@ const isActive = (item: NavItem) => {
       });
     });
 
+    // Close dropdowns on outside click
     document.addEventListener("click", () => {
       document.querySelectorAll("[data-dropdown-menu]").forEach((m) => m.classList.add("hidden"));
       document.querySelectorAll("[data-dropdown-chevron]").forEach((c) => c.classList.remove("rotate-180"));
       document.querySelectorAll("[data-dropdown-btn]").forEach((b) => b.setAttribute("aria-expanded", "false"));
     });
 
+    // Close on Escape key
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         document.querySelectorAll("[data-dropdown-menu]").forEach((m) => m.classList.add("hidden"));
@@ -292,7 +308,7 @@ const isActive = (item: NavItem) => {
       }
     });
 
-    // Mobile accordions — generic, works for both Services and About
+    // Mobile accordions
     document.querySelectorAll("[data-mobile-accordion-btn]").forEach((btn) => {
       const wrapper = btn.closest("div");
       const links = wrapper?.querySelector("[data-mobile-accordion-links]");
@@ -304,6 +320,12 @@ const isActive = (item: NavItem) => {
         const isHidden = links.classList.contains("hidden");
         links.classList.toggle("hidden", !isHidden);
         chevron?.classList.toggle("rotate-180", isHidden);
+        
+        // Dynamic resize for the parent menu to avoid clipping
+        if (isOpen) {
+          mobileMenu.style.maxHeight = 'none';
+          mobileMenu.style.maxHeight = `${mobileMenu.scrollHeight}px`;
+        }
       });
     });
 
@@ -311,6 +333,7 @@ const isActive = (item: NavItem) => {
     handleScroll();
   }
 
+  // Load logic for Astro View Transitions
   initHeader();
   document.addEventListener("astro:page-load", initHeader);
 </script>

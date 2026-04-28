@@ -139,6 +139,11 @@ const testimonials = [
     const count = getMaxIndex() + 1;
     for (let i = 0; i < count; i++) {
       const d = document.createElement('button');
+      
+      // Accessibility Fix: Add Label and Current State
+      d.setAttribute('aria-label', `Go to testimonial group ${i + 1}`);
+      d.setAttribute('aria-current', i === current ? 'true' : 'false');
+      
       d.className = `h-2 rounded-full transition-all duration-300 ${i === current ? 'w-8 bg-teal' : 'w-2 bg-slate-300'}`;
       d.onclick = () => goTo(i);
       dotsEl.appendChild(d);
@@ -151,7 +156,11 @@ const testimonials = [
     track.style.transform = `translateX(-${offset}px)`;
     
     Array.from(dotsEl.children).forEach((d, i) => {
-      (d as HTMLElement).className = `h-2 rounded-full transition-all duration-300 ${i === current ? 'w-8 bg-teal' : 'w-2 bg-slate-300'}`;
+      const dot = d as HTMLElement;
+      dot.className = `h-2 rounded-full transition-all duration-300 ${i === current ? 'w-8 bg-teal' : 'w-2 bg-slate-300'}`;
+      
+      // Update Accessibility attributes on state change
+      dot.setAttribute('aria-current', i === current ? 'true' : 'false');
     });
 
     // Update disabled states for all button sets
@@ -160,8 +169,8 @@ const testimonials = [
   }
 
   // Event Listeners
-  prevBtn.onclick = () => goTo(current - 1);
-  nextBtn.onclick = () => goTo(current + 1);
+  if(prevBtn) prevBtn.onclick = () => goTo(current - 1);
+  if(nextBtn) nextBtn.onclick = () => goTo(current + 1);
   if(prevBtnMobile) prevBtnMobile.onclick = () => goTo(current - 1);
   if(nextBtnMobile) nextBtnMobile.onclick = () => goTo(current + 1);
 
