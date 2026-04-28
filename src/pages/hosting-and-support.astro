@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeroSecondary from "../components/HeroSecondary.astro";
+import Section from "../components/ui/Section.astro";
+import CTAAboveFooter from "../components/CTAAboveFooter.astro";
+
+const pageTitle = "Hosting & Support";
+const metaDescription = "Reliable hosting and website support from Dockside Web Solutions. Secure hosting, updates, maintenance, and ongoing help to keep your website running smoothly.";
+---
+
+<Layout title={pageTitle} description={metaDescription}>
+    <HeroSecondary
+        label="UNLIMITED UPDATES"
+        heading="Hosting & Support Services"
+        description="Dependable hosting and ongoing website support to keep your site secure, updated, fast, and running smoothly so you can stay focused on your business."
+    />
+
+    <Section bg="light">
+        <div class="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
+            <p class="text-sm font-semibold tracking-[0.2em] text-primary uppercase mb-3">
+            Work In Progress
+            </p>
+
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+            This Page Is Currently Being Built
+            </h2>
+
+            <p class="text-slate-600 leading-relaxed max-w-2xl mx-auto">
+            We’re currently putting the finishing touches on this page. Check back soon
+            for more details about our services, pricing, and how we can help your
+            business grow online.
+            </p>
+        </div>
+    </Section>
+
+    
+    <CTAAboveFooter />
+</Layout>

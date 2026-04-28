@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeroSecondary from "../components/HeroSecondary.astro";
+import Section from "../components/ui/Section.astro";
+import CTAAboveFooter from "../components/CTAAboveFooter.astro";
+import FAQ from "../components/FAQ.astro";
+
+const pageTitle = "FAQ";
+const metaDescription = "Get answers about our Charleston web design services, pricing, timelines, SEO, hosting, and website redesign process.";
+---
+
+<Layout title={pageTitle} description={metaDescription}>
+    <HeroSecondary
+        label="COMMON QUESTIONS"
+        heading="Frequently Asked Questions"
+        description="We know starting a new website project can raise a few questions. Here are some quick answers to help you feel confident moving forward."
+    />
+
+    <Section bg="light">
+        <FAQ />
+    </Section>
+    <CTAAboveFooter />
+</Layout>

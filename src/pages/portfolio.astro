@@ -1,0 +1,44 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeroSecondary from "../components/HeroSecondary.astro";
+import Section from "../components/ui/Section.astro";
+import SectionLabel from "../components/ui/SectionLabel.astro";
+import Heading from "../components/ui/Heading.astro";
+import Text from "../components/ui/Text.astro";
+import Button from "../components/ui/Button.astro";
+import CTAAboveFooter from "../components/CTAAboveFooter.astro";
+import OurWork from "../components/OurWork.astro";
+const pageTitle = "Portfolio";
+const metaDescription = "Browse our portfolio of custom websites for small businesses. See modern designs built for leads, speed, and growth.";
+---
+
+<Layout title={pageTitle} description={metaDescription}>
+  <HeroSecondary
+    label="Portfolio"
+    heading="Websites Built to Grow Businesses"
+    description="Explore recent projects designed for small businesses that need modern design, strong performance, and real results."
+  />
+
+    <Section bg="light">
+      <div class="sticky top-[15vh] z-0 min-h-[30vh] flex items-center justify-center px-6 pb-20">
+        <div class="text-center max-w-3xl mx-auto">
+          <SectionLabel>Our Portfolio</SectionLabel>
+          <Heading>Teams We've Worked With</Heading>
+          <div class="mb-6">
+            <Text>Check out some of our latest projects and see how we can help your business grow.</Text>
+          </div>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="/contact/">
+              <Button variant="primary">Start Your Project</Button>
+            </a>
+            <a href="/pricing/">
+              <Button variant="navyOutline">See Pricing</Button>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+        <OurWork />
+    </Section>
+    <CTAAboveFooter />
+</Layout>

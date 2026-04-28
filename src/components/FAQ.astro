@@ -2,80 +2,140 @@
 // FAQ.astro — uses CSS custom property names from Dockside theme
 
 const categories = [
-  "General",
+  "Websites",
   "Pricing & Payments",
-  "Services",
-  "Getting Started",
-  "CFO Advisory",
+  "Plans",
+  "SEO"
 ];
 
 const faqs = [
+  //WEBSITES
   {
-    category: "General",
-    question: "What is a fractional CFO?",
-    answer:
-      "A fractional CFO is an experienced chief financial officer who works with your business on a part-time or project basis. You get senior-level financial leadership — strategic planning, forecasting, and cash flow management — without the overhead of a full-time executive hire.",
+    "category": "Websites",
+    "question": "How long does the process take from start to finish?",
+    "answer": "Typical turnaround time is 2 to 3 weeks for a full website, or about 1 week for a landing page. This starts once payment is made and I have everything needed to begin, including your content and branding materials. Delays in approvals or missing content can extend the timeline, and I’ll keep you posted from start to finish."  
   },
   {
-    category: "General",
-    question: "What size businesses do you typically work with?",
-    answer:
-      "We primarily serve small to mid-size businesses in the $1M–$20M revenue range. Whether you're preparing for growth, navigating a transition, or simply need cleaner financials, Seaside Creek Advisors can help.",
+    "category": "Websites",
+    "question": "Will my website be optimized for mobile devices and fast loading speeds?",
+    "answer": "Absolutely. Every site I build is designed to be mobile-responsive so it looks great on any screen, and the static architecture is specifically chosen to ensure top-tier loading speeds."
   },
   {
-    category: "Pricing & Payments",
-    question: "How is your pricing structured?",
-    answer:
-      "We offer monthly retainer engagements as well as project-based pricing for one-time needs like financial audits or fundraising prep. Retainers are billed at the beginning of each month.",
+    "category": "Websites",
+    "question": "Do you use WordPress, Wix, or other site builders?",
+    "answer": "No, I don't use those. I specialize in building custom static sites using HTML, CSS, and JavaScript. This means no clunky database or slow site builders getting in the way, ensuring I have complete control over the performance and design of your site."
   },
   {
-    category: "Pricing & Payments",
-    question: "What happens if I need to pause or cancel?",
-    answer:
-      "Retainer agreements require 30 days written notice to pause or cancel. There are no long-term contracts or cancellation penalties.",
+    "category": "Websites",
+    "question": "Why is a custom-coded website better than a template?",
+    "answer": "Static sites are awesome because they offer superior loading speeds and are inherently more secure. Since there's no backend database or server-side processing, the 'attack surface' for hackers is virtually eliminated, making your site much safer than a standard template or CMS-based site."
   },
   {
-    category: "Pricing & Payments",
-    question: "Do you offer a free initial consultation?",
-    answer:
-      "Yes — we offer a complimentary 30-minute discovery call to understand your goals and determine if we're a good fit. No pressure, no commitment.",
+    "category": "Websites",
+    "question": "What happens to my site if I decide to stop working with you?",
+    "answer": "If you decide to cancel and don't want to pay the buyout fee, the site will be taken offline and ownership rights stay with me. However, if you want to keep all the files and the code for yourself, there’s a flat Early Buyout Fee of $3,000 to transfer full ownership and repository access to you."
   },
   {
-    category: "Services",
-    question: "What does your ongoing CFO advisory include?",
-    answer:
-      "Monthly engagements typically include cash flow monitoring, financial reporting review, budget vs. actuals analysis, strategic guidance, and regular check-in calls with your team.",
+    "category": "Websites",
+    "question": "What can I do inside the client portal?",
+    "answer": "Your client portal gives you one convenient place to manage everything. You can view invoices, make payments, submit support tickets, request updates, schedule meetings, and keep track of ongoing work."
   },
   {
-    category: "Services",
-    question: "Can you help us prepare for a fundraise or sale?",
-    answer:
-      "Absolutely. We have experience preparing businesses for investor due diligence, M&A transactions, and SBA loan applications — including building investor-ready financial models and cleaning up historical records.",
+    "category": "Websites",
+    "question": "Can you build custom features like booking systems or member portals?",
+    "answer": "The standard setup is focused on high-performance static websites, so it does not include custom-built systems like user accounts, member portals, or booking platforms. However, I can absolutely connect your website to trusted third-party solutions for things like bookings, memberships, scheduling, or customer portals."
+  },
+
+  //PRICING & PAYMENTS
+  {
+    "category": "Pricing & Payments",
+    "question": "What payment methods do you accept for invoices?",
+    "answer": "Everything is handled securely through Stripe. You'll just need to have a payment method or bank account on file so I can automatically process the charges each month."
   },
   {
-    category: "Getting Started",
-    question: "How quickly can we get started?",
-    answer:
-      "After our discovery call and a signed engagement letter, most clients are fully onboarded within one to two weeks. We move at your pace.",
+    "category": "Pricing & Payments",
+    "question": "How are monthly payments or lump sum deposits processed?",
+    "answer": "Payments are handled securely and can be set up automatically for monthly plans. You’ll also have access to a client portal where you can view invoices, manage billing, and keep track of your account."
   },
   {
-    category: "Getting Started",
-    question: "What do you need from us to begin?",
-    answer:
-      "We'll typically request access to your accounting software (QuickBooks, Xero, etc.), recent bank statements, and any existing financial reports. We'll walk you through exactly what we need during onboarding.",
+    "category": "Pricing & Payments",
+    "question": "If I need more pages added to my site later, is there an extra fee?",
+    "answer": "The standard plan covers up to six pages, while the landing page plan covers up to 1. If you need more down the road, it's just a one-time fee of $100 for each additional page, and once they're built, they're fully covered under your existing maintenance plan."
   },
   {
-    category: "CFO Advisory",
-    question: "Will I work directly with a senior advisor?",
-    answer:
-      "Yes. At Seaside Creek Advisors, you work directly with a senior fractional CFO — not a junior analyst. You'll have a dedicated point of contact who knows your business deeply.",
+  "category": "Pricing & Payments",
+  "question": "Are there any hidden costs like hosting, SSL certificates, or domain renewals?",
+  "answer": "There are no hidden surprises! Hosting and your SSL certificate are included in your monthly fee. The only separate cost is your domain name, which you purchase and renew yourself so you keep full ownership and full control of your brand. That means your website address always stays in your name, with no risk of losing access if you ever decide to make changes in the future. Most domains are only around $11 per year."
   },
   {
-    category: "CFO Advisory",
-    question: "Can you work alongside our existing bookkeeper or accountant?",
-    answer:
-      "Absolutely. We frequently collaborate with in-house bookkeepers and external CPAs. We operate at the strategic layer, complementing your existing team.",
+    "category": "Pricing & Payments",
+    "question": "How do you handle late payments or failed transactions?",
+    "answer": "If an account is more than 30 days past due, I may have to pause services or take the site offline. I'm not responsible for any lost traffic during that time, so it's best to keep the account current."
   },
+  {
+    "category": "Pricing & Payments",
+    "question": "What is your policy regarding refunds for project deposits?",
+    "answer": "Because I'm dedicating production time and infrastructure to your specific project, all fees paid under this agreement are non-refundable."
+  },
+
+  //PLANS
+  {
+    "category": "Plans",
+    "question": "Do your plans include ongoing hosting and security updates?",
+    "answer": "Yes, I’ve got you covered. Your monthly plan includes professional hosting, ongoing maintenance, and unlimited content updates to make sure everything stays accurate and protected. Once your website is live, you don’t have to worry about managing any of it yourself."
+  },
+  {
+    "category": "Plans",
+    "question": "How long does the initial contract or subscription term last?",
+    "answer": "There is an initial 12-month minimum commitment to start off. This reflects a financing model that allows you to spread the higher cost of the design and development over a year instead of paying it all at once."
+  },
+  {
+    "category": "Plans",
+    "question": "On a monthly plan, do I keep paying after the minimum term is over?",
+    "answer": "Yes, once the initial term is complete, the plan continues on a simple month-to-month basis so you keep receiving hosting, support, and maintenance. You’re free to cancel anytime after the minimum term with a 30-day written notice."
+  },
+  {
+    "category": "Plans",
+    "question": "What is the difference between a monthly subscription and a lump sum plan?",
+    "answer": "The monthly option lets you spread the project cost over time instead of paying a large upfront amount, making it easier to get started. I also offer a lump sum payment option if you’d rather pay upfront, and ongoing monthly support plans are available for an additional feeif you’d still like hosting, updates, and maintenance afterwards."
+  },
+  {
+    "category": "Plans",
+    "question": "What happens if I need to cancel my plan before the term is finished?",
+    "answer": "You can cancel after the initial term with 30 days' notice. If you need to leave early and want to take the code with you, you would need to pay the $3,000 Early Buyout Fee to secure ownership of the files."
+  },
+  {
+    "category": "Plans",
+    "question": "Can I switch from a monthly subscription to a lump sum payment later?",
+    "answer": "The agreement doesn't have a specific 'switch' clause, but you always have the option to pay the $3,000 flat Buyout Fee at any time to terminate the subscription and take full ownership of the repository and code."
+  },
+
+  //SEO
+  {
+    "category": "SEO",
+    "question": "What is Search Engine Optimization (SEO)?",
+    "answer": "It’s the process of making sure your site is built correctly so search engines can find you. My goal is to ensure your small business site stays accurate and ready to convert visitors who find you online."
+  },
+  {
+    "category": "SEO",
+    "question": "Is basic SEO included in the initial website build?",
+    "answer": "Yes, basic Search Engine Optimization is a core deliverable. I make sure the foundational elements are in place from the start so your site is ready for the web."
+  },
+  {
+    "category": "SEO",
+    "question": "What is the difference between on-page SEO and ongoing SEO services?",
+    "answer": "I include the essential SEO foundation in your build. While the agreement mentions ongoing support and maintenance, it doesn't separate advanced marketing tiers from the standard optimization included in the plan."
+  },
+  {
+    "category": "SEO",
+    "question": "Can you guarantee that my website will rank on the first page of Google?",
+    "answer": "I can’t guarantee specific rankings, since search engines use their own algorithms and competition varies by market. What I can guarantee is that your website will be built with strong SEO foundations, fast performance, and best practices that give you the best chance to rank well over time."
+  },
+  {
+    "category": "SEO",
+    "question": "How long does it typically take to see measurable results from SEO?",
+    "answer": "SEO is a long-term strategy, so timelines can vary depending on your industry, competition, and starting point. Many businesses begin seeing early improvements within 3 to 6 months, with stronger long-term growth building over time as your site gains authority and visibility."
+  }
 ];
 
 const firstCategory = categories[0];
@@ -85,7 +145,7 @@ const firstCategory = categories[0];
 <div class="flex flex-wrap gap-3 justify-center mb-10" role="tablist" aria-label="FAQ categories">
   {categories.map((cat, idx) => (
     <button
-      class={`faq-filter px-6 py-2.5 rounded-full border text-base font-semibold transition-colors duration-200 cursor-pointer ${
+      class={`faq-filter px-6 py-2.5 rounded-lg border text-base font-semibold transition-colors duration-200 cursor-pointer ${
         idx === 0 ? "filter-active" : "filter-inactive"
       }`}
       data-category={cat}
@@ -125,7 +185,7 @@ const firstCategory = categories[0];
         role="region"
         aria-labelledby={`faq-btn-${i}`}
       >
-        <p class="pb-5 text-navy text-[0.9375rem] leading-7">
+        <p class="pb-5 pr-15 text-navy text-[0.9375rem] leading-7">
           {item.answer}
         </p>
       </div>

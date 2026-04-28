@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeroSecondary from "../components/HeroSecondary.astro";
+import Section from "../components/ui/Section.astro";
+import CTAAboveFooter from "../components/CTAAboveFooter.astro";
+
+const pageTitle = "Web Design";
+const metaDescription = "Professional web design services from Dockside Web Solutions. Custom, mobile-friendly websites built for speed, trust, and conversions to help small businesses grow online.";
+---
+
+<Layout title={pageTitle} description={metaDescription}>
+    <HeroSecondary
+        label="Custom Websites"
+        heading="Web Design Services"
+        description="Custom built websites designed to help your business stand out, build trust, and turn visitors into customers with clean design, fast performance, and a seamless user experience."
+    />
+
+    <Section bg="light">
+        <div class="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
+            <p class="text-sm font-semibold tracking-[0.2em] text-primary uppercase mb-3">
+            Work In Progress
+            </p>
+
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+            This Page Is Currently Being Built
+            </h2>
+
+            <p class="text-slate-600 leading-relaxed max-w-2xl mx-auto">
+            We’re currently putting the finishing touches on this page. Check back soon
+            for more details about our services, pricing, and how we can help your
+            business grow online.
+            </p>
+        </div>
+    </Section>
+
+
+    <CTAAboveFooter />
+</Layout>

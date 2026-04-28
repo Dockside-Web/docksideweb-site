@@ -3,9 +3,6 @@ import { Image } from 'astro:assets';
 import cjcDetailingMockup from '../assets/clientImages/cjcDetailing-mockup.webp';
 import sweetCarolineSeaportMockup from '../assets/clientImages/sweetCarolineSeaport-mockup.webp';
 import seasideCreekMockup from '../assets/clientImages/seasideCreek-mockup.webp';
-import SectionLabel from "./ui/SectionLabel.astro";
-import Heading from "./ui/Heading.astro";
-import Text from "./ui/Text.astro";
 import Button from "./ui/Button.astro";
 
 const websites = [
@@ -62,24 +59,6 @@ const websites = [
     </clipPath>
   </defs>
 </svg>
- 
-<div class="sticky top-[15vh] z-0 min-h-[30vh] flex items-center justify-center px-6 pb-20">
-  <div class="text-center max-w-3xl mx-auto">
-    <SectionLabel>Our Portfolio</SectionLabel>
-    <Heading>Teams We've Worked With</Heading>
-    <div class="mb-6">
-      <Text>Check out some of our latest projects and see how we can help your business grow.</Text>
-    </div>
-    <div class="flex flex-wrap justify-center gap-4">
-      <a href="/contact/">
-        <Button variant="primary">Start Your Project</Button>
-      </a>
-      <a href="/pricing/">
-        <Button variant="navyOutline">See Pricing</Button>
-      </a>
-    </div>
-  </div>
-</div>
  
 <section class="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
   <div class="relative">

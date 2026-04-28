@@ -5,81 +5,32 @@ import { Mail, Phone, MapPin } from "lucide-astro";
 
 const currentYear = new Date().getFullYear();
 
-const navigationLinks = ["Home", "Services", "Pricing", "Connect"];
-const serviceLinks = [
-  "Custom Website Design",
-  "SEO & Performance",
-  "Maintenance & Support",
-];
+const navigationLinks = ["Home", "Pricing", "Web-Design", "SEO", "Contact", "FAQ", "Portfolio", "About"];
 ---
 
-<div class="w-full bg-white">
-  <div class="relative w-full overflow-hidden bg-slate-50">
-    <svg
-      class="relative block w-full h-25 md:h-50"
-      style="z-index: 1"
-      viewBox="0 0 1440 320"
-      preserveAspectRatio="xMidYMid slice"
-    >
-      <!-- WAVE LAYERS -->
-      <!-- Background Wave (Lightest - Furthest/Horizon) -->
-      <path
-        fill="#91C9CF"
-        d="M0,180 C360,150 1080,210 1440,180 L1440,320 L0,320 Z"
-      ></path>
-
-      <path
-        fill="#5197A6"
-        d="M0,200 C240,160 480,240 720,200 C960,160 1200,240 1440,200 L1440,320 L0,320 Z"
-      ></path>
-
-      <image
-        href="/assets/lighthouse.svg"
-        class="scale-x-[-1]"
-        x="100"
-        y="50"
-        width="200"
-        height="200"
-        style="transform: scale(0.90); transform-origin: center bottom;"
-      />
-
-      <path
-        fill="#224769"
-        d="M0,230 C180,260 360,200 540,230 C720,260 900,200 1080,230 C1260,260 1350,220 1440,230 L1440,320 L0,320 Z"
-      ></path>
-
-      <!-- Foreground Wave (Darkest - Closest, Matches beginning of gradient for footer) -->
-      <path
-        fill="#1e3556"
-        d="M0,260 C240,240 480,280 720,260 C960,240 1200,280 1440,260 L1440,320 L0,320 Z"
-      ></path>
-    </svg>
-  </div>
-
-  <footer
-    class="relative bg-linear-to-b from-[#1e3556] to-[#1A304d] text-white pb-8 -mt-1"
-  >
+<div class="w-full">
+  <footer class="relative bg-linear-to-b bg-navy text-white pb-8 -mt-1">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
 
-        <!-- Logo / CTA — left-aligned -->
-        <div class="space-y-4">
-          <a href="/" class="flex items-center space-x-2">
-            <Logo class="h-25 w-auto" aria-label="Dockside Web Solutions Logo" />
-          </a>
+        <!-- Logo / CTA -->
+        <div class="space-y-4 flex flex-col items-center md:items-start">
+          <Logo class="h-25 w-auto" aria-label="Dockside Web Solutions Logo" />
           <p class="text-slate-400 text-sm leading-relaxed">
             Fast, modern websites for small businesses
           </p>
-          <Button variant="primary" size="sm">Get Started Today</Button>
+          <a href="/contact/" class="flex items-center space-x-2">
+            <Button variant="primary" size="sm">Get Started Today</Button>
+          </a>
         </div>
 
-        <!-- Navigation — centered -->
-        <div class="md:flex md:flex-col md:items-center">
+        <!-- Navigation -->
+        <div class="flex flex-col items-center">
           <div>
             <h3 class="text-gold font-bold uppercase tracking-wider text-sm mb-6">
-              Navigation
+              Quick Links
             </h3>
-            <ul class="space-y-3">
+            <ul class="grid grid-cols-2 gap-x-8 gap-y-3 w-fit">
               {
                 navigationLinks.map((item) => (
                   <li>
@@ -96,31 +47,8 @@ const serviceLinks = [
           </div>
         </div>
 
-        <!-- Services — centered -->
-        <div class="md:flex md:flex-col md:items-center">
-          <div>
-            <h3 class="text-gold font-bold uppercase tracking-wider text-sm mb-6">
-              Services
-            </h3>
-            <ul class="space-y-3">
-              {
-                serviceLinks.map((item) => (
-                  <li>
-                    <a
-                      href="/services/"
-                      class="text-slate-300 hover:text-teal transition-colors text-sm"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
-
-        <!-- Contact — right-aligned -->
-        <div class="md:flex md:flex-col md:items-end">
+        <!-- Contact -->
+        <div class="flex flex-col items-center md:items-start">
           <div>
             <h3 class="text-gold font-bold uppercase tracking-wider text-sm mb-6">
               Contact
@@ -152,16 +80,14 @@ const serviceLinks = [
 
       </div>
 
-      <div
-        class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center"
-      >
+      <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
         <p class="text-slate-500 text-sm">
           © {currentYear} Dockside Web Solutions. All rights reserved.
         </p>
         <div class="flex space-x-3 mt-4 md:mt-0">
           <a
             href="/legal/privacy-policy/"
-            class="text-slate-400 hover:text-yellow-500 transition-colors"
+            class="text-slate-400 hover:text-yellow-500 transition-colors text-sm"
             aria-label="Privacy Policy"
           >
             <p>Privacy Policy</p>
@@ -169,7 +95,7 @@ const serviceLinks = [
           <p class="text-slate-400">|</p>
           <a
             href="/legal/terms-of-service/"
-            class="text-slate-400 hover:text-yellow-500 transition-colors"
+            class="text-slate-400 hover:text-yellow-500 transition-colors text-sm"
             aria-label="Terms of Service"
           >
             <p>Terms of Service</p>
