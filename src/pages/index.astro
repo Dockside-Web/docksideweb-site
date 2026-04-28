@@ -225,21 +225,14 @@ const metaDescription = "Modern, high-performance web development for small busi
   <!-- Why Choose Us -->
   <Section bg="white">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      {/* Left side - Large professional image */}
       <div class="relative animate-fade-in-left">
-        <div
-          class="relative rounded-3xl overflow-hidden shadow-2xl
-                    w-full h-48 lg:h-auto"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=1000"
-            alt="Professional team member"
-            class="w-full h-full object-cover lg:aspect-3/4"
-          />
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl w-full h-48 lg:h-auto">
+          <Image
+            src={heroImage}
+            alt="Professional website example"
+            class="w-full h-full object-cover lg:aspect-3/4">
         </div>
       </div>
-
-      {/* Right side - Benefits grid */}
       <div>
         <div class="mb-12 animate-fade-in-up">
           <SectionLabel>What We Offer</SectionLabel>
