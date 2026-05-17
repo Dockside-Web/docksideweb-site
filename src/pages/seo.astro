@@ -2,37 +2,563 @@
 import Layout from "../layouts/Layout.astro";
 import HeroSecondary from "../components/HeroSecondary.astro";
 import Section from "../components/ui/Section.astro";
+import SectionLabel from "../components/ui/SectionLabel.astro";
+import Heading from "../components/ui/Heading.astro";
+import Text from "../components/ui/Text.astro";
+import GoogleSEOGraphic from "../components/ui/GoogleSEOGraphic.astro";
+import Button from "../components/ui/Button.astro";
 import CTAAboveFooter from "../components/CTAAboveFooter.astro";
 
+import { Search, FileText, MapPin, Zap, PenTool } from "lucide-astro";
+
+const pillars = [
+  {
+    title: "Relevance",
+    desc: "Does your website content match exactly what the customer is searching for?"
+  },
+  {
+    title: "Trust & Authority",
+    desc: "Is your business credible? Do other reputable sites link to yours?"
+  },
+  {
+    title: "Speed & Experience",
+    desc: "Does your site load instantly and look perfect on mobile phones?"
+  },
+  {
+    title: "Local Signals",
+    desc: "Is your Google Business Profile optimized for your specific neighborhood or city?"
+  }
+];
+
+const services = [
+  {
+    icon: Search,
+    title: "Keyword Research",
+    description:
+      "I find out exactly what your customers are typing into Google and make sure your website shows up for those searches."
+  },
+  {
+    icon: FileText,
+    title: "On-Page SEO",
+    description:
+      "Every page is optimized with the right titles, headings, and content structure so Google knows what you offer."
+  },
+  {
+    icon: Zap,
+    title: "Technical SEO",
+    description:
+      "Fast loading speeds, mobile optimization, and clean site structure. All the behind-the-scenes work that Google loves."
+  },
+  {
+    icon: PenTool,
+    title: "Content Optimization",
+    description:
+      "Your website content is written and structured to rank higher while still sounding natural and helpful to real people."
+  },
+  {
+    icon: MapPin,
+    title: "Local SEO Setup",
+    description:
+      "Get your business on Google Maps and Google Business Profile so local customers find you when they need you."
+  }
+];
+
+const chartHeights = [20, 35, 25, 45, 60, 55, 80, 75, 95, 100];
+
 const pageTitle = "SEO";
-const metaDescription = "Improve your visibility online with SEO services from Dockside Web Solutions. We build fast, search-friendly websites and optimize your online presence to help local businesses rank higher and attract more customers.";
+const metaDescription =
+  "Improve your visibility online with SEO services from Dockside Web Solutions. We build fast, search-friendly websites and optimize your online presence to help local businesses rank higher and attract more customers.";
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
-    <HeroSecondary
-        label="SEO"
-        heading="Search Engine Optimization"
-        description="Learn how Dockside Web Solutions helps businesses grow through smart SEO strategies, fast website performance, local search optimization, and search-friendly design built to increase visibility and generate leads."
-    />
+  <HeroSecondary
+    label="SEO"
+    heading="Search Engine Optimization"
+    description="Learn how Dockside Web Solutions helps businesses grow through smart SEO strategies, fast website performance, local search optimization, and search-friendly design built to increase visibility and generate leads."
+  />
 
-    <Section bg="light">
-        <div class="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-            <p class="text-sm font-semibold tracking-[0.2em] text-primary uppercase mb-3">
-            Work In Progress
-            </p>
-
-            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
-            This Page Is Currently Being Built
-            </h2>
-
-            <p class="text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            We’re currently putting the finishing touches on this page. Check back soon
-            for more details about our services, pricing, and how we can help your
-            business grow online.
-            </p>
+  <Section id="google-search">
+    <div class="max-w-6xl mx-auto px-6 md:px-8">
+      <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+        <div>
+          <GoogleSEOGraphic />
         </div>
-    </Section>
+        <div class="reveal-left opacity-0">
+          <h2
+            class="text-4xl md:text-5xl font-bold text-navy mb-6 leading-tight"
+          >
+            Watch your business rise to the top
+          </h2>
+          <p class="text-lg text-navy mb-6 leading-relaxed">
+            When a potential customer searches for your services, they rarely
+            look past the first few results. If you're buried on page two,
+            you're invisible.
+          </p>
+          <p class="text-lg text-navy leading-relaxed">
+            Our targeted SEO strategies act as a rising tide, lifting your
+            website above the competition so you capture the traffic, leads, and
+            sales you deserve.
+          </p>
+        </div>
+      </div>
+    </div>
+  </Section>
 
-    
-    <CTAAboveFooter />
+  <Section bg="white">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <SectionLabel>The Basics</SectionLabel>
+      <Heading>What exactly is SEO?</Heading>
+      <Text class="mt-4">
+        SEO (Search Engine Optimization) is like a map that helps customers find
+        your business online. It's the process of making your website the most
+        attractive destination for Google.
+      </Text>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <!-- Left: Laptop Mockup -->
+      <div class="reveal-left opacity-0 relative mx-auto w-full max-w-lg">
+        <div class="max-w-2xl mx-auto p-8">
+          <div class="relative group">
+            <div
+              class="relative bg-[#0A2540] rounded-t-2xl p-1.5 sm:p-3 border-[#0A2540] border-4 border-b-0 aspect-16/10 overflow-hidden shadow-2xl"
+            >
+              <div
+                class="absolute top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-gray-600"
+              >
+              </div>
+
+              <div
+                class="bg-[#F5F1EA] w-full h-full rounded-sm overflow-hidden flex flex-col mt-0.5 sm:mt-1"
+              >
+                <div
+                  class="h-6 sm:h-10 bg-white border-b border-gray-200 flex items-center px-2 sm:px-4 justify-between shrink-0"
+                >
+                  <div class="font-bold text-navy text-[9px] sm:text-xs">
+                    Traffic Analytics
+                  </div>
+                  <div class="hidden xs:flex gap-1">
+                    <div class="w-6 sm:w-12 h-2 sm:h-4 bg-gray-100 rounded">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-1.5 sm:p-4 flex-1 flex flex-col min-h-0">
+                  <div class="grid grid-cols-3 gap-1 sm:gap-2 mb-1.5 sm:mb-4">
+                    <div
+                      class="bg-white p-1 sm:p-2 rounded border border-gray-100 text-center sm:text-left"
+                    >
+                      <div
+                        class="text-[7px] sm:text-[10px] text-gray-500 leading-tight"
+                      >
+                        Visitors
+                      </div>
+                      <div
+                        class="text-[9px] sm:text-sm font-bold text-[#0A2540]"
+                      >
+                        12.4k
+                      </div>
+                    </div>
+                    <div
+                      class="bg-white p-1 sm:p-2 rounded border border-gray-100 text-center sm:text-left"
+                    >
+                      <div
+                        class="text-[7px] sm:text-[10px] text-gray-500 leading-tight"
+                      >
+                        Leads
+                      </div>
+                      <div class="text-[9px] sm:text-sm font-bold text-navy">
+                        342
+                      </div>
+                    </div>
+                    <div
+                      class="bg-white p-1 sm:p-2 rounded border border-gray-100 text-center sm:text-left"
+                    >
+                      <div
+                        class="text-[7px] sm:text-[10px] text-gray-500 leading-tight"
+                      >
+                        Ranking
+                      </div>
+                      <div class="text-[9px] sm:text-sm font-bold text-navy">
+                        #3
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="flex-1 bg-white rounded border border-gray-100 p-1.5 sm:p-3 relative flex items-end min-h-0 overflow-hidden"
+                  >
+                    <div
+                      class="w-full flex items-end justify-between gap-0.5 sm:gap-1 h-full"
+                    >
+                      {
+                        chartHeights.map((height, i) => (
+                          <div
+                            class="chart-bar w-full bg-gold rounded-t-[1px] opacity-80"
+                            style={`height: ${height}%; animation-delay: ${i * 0.1}s;`}
+                          />
+                        ))
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="h-5 bg-linear-to-b from-gray-400 to-gray-500 rounded-b-2xl w-[112%] -ml-[6%] shadow-2xl flex justify-center relative z-10"
+            >
+              <div class="w-1/4 h-1.5 bg-gray-600 rounded-b-md"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Explanation -->
+      <div class="reveal-right opacity-0">
+        <h3 class="text-3xl font-bold text-navy mb-6">
+          How Google decides who wins
+        </h3>
+        <p class="text-lg text-[#0F1419]/70 mb-8 leading-relaxed">
+          When someone searches for your services, Google looks at hundreds of
+          signals to decide which websites to show first. We focus on the
+          pillars that matter most:
+        </p>
+        <div class="space-y-6">
+          {
+            pillars.map((item, i) => (
+              <div class="flex items-start gap-4">
+                <div class="w-6 h-6 rounded-full bg-teal text-white flex items-center justify-center shrink-0 mt-1 text-sm font-bold">
+                  {i + 1}
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-navy mb-1">{item.title}</h4>
+                  <p class="text-[#0F1419]/70">{item.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="navy">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <SectionLabel>The Impact</SectionLabel>
+      <Heading class="text-white">Why SEO Matters for Your Business</Heading>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid md:grid-cols-2 gap-8 mb-16">
+      <!-- Card 1: Visibility -->
+      <div
+        class="reveal-up opacity-0 bg-[#0F1419]/50 p-8 rounded-xl border border-white/10"
+      >
+        <svg
+          class="w-8 h-8 text-gold mb-6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle
+            cx="12"
+            cy="12"
+            r="3"></circle>
+        </svg>
+        <h3 class="text-2xl font-bold text-white mb-3">Get found on Google</h3>
+        <p class="text-[#E8F0EE]/70 leading-relaxed mb-6">
+          Show up when customers search for what you offer. More visibility
+          means more opportunities.
+        </p>
+        <div
+          class="bg-white/5 rounded-lg p-4 flex items-center justify-between border border-white/5"
+        >
+          <span class="text-sm text-white/60">Search Impressions</span>
+          <span class="text-lg font-bold text-gold">+340%</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Local -->
+      <div
+        class="reveal-up opacity-0 [animation-delay:100ms] bg-[#0F1419]/50 p-8 rounded-xl border border-white/10"
+      >
+        <svg
+          class="w-8 h-8 text-gold mb-6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+          ></path><circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <h3 class="text-2xl font-bold text-white mb-3">
+          Attract local customers
+        </h3>
+        <p class="text-[#E8F0EE]/70 leading-relaxed mb-6">
+          Local SEO optimization puts you on the map. Appear in Google Maps and
+          "near me" searches.
+        </p>
+        <div class="flex gap-2">
+          {
+            [1, 2, 3].map((i) => (
+              <div class="h-12 flex-1 bg-white/5 rounded-lg border border-white/5 flex items-center justify-center">
+                <svg
+                  class={`w-4 h-4 ${i === 2 ? "text-gold" : "text-white/20"}`}
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <>
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </>
+                </svg>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Card 3: Competitors -->
+      <div
+        class="reveal-up opacity-0 [animation-delay:200ms] bg-[#0F1419]/50 p-8 rounded-xl border border-white/10"
+        id="rank-card"
+      >
+        <h3 class="text-2xl font-bold text-white mb-3">
+          Outrank the competition
+        </h3>
+        <p class="text-[#E8F0EE]/70 leading-relaxed mb-8">
+          Smart SEO levels the playing field. You don't need a huge budget to
+          beat bigger companies.
+        </p>
+        <div class="space-y-5">
+          <div>
+            <div class="flex justify-between text-sm mb-2">
+              <span class="text-white font-medium">Your Business</span>
+              <span class="text-gold font-bold">Rank #1</span>
+            </div>
+            <div class="h-3 w-full bg-white/10 rounded-full overflow-hidden">
+              <div class="bar-yours h-full bg-gold rounded-full w-[20%]"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-2">
+              <span class="text-white/50">Big Competitor</span>
+              <span class="text-white/50">Rank #4</span>
+            </div>
+            <div class="h-3 w-full bg-white/10 rounded-full overflow-hidden">
+              <div class="h-full bg-white/20 rounded-full w-[60%]"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Growth Chart -->
+      <div
+        class="reveal-up opacity-0 [animation-delay:300ms] bg-[#0F1419]/50 p-8 rounded-xl border border-white/10"
+        id="chart-card"
+      >
+        <h3 class="text-2xl font-bold text-white mb-3">Long-term growth</h3>
+        <p class="text-[#E8F0EE]/70 leading-relaxed mb-6">
+          Unlike paid ads that stop when you stop paying, SEO keeps working for
+          you 24/7.
+        </p>
+        <div class="h-32 w-full relative mt-4">
+          <div class="absolute inset-0 flex flex-col justify-between">
+            {[1, 2, 3, 4].map(() => <div class="w-full h-px bg-white/5" />)}
+          </div>
+          <svg
+            viewBox="0 0 100 40"
+            class="absolute inset-0 w-full h-full overflow-visible"
+            preserveAspectRatio="none"
+          >
+            <path
+              id="growth-path"
+              d="M 0 35 Q 20 35, 30 25 T 60 15 T 100 5"
+              fill="none"
+              stroke="#6dbbb5"
+              stroke-width="3"
+              stroke-linecap="round"></path>
+            <circle
+              id="growth-dot"
+              cx="100"
+              cy="5"
+              r="3"
+              fill="#d8b86f"
+              opacity="0"></circle>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inline CTA -->
+    <div
+      class="reveal-up opacity-0 bg-gold rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8"
+    >
+      <div>
+        <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">
+          Ready to start outranking your competition?
+        </h3>
+        <p class="text-[#E8F0EE]/80 text-lg">
+          Tell us about your project and get a custom proposal tailored to your
+          business needs.
+        </p>
+      </div>
+      <a href="/contact/">
+        <Button variant="secondary" size="lg">
+          Get Started Today
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </Button>
+      </a>
+    </div>
+  </Section>
+
+  <Section bg="light">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <SectionLabel>What I Do</SectionLabel>
+      <Heading>SEO Services for Small Business Websites</Heading>
+      <Text>
+        I don't just build websites, I build websites that get found. SEO is
+        built into every site from day one, not added as an afterthought.
+      </Text>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6 md:px-8">
+      <div class="space-y-6">
+        {
+          services.map((service, index) => (
+            <div
+              class="bg-white p-8 rounded-xl border border-[#E8F0EE] flex flex-col md:flex-row items-start gap-6 shadow-sm hover:shadow-md transition-all duration-300 reveal-left"
+              style={`transition-delay: ${index * 100}ms`}
+            >
+              <div class="w-12 h-12 bg-[#0A2540] rounded-lg flex items-center justify-center shrink-0">
+                <service.icon size={24} class="text-[#C9A961]" />
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-[#0A2540] mb-2">
+                  {index + 1}. {service.title}
+                </h3>
+                <p class="text-[#0F1419]/70 leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Section>
+
+  <CTAAboveFooter />
 </Layout>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-in");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  document
+    .querySelectorAll(".reveal-left, .reveal-right, .reveal-up")
+    .forEach((el) => {
+      observer.observe(el);
+    });
+
+  const cardObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("bars-animate");
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  document.querySelectorAll("#rank-card, #chart-card").forEach((el) => {
+    cardObserver.observe(el);
+  });
+</script>
+
+<style>
+  .reveal-left {
+    transform: translateX(-20px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+  .reveal-right {
+    transform: translateX(20px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+    transition-delay: 0.2s;
+  }
+  .animate-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+
+  #growth-path {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    transition: stroke-dashoffset 2s ease-in-out;
+  }
+  #chart-card.bars-animate #growth-path {
+    stroke-dashoffset: 0;
+  }
+  #chart-card.bars-animate #growth-dot {
+    animation: dotPop 0.3s ease-out 2.3s both;
+  }
+  @keyframes dotPop {
+    from {
+      opacity: 0;
+      transform: scale(0);
+      transform-origin: 100px 5px;
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+      transform-origin: 100px 5px;
+    }
+  }
+
+  .bar-yours {
+    transition: width 1.5s ease-out 0.5s;
+  }
+  #rank-card.bars-animate .bar-yours {
+    width: 85%;
+  }
+</style>

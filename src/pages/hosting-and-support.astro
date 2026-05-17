@@ -2,37 +2,192 @@
 import Layout from "../layouts/Layout.astro";
 import HeroSecondary from "../components/HeroSecondary.astro";
 import Section from "../components/ui/Section.astro";
+import Heading from "../components/ui/Heading.astro";
+import Text from "../components/ui/Text.astro";
+import SectionLabel from "../components/ui/SectionLabel.astro";
+import Button from "../components/ui/Button.astro";
+import FAQ from "../components/FAQ.astro";
 import CTAAboveFooter from "../components/CTAAboveFooter.astro";
 
+import {
+  LifeBuoy,
+  ShieldCheck,
+  Zap,
+  MessageSquare,
+  Globe,
+  Key
+} from "lucide-astro";
+
+const supportFeatures = [
+  {
+    title: "Unlimited Updates",
+    body: "Need a photo swapped, a price changed, or a new team member added? Just send it over. We handle all minor content updates so your site stays current without you lifting a finger.",
+    icon: Zap
+  },
+  {
+    title: "Direct Human Support",
+    body: "You have my direct line. No support tickets lost in a queue or outsourced help desks. You talk to the person who actually wrote every line of code on your site.",
+    icon: LifeBuoy
+  },
+  {
+    title: "Worry-Free Security",
+    body: "We handle the security patches, SSL renewals, and routine maintenance in the background. Your site stays protected, and you never have to deal with a 'Site Compromised' email.",
+    icon: ShieldCheck
+  },
+  {
+    title: "All-in-One Hosting",
+    body: "We manage the high-performance hosting, domain renewals, and enterprise-grade SSL certificates. Everything is bundled into one simple monthly payment.",
+    icon: Globe
+  },
+  {
+    title: "The Client Portal",
+    body: "One central hub to pay invoices, track project progress, answer onboarding questionnaires, and message me directly. Total transparency for your business.",
+    icon: MessageSquare
+  },
+  {
+    title: "You Own the Domain",
+    body: "You purchase and renew your own domain. This ensures you maintain 100% legal ownership of your brand's URL, so it can never be withheld from you for any reason.",
+    icon: Key
+  }
+];
+
+const checklist = [
+  "Unlimited minor content updates",
+  "Security patches & routine maintenance",
+  "Direct access to your developer",
+  "99.9% Uptime & Speed Optimization",
+  "Enterprise-grade SSL certificates",
+  "Professional high-speed hosting"
+];
+
 const pageTitle = "Hosting & Support";
-const metaDescription = "Reliable hosting and website support from Dockside Web Solutions. Secure hosting, updates, maintenance, and ongoing help to keep your website running smoothly.";
+const metaDescription =
+  "Reliable hosting and website support from Dockside Web Solutions. Secure hosting, updates, maintenance, and ongoing help to keep your website running smoothly.";
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
-    <HeroSecondary
-        label="UNLIMITED UPDATES"
-        heading="Hosting & Support Services"
-        description="Dependable hosting and ongoing website support to keep your site secure, updated, fast, and running smoothly so you can stay focused on your business."
-    />
+  <HeroSecondary
+    label="UNLIMITED UPDATES"
+    heading="Hosting & Support Services"
+    description="Dependable hosting and ongoing website support to keep your site secure, updated, fast, and running smoothly so you can stay focused on your business."
+  />
 
-    <Section bg="light">
-        <div class="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-            <p class="text-sm font-semibold tracking-[0.2em] text-primary uppercase mb-3">
-            Work In Progress
-            </p>
+  <Section>
+    <div class="mx-auto max-w-6xl">
+      <div class="grid gap-14 lg:grid-cols-2 items-center">
+        <div>
+          <SectionLabel>The Hands-Off Experience</SectionLabel>
+          <Heading>
+            Your website,
+            <span class="italic text-teal">fully taken care of</span>
+          </Heading>
+          <Text>
+            Most business owners find website maintenance a chore because of
+            lost login info, fighting with builders, and worrying about security
+            updates.
+          </Text>
+          <Text class="mt-4">
+            Dockside Web Solutions flips the script. We provide a
+            <span class="font-bold">fully-serviced</span> experience where <span
+              class="font-bold">unlimited content updates</span
+            >
+            and <span class="font-bold">proactive security</span> are standard. When
+            you need a change, you contact me directly and I will get it done in 1-2
+            business days.
+          </Text>
 
-            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
-            This Page Is Currently Being Built
-            </h2>
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-y-4">
+            {
+              checklist.map((item) => (
+                <div class="flex items-center gap-3">
+                  <div class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold/10 border border-gold/20">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#d8b86f"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-navy/80">{item}</span>
+                </div>
+              ))
+            }
+          </div>
 
-            <p class="text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            We’re currently putting the finishing touches on this page. Check back soon
-            for more details about our services, pricing, and how we can help your
-            business grow online.
-            </p>
+          <div class="mt-10">
+            <a href="/contact/">
+              <Button>Start Your Website Today</Button>
+            </a>
+          </div>
         </div>
-    </Section>
 
-    
-    <CTAAboveFooter />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {
+            supportFeatures.map((f) => (
+              <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+                <f.icon class="h-6 w-6 text-teal mb-4" />
+                <h3 class="text-base font-bold text-navy mb-2">{f.title}</h3>
+                <p class="text-xs leading-relaxed text-navy/60">{f.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="navy">
+    <div class="mx-auto max-w-4xl text-center">
+      <SectionLabel class="text-teal/80">Transparency & Control</SectionLabel>
+      <h2 class="text-3xl md:text-5xl text-white font-bold tracking-tight mb-6">
+        Everything in one <span class="italic text-teal">Client Portal</span>
+      </h2>
+      <Text class="text-white/70 max-w-2xl mx-auto">
+        No more digging through emails for invoices or links. Your dedicated
+        client portal allows you to manage your entire digital presence from one
+        secure dashboard.
+      </Text>
+
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+        {
+          [
+            { label: "Pay Invoices", sub: "Secure Stripe payments" },
+            { label: "Update Requests", sub: "Unlimited & fast" },
+            { label: "Questionnaires", sub: "Easy onboarding" },
+            { label: "Direct Messaging", sub: "Talk to me anytime" }
+          ].map((item) => (
+            <div class="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm">
+              <div class="text-teal font-bold text-lg mb-1">{item.label}</div>
+              <div class="text-white/40 text-[11px] uppercase tracking-wider">
+                {item.sub}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="white">
+    <div class="text-center max-w-3xl mx-auto">
+      <SectionLabel>Common Questions</SectionLabel>
+      <Heading>Support FAQs</Heading>
+    </div>
+
+    <FAQ selectedCategories={["Plans"]} />
+
+    <div class="text-center">
+      <a href="/faq/">
+        <Button variant="secondary" size="md"> View Full FAQ </Button>
+      </a>
+    </div>
+  </Section>
+
+  <CTAAboveFooter />
 </Layout>

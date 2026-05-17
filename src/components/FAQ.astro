@@ -1,281 +1,363 @@
 ---
-// FAQ.astro — uses CSS custom property names from Dockside theme
+// FAQ.astro
+interface Props {
+  selectedCategories?: string[];
+}
 
-const categories = [
-  "Websites",
-  "Pricing & Payments",
-  "Plans",
-  "SEO"
-];
+const { selectedCategories } = Astro.props;
 
-const faqs = [
-  //WEBSITES
-  {
-    "category": "Websites",
-    "question": "How long does the process take from start to finish?",
-    "answer": "Typical turnaround time is 2 to 3 weeks for a full website, or about 1 week for a landing page. This starts once payment is made and I have everything needed to begin, including your content and branding materials. Delays in approvals or missing content can extend the timeline, and I’ll keep you posted from start to finish."  
-  },
-  {
-    "category": "Websites",
-    "question": "Will my website be optimized for mobile devices and fast loading speeds?",
-    "answer": "Absolutely. Every site I build is designed to be mobile-responsive so it looks great on any screen, and the static architecture is specifically chosen to ensure top-tier loading speeds."
-  },
-  {
-    "category": "Websites",
-    "question": "Do you use WordPress, Wix, or other site builders?",
-    "answer": "No, I don't use those. I specialize in building custom static sites using HTML, CSS, and JavaScript. This means no clunky database or slow site builders getting in the way, ensuring I have complete control over the performance and design of your site."
-  },
-  {
-    "category": "Websites",
-    "question": "Why is a custom-coded website better than a template?",
-    "answer": "Static sites are awesome because they offer superior loading speeds and are inherently more secure. Since there's no backend database or server-side processing, the 'attack surface' for hackers is virtually eliminated, making your site much safer than a standard template or CMS-based site."
-  },
-  {
-    "category": "Websites",
-    "question": "What happens to my site if I decide to stop working with you?",
-    "answer": "If you decide to cancel and don't want to pay the buyout fee, the site will be taken offline and ownership rights stay with me. However, if you want to keep all the files and the code for yourself, there’s a flat Early Buyout Fee of $3,000 to transfer full ownership and repository access to you."
-  },
-  {
-    "category": "Websites",
-    "question": "What can I do inside the client portal?",
-    "answer": "Your client portal gives you one convenient place to manage everything. You can view invoices, make payments, submit support tickets, request updates, schedule meetings, and keep track of ongoing work."
-  },
-  {
-    "category": "Websites",
-    "question": "Can you build custom features like booking systems or member portals?",
-    "answer": "The standard setup is focused on high-performance static websites, so it does not include custom-built systems like user accounts, member portals, or booking platforms. However, I can absolutely connect your website to trusted third-party solutions for things like bookings, memberships, scheduling, or customer portals."
-  },
+const allCategories = ["Websites", "Pricing & Payments", "Plans", "SEO"];
 
-  //PRICING & PAYMENTS
+// 1. Determine which categories to show (use prop if provided, else show all)
+const categories =
+  selectedCategories && selectedCategories.length > 0
+    ? allCategories.filter((cat) => selectedCategories.includes(cat))
+    : allCategories;
+
+const faqsData = [
+  // WEBSITES
   {
-    "category": "Pricing & Payments",
-    "question": "What payment methods do you accept for invoices?",
-    "answer": "Everything is handled securely through Stripe. You'll just need to have a payment method or bank account on file so I can automatically process the charges each month."
+    category: "Websites",
+    question: "How long does the process take from start to finish?",
+    answer:
+      "Typical turnaround time is 2 to 3 weeks for a full website, or about 1 week for a landing page. This starts once payment is made and I have everything needed to begin, including your content and branding materials."
   },
   {
-    "category": "Pricing & Payments",
-    "question": "How are monthly payments or lump sum deposits processed?",
-    "answer": "Payments are handled securely and can be set up automatically for monthly plans. You’ll also have access to a client portal where you can view invoices, manage billing, and keep track of your account."
+    category: "Websites",
+    question:
+      "Will my website be optimized for mobile devices and fast loading speeds?",
+    answer:
+      "Absolutely. Every site I build is designed to be mobile-responsive so it looks great on any screen, and the static architecture is specifically chosen to ensure top-tier loading speeds."
   },
   {
-    "category": "Pricing & Payments",
-    "question": "If I need more pages added to my site later, is there an extra fee?",
-    "answer": "The standard plan covers up to six pages, while the landing page plan covers up to 1. If you need more down the road, it's just a one-time fee of $100 for each additional page, and once they're built, they're fully covered under your existing maintenance plan."
+    category: "Websites",
+    question: "Do you use WordPress, Wix, or other site builders?",
+    answer:
+      "No, I don't use those. I specialize in building custom static sites using HTML, CSS, and JavaScript. This means no clunky database or slow site builders getting in the way."
   },
   {
-  "category": "Pricing & Payments",
-  "question": "Are there any hidden costs like hosting, SSL certificates, or domain renewals?",
-  "answer": "There are no hidden surprises! Hosting and your SSL certificate are included in your monthly fee. The only separate cost is your domain name, which you purchase and renew yourself so you keep full ownership and full control of your brand. That means your website address always stays in your name, with no risk of losing access if you ever decide to make changes in the future. Most domains are only around $11 per year."
+    category: "Websites",
+    question: "Why is a custom-coded website better than a template?",
+    answer:
+      "Static sites offer superior loading speeds and are inherently more secure. Since there's no backend database, the 'attack surface' for hackers is virtually eliminated."
   },
   {
-    "category": "Pricing & Payments",
-    "question": "How do you handle late payments or failed transactions?",
-    "answer": "If an account is more than 30 days past due, I may have to pause services or take the site offline. I'm not responsible for any lost traffic during that time, so it's best to keep the account current."
+    category: "Websites",
+    question: "What happens to my site if I decide to stop working with you?",
+    answer:
+      "If you decide to cancel and don't want to pay the buyout fee, the site will be taken offline. If you want to keep all the files and code, there’s a flat Early Buyout Fee of $3,000."
   },
   {
-    "category": "Pricing & Payments",
-    "question": "What is your policy regarding refunds for project deposits?",
-    "answer": "Because I'm dedicating production time and infrastructure to your specific project, all fees paid under this agreement are non-refundable."
+    category: "Websites",
+    question: "What can I do inside the client portal?",
+    answer:
+      "Your client portal gives you one convenient place to manage everything. You can view invoices, make payments, submit support tickets, and request updates."
+  },
+  {
+    category: "Websites",
+    question:
+      "Can you build custom features like booking systems or member portals?",
+    answer:
+      "Standard setup is focused on high-performance static sites. While I don't build custom member portals, I can connect your site to trusted third-party solutions for bookings and memberships."
   },
 
-  //PLANS
+  // PRICING & PAYMENTS
   {
-    "category": "Plans",
-    "question": "Do your plans include ongoing hosting and security updates?",
-    "answer": "Yes, I’ve got you covered. Your monthly plan includes professional hosting, ongoing maintenance, and unlimited content updates to make sure everything stays accurate and protected. Once your website is live, you don’t have to worry about managing any of it yourself."
+    category: "Pricing & Payments",
+    question: "What payment methods do you accept for invoices?",
+    answer:
+      "Everything is handled securely through Stripe. To automatically process your charges each month, you can connect your bank account via ACH with no additional fees or a Credit/Debit Card subject to a 3.5% processing fee."
   },
   {
-    "category": "Plans",
-    "question": "How long does the initial contract or subscription term last?",
-    "answer": "There is an initial 12-month minimum commitment to start off. This reflects a financing model that allows you to spread the higher cost of the design and development over a year instead of paying it all at once."
+    category: "Pricing & Payments",
+    question: "How are monthly payments or lump sum deposits processed?",
+    answer:
+      "Payments are handled securely and can be set up automatically. You’ll also have access to a client portal to view invoices and manage billing."
   },
   {
-    "category": "Plans",
-    "question": "On a monthly plan, do I keep paying after the minimum term is over?",
-    "answer": "Yes, once the initial term is complete, the plan continues on a simple month-to-month basis so you keep receiving hosting, support, and maintenance. You’re free to cancel anytime after the minimum term with a 30-day written notice."
+    category: "Pricing & Payments",
+    question:
+      "If I need more pages added to my site later, is there an extra fee?",
+    answer:
+      "Standard plans cover up to 6 pages. Additional pages are a one-time fee of $100 each, and they are fully covered under your existing maintenance plan once built."
   },
   {
-    "category": "Plans",
-    "question": "What is the difference between a monthly subscription and a lump sum plan?",
-    "answer": "The monthly option lets you spread the project cost over time instead of paying a large upfront amount, making it easier to get started. I also offer a lump sum payment option if you’d rather pay upfront, and ongoing monthly support plans are available for an additional feeif you’d still like hosting, updates, and maintenance afterwards."
+    category: "Pricing & Payments",
+    question:
+      "Are there any hidden costs like hosting, SSL certificates, or domain renewals?",
+    answer:
+      "No hidden surprises! Hosting and SSL are included. The only separate cost is your domain name (approx. $11/year), which you purchase yourself to maintain full ownership."
   },
   {
-    "category": "Plans",
-    "question": "What happens if I need to cancel my plan before the term is finished?",
-    "answer": "You can cancel after the initial term with 30 days' notice. If you need to leave early and want to take the code with you, you would need to pay the $3,000 Early Buyout Fee to secure ownership of the files."
+    category: "Pricing & Payments",
+    question: "How do you handle late payments or failed transactions?",
+    answer:
+      "If an account is more than 30 days past due, I may have to pause services or take the site offline. It's best to keep the account current to avoid lost traffic."
   },
   {
-    "category": "Plans",
-    "question": "Can I switch from a monthly subscription to a lump sum payment later?",
-    "answer": "The agreement doesn't have a specific 'switch' clause, but you always have the option to pay the $3,000 flat Buyout Fee at any time to terminate the subscription and take full ownership of the repository and code."
+    category: "Pricing & Payments",
+    question: "What is your policy regarding refunds for project deposits?",
+    answer:
+      "Because I'm dedicating production time and infrastructure to your specific project, all fees paid under this agreement are non-refundable."
   },
 
-  //SEO
+  // PLANS
   {
-    "category": "SEO",
-    "question": "What is Search Engine Optimization (SEO)?",
-    "answer": "It’s the process of making sure your site is built correctly so search engines can find you. My goal is to ensure your small business site stays accurate and ready to convert visitors who find you online."
+    category: "Plans",
+    question: "Do your plans include ongoing hosting and security updates?",
+    answer:
+      "Yes. Your monthly plan includes professional hosting, ongoing maintenance, and unlimited content updates so you don’t have to worry about managing it yourself."
   },
   {
-    "category": "SEO",
-    "question": "Is basic SEO included in the initial website build?",
-    "answer": "Yes, basic Search Engine Optimization is a core deliverable. I make sure the foundational elements are in place from the start so your site is ready for the web."
+    category: "Plans",
+    question: "How long does the initial contract or subscription term last?",
+    answer:
+      "There is an initial 12-month minimum commitment. This allows you to spread the development cost over a year instead of paying it all at once."
   },
   {
-    "category": "SEO",
-    "question": "What is the difference between on-page SEO and ongoing SEO services?",
-    "answer": "I include the essential SEO foundation in your build. While the agreement mentions ongoing support and maintenance, it doesn't separate advanced marketing tiers from the standard optimization included in the plan."
+    category: "Plans",
+    question:
+      "On a monthly plan, do I keep paying after the minimum term is over?",
+    answer:
+      "Yes, it continues on a month-to-month basis for hosting and support. You’re free to cancel anytime after the minimum term with a 30-day notice."
   },
   {
-    "category": "SEO",
-    "question": "Can you guarantee that my website will rank on the first page of Google?",
-    "answer": "I can’t guarantee specific rankings, since search engines use their own algorithms and competition varies by market. What I can guarantee is that your website will be built with strong SEO foundations, fast performance, and best practices that give you the best chance to rank well over time."
+    category: "Plans",
+    question:
+      "What is the difference between a monthly subscription and a lump sum plan?",
+    answer:
+      "The monthly option spreads the project cost over time. The lump sum option allows for upfront payment with optional ongoing support plans available."
   },
   {
-    "category": "SEO",
-    "question": "How long does it typically take to see measurable results from SEO?",
-    "answer": "SEO is a long-term strategy, so timelines can vary depending on your industry, competition, and starting point. Many businesses begin seeing early improvements within 3 to 6 months, with stronger long-term growth building over time as your site gains authority and visibility."
+    category: "Plans",
+    question:
+      "What happens if I need to cancel my plan before the term is finished?",
+    answer:
+      "You can cancel after the initial term with 30 days' notice. Early cancellation with code ownership requires a $3,000 Early Buyout Fee."
+  },
+  {
+    category: "Plans",
+    question:
+      "Can I switch from a monthly subscription to a lump sum payment later?",
+    answer:
+      "While there isn't a direct 'switch' clause, you can pay the $3,000 flat Buyout Fee at any time to terminate the subscription and take full ownership."
+  },
+
+  // SEO
+  {
+    category: "SEO",
+    question: "What is Search Engine Optimization (SEO)?",
+    answer:
+      "It’s the process of making sure your site is built correctly so search engines can find you and visitors can convert."
+  },
+  {
+    category: "SEO",
+    question: "Is basic SEO included in the initial website build?",
+    answer:
+      "Yes, basic SEO foundation is a core deliverable. I ensure the foundational elements are in place from the start."
+  },
+  {
+    category: "SEO",
+    question:
+      "What is the difference between on-page SEO and ongoing SEO services?",
+    answer:
+      "I include the essential SEO foundation. Advanced marketing tiers are separate from the standard optimization included in the plan."
+  },
+  {
+    category: "SEO",
+    question:
+      "Can you guarantee that my website will rank on the first page of Google?",
+    answer:
+      "I can’t guarantee specific rankings due to algorithm variables, but I guarantee your site will be built with strong SEO best practices."
+  },
+  {
+    category: "SEO",
+    question:
+      "How long does it typically take to see measurable results from SEO?",
+    answer:
+      "SEO is a long-term strategy. Many businesses see improvements within 3 to 6 months, with stronger growth over time."
   }
 ];
 
+// 2. Filter the FAQs based on the allowed categories
+const faqs = faqsData.filter((faq) => categories.includes(faq.category));
+
+// 3. Initial active category is the first one in our filtered list
 const firstCategory = categories[0];
 ---
 
-<!-- Category Filters -->
-<div class="flex flex-wrap gap-3 justify-center mb-10" role="tablist" aria-label="FAQ categories">
-  {categories.map((cat, idx) => (
-    <button
-      class={`faq-filter px-6 py-2.5 rounded-lg border text-base font-semibold transition-colors duration-200 cursor-pointer ${
-        idx === 0 ? "filter-active" : "filter-inactive"
-      }`}
-      data-category={cat}
-      role="tab"
-      aria-selected={idx === 0 ? "true" : "false"}
-    >
-      {cat}
-    </button>
-  ))}
-</div>
-
-<!-- Accordion -->
-<div>
-  {faqs.map((item, i) => (
-    <div
-      class="faq-item border-b border-navy/10"
-      data-category={item.category}
-      hidden={item.category !== firstCategory}
-    >
-      <button
-        class="faq-question flex justify-between items-center w-full py-5 text-left text-lg font-semibold text-color-navy hover:text-teal transition-colors duration-200 gap-4 cursor-pointer bg-transparent border-none"
-        aria-expanded="false"
-        aria-controls={`faq-answer-${i}`}
-        id={`faq-btn-${i}`}
-      >
-        <span>{item.question}</span>
-        <span class="faq-chevron shrink-0 text-teal transition-transform duration-300">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-      </button>
-
+<div class="max-w-4xl mx-auto px-4 py-12">
+  {
+    categories.length > 1 && (
       <div
-        class="overflow-hidden max-h-0 transition-[max-height] duration-300 ease-in-out"
-        id={`faq-answer-${i}`}
-        role="region"
-        aria-labelledby={`faq-btn-${i}`}
+        class="flex flex-wrap gap-3 justify-center mb-10"
+        role="tablist"
+        aria-label="FAQ categories"
       >
-        <p class="pb-5 pr-15 text-navy text-[0.9375rem] leading-7">
-          {item.answer}
-        </p>
+        {categories.map((cat, idx) => (
+          <button
+            class={`faq-filter px-6 py-2.5 rounded-lg border text-base font-semibold transition-colors duration-200 cursor-pointer ${
+              idx === 0 ? "filter-active" : "filter-inactive"
+            }`}
+            data-category={cat}
+            role="tab"
+            aria-selected={idx === 0 ? "true" : "false"}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
-    </div>
-  ))}
+    )
+  }
+
+  <div class="space-y-2">
+    {
+      faqs.map((item, i) => (
+        <div
+          class="faq-item border-b border-navy/10"
+          data-category={item.category}
+          hidden={item.category !== firstCategory}
+        >
+          <button
+            class="faq-question flex justify-between items-center w-full py-5 text-left text-lg font-semibold text-navy hover:text-teal transition-colors duration-200 gap-4 cursor-pointer bg-transparent border-none outline-none"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${i}`}
+            id={`faq-btn-${i}`}
+          >
+            <span>{item.question}</span>
+            <span class="faq-chevron shrink-0 text-teal transition-transform duration-300">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path
+                  d="M5 7.5L10 12.5L15 7.5"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </button>
+
+          <div
+            class="overflow-hidden max-h-0 transition-[max-height] duration-300 ease-in-out"
+            id={`faq-answer-${i}`}
+            role="region"
+            aria-labelledby={`faq-btn-${i}`}
+          >
+            <p class="pb-5 pr-12 text-navy/80 text-[0.9375rem] leading-7">
+              {item.answer}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
 </div>
 
 <style>
+  /* These use your variable names from the Dockside theme */
   .filter-active {
-    background-color: var(--color-navy);
-    border-color: var(--color-navy);
+    background-color: var(--color-navy, #001f3f);
+    border-color: var(--color-navy, #001f3f);
     color: white;
   }
 
   .filter-inactive {
-    border-color: color-mix(in srgb, var(--color-navy) 30%, transparent);
-    color: var(--color-navy);
+    border-color: rgba(0, 31, 63, 0.2);
+    color: var(--color-navy, #001f3f);
   }
 
   .filter-inactive:hover {
-    border-color: var(--color-navy);
+    border-color: var(--color-navy, #001f3f);
+  }
+
+  .rotate-180 {
+    transform: rotate(180deg);
+  }
+
+  .text-navy {
+    color: var(--color-navy, #001f3f);
+  }
+  .text-teal {
+    color: var(--color-teal, #008080);
   }
 </style>
 
 <script>
-  // ── Filter logic ──
-  const filters = document.querySelectorAll<HTMLButtonElement>(".faq-filter");
-  const items = document.querySelectorAll<HTMLElement>(".faq-item");
+  function initFAQ() {
+    const filters = document.querySelectorAll<HTMLButtonElement>(".faq-filter");
+    const items = document.querySelectorAll<HTMLElement>(".faq-item");
+    const questions =
+      document.querySelectorAll<HTMLButtonElement>(".faq-question");
 
-  filters.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      // Reset all
-      filters.forEach((b) => {
-        b.classList.remove("filter-active");
-        b.classList.add("filter-inactive");
-        b.setAttribute("aria-selected", "false");
+    // Filter Logic
+    filters.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filters.forEach((b) => {
+          b.classList.remove("filter-active");
+          b.classList.add("filter-inactive");
+          b.setAttribute("aria-selected", "false");
+        });
+        btn.classList.remove("filter-inactive");
+        btn.classList.add("filter-active");
+        btn.setAttribute("aria-selected", "true");
+
+        const selected = btn.dataset.category;
+        items.forEach((item) => {
+          const match = item.dataset.category === selected;
+          if (match) {
+            item.removeAttribute("hidden");
+          } else {
+            item.setAttribute("hidden", "");
+            // Close any open answers in hidden categories
+            const answer = item.querySelector<HTMLElement>(
+              "[id^='faq-answer-']"
+            );
+            const q = item.querySelector<HTMLButtonElement>(".faq-question");
+            const chevron = q?.querySelector(".faq-chevron");
+            if (answer) answer.style.maxHeight = "0px";
+            if (q) q.setAttribute("aria-expanded", "false");
+            if (chevron) chevron.classList.remove("rotate-180");
+          }
+        });
       });
-      // Activate clicked
-      btn.classList.remove("filter-inactive");
-      btn.classList.add("filter-active");
-      btn.setAttribute("aria-selected", "true");
+    });
 
-      // Show/hide items and close any open answers
-      const selected = btn.dataset.category;
-      items.forEach((item) => {
-        const match = item.dataset.category === selected;
-        if (match) {
-          item.removeAttribute("hidden");
+    // Accordion Logic
+    questions.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const isOpen = btn.getAttribute("aria-expanded") === "true";
+        const answerId = btn.getAttribute("aria-controls");
+        const answer = document.getElementById(answerId!);
+        const chevron = btn.querySelector(".faq-chevron");
+
+        // Close others
+        questions.forEach((other) => {
+          if (other !== btn) {
+            other.setAttribute("aria-expanded", "false");
+            const otherAnswer = document.getElementById(
+              other.getAttribute("aria-controls")!
+            );
+            if (otherAnswer) otherAnswer.style.maxHeight = "0px";
+            other.querySelector(".faq-chevron")?.classList.remove("rotate-180");
+          }
+        });
+
+        // Toggle current
+        if (isOpen) {
+          if (answer) answer.style.maxHeight = "0px";
+          btn.setAttribute("aria-expanded", "false");
+          chevron?.classList.remove("rotate-180");
         } else {
-          item.setAttribute("hidden", "");
-          const answer = item.querySelector<HTMLElement>("[id^='faq-answer-']")!;
-          const question = item.querySelector<HTMLButtonElement>(".faq-question")!;
-          const chevron = question.querySelector<HTMLElement>(".faq-chevron")!;
-          answer.style.maxHeight = "0px";
-          question.setAttribute("aria-expanded", "false");
-          chevron.classList.remove("rotate-180");
+          if (answer) answer.style.maxHeight = answer.scrollHeight + "px";
+          btn.setAttribute("aria-expanded", "true");
+          chevron?.classList.add("rotate-180");
         }
       });
     });
-  });
+  }
 
-  // ── Accordion logic ──
-  const questions = document.querySelectorAll<HTMLButtonElement>(".faq-question");
-
-  questions.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const isOpen = btn.getAttribute("aria-expanded") === "true";
-      const answer = document.getElementById(btn.getAttribute("aria-controls")!) as HTMLElement;
-      const chevron = btn.querySelector<HTMLElement>(".faq-chevron")!;
-
-      // Close all others
-      questions.forEach((other) => {
-        if (other !== btn) {
-          other.setAttribute("aria-expanded", "false");
-          const otherAnswer = document.getElementById(other.getAttribute("aria-controls")!) as HTMLElement;
-          otherAnswer.style.maxHeight = "0px";
-          other.querySelector<HTMLElement>(".faq-chevron")!.classList.remove("rotate-180");
-        }
-      });
-
-      // Toggle current
-      if (isOpen) {
-        answer.style.maxHeight = "0px";
-        btn.setAttribute("aria-expanded", "false");
-        chevron.classList.remove("rotate-180");
-      } else {
-        answer.style.maxHeight = answer.scrollHeight + "px";
-        btn.setAttribute("aria-expanded", "true");
-        chevron.classList.add("rotate-180");
-      }
-    });
-  });
+  // Runs on initial load and after View Transitions (if using them)
+  initFAQ();
+  document.addEventListener("astro:after-swap", initFAQ);
 </script>

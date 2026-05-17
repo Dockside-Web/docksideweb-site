@@ -19,7 +19,7 @@ const navigation: NavItem[] = [
     children: [
       { name: "Web Design", path: "/web-design/" },
       { name: "SEO", path: "/seo/" },
-      { name: "Hosting & Support", path: "/hosting-and-support/" },
+      { name: "Hosting & Support", path: "/hosting-and-support/" }
     ]
   },
   { name: "Portfolio", path: "/portfolio/" },
@@ -29,17 +29,19 @@ const navigation: NavItem[] = [
     children: [
       { name: "Reviews", path: "/reviews/" },
       { name: "FAQ", path: "/faq/" },
-      { name: "About Us", path: "/about/" },
+      { name: "About Us", path: "/about/" }
     ]
   },
-  { name: "Pricing", path: "/pricing/" },
+  { name: "Pricing", path: "/pricing/" }
 ];
 
 const isActive = (item: NavItem) => {
   const normalizedPath = item.path.replace(/\/$/, "");
   if (currentPath === normalizedPath) return true;
   if (item.children) {
-    return item.children.some(child => currentPath === child.path.replace(/\/$/, ""));
+    return item.children.some(
+      (child) => currentPath === child.path.replace(/\/$/, "")
+    );
   }
   return false;
 };
@@ -49,8 +51,9 @@ const isActive = (item: NavItem) => {
   id="site-header"
   class="fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-500"
 >
-  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
-
+  <div
+    class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8"
+  >
     <a href="/" class="group flex items-center">
       <Logo
         class="h-12 md:h-16 w-auto transition-all duration-300 group-hover:opacity-90"
@@ -59,61 +62,69 @@ const isActive = (item: NavItem) => {
     </a>
 
     <nav class="hidden md:flex items-center gap-8">
-      {navigation.map((item) => (
-        item.children ? (
-          <div class="relative group">
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              data-dropdown-btn
-              class={`flex items-center gap-1 text-sm font-semibold tracking-wide uppercase transition-colors hover:text-gold cursor-pointer bg-transparent ${
+      {
+        navigation.map((item) =>
+          item.children ? (
+            <div class="relative group">
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                data-dropdown-btn
+                class={`flex items-center gap-1 text-sm font-semibold tracking-wide uppercase transition-colors hover:text-gold cursor-pointer bg-transparent ${
+                  isActive(item) ? "text-gold" : "text-white/90"
+                }`}
+              >
+                {item.name}
+                <svg
+                  data-dropdown-chevron
+                  class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2.5"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              <div
+                data-dropdown-menu
+                class="absolute top-full left-1/2 -translate-x-1/2 w-44 bg-white rounded-xl shadow-2xl overflow-hidden z-10 hidden group-hover:block border-b-4 border-teal"
+              >
+                <div class="absolute -top-4 left-0 w-full h-4" />
+                <div class="py-2 relative">
+                  {item.children.map((child) => (
+                    <a
+                      href={child.path}
+                      class={`block px-4 py-2.5 text-sm font-medium tracking-wide transition-colors hover:bg-gray-50 hover:text-gold ${
+                        currentPath === child.path.replace(/\/$/, "")
+                          ? "text-gold"
+                          : "text-navy"
+                      }`}
+                    >
+                      {child.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a
+              href={item.path}
+              data-nav-link
+              class={`text-sm font-semibold tracking-wide uppercase transition-colors duration-300 hover:text-gold ${
                 isActive(item) ? "text-gold" : "text-white/90"
               }`}
             >
               {item.name}
-              <svg
-                data-dropdown-chevron
-                class="w-3.5 h-3.5 transition-transform duration-200"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
-            <div
-              data-dropdown-menu
-              class="absolute top-full left-1/2 -translate-x-1/2 w-44 bg-navy rounded-xl shadow-2xl overflow-hidden z-10 hidden"
-            >
-              <div class="absolute -top-4 left-0 w-full h-4"></div>
-              <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-navy rotate-45"></div>
-              <div class="py-2 relative">
-                {item.children.map((child) => (
-                  <a
-                    href={child.path}
-                    class={`block px-4 py-2.5 text-sm font-medium tracking-wide transition-colors hover:bg-white/5 hover:text-gold ${
-                      currentPath === child.path.replace(/\/$/, "") ? "text-gold" : "text-slate-200"
-                    }`}
-                  >
-                    {child.name}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        ) : (
-          <a
-            href={item.path}
-            data-nav-link
-            class={`text-sm font-semibold tracking-wide uppercase transition-colors duration-300 hover:text-gold ${
-              isActive(item) ? "text-gold" : "text-white/90"
-            }`}
-          >
-            {item.name}
-          </a>
+            </a>
+          )
         )
-      ))}
+      }
 
       <a href="/contact/">
         <Button variant="primary" size="sm">Contact</Button>
@@ -129,7 +140,8 @@ const isActive = (item: NavItem) => {
       <svg
         id="icon-open"
         xmlns="http://www.w3.org/2000/svg"
-        width="24" height="24"
+        width="24"
+        height="24"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -144,7 +156,8 @@ const isActive = (item: NavItem) => {
       </svg>
       <svg
         id="icon-close"
-        width="24" height="24"
+        width="24"
+        height="24"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -165,50 +178,62 @@ const isActive = (item: NavItem) => {
     aria-hidden="true"
   >
     <nav class="flex flex-col gap-6 px-6 py-8">
-      {navigation.map((item) => (
-        item.children ? (
-          <div>
-            <button
-              data-mobile-accordion-btn
-              class={`flex items-center gap-2 w-full text-lg font-medium tracking-tight ${
+      {
+        navigation.map((item) =>
+          item.children ? (
+            <div>
+              <button
+                data-mobile-accordion-btn
+                class={`flex items-center gap-2 w-full text-lg font-medium tracking-tight ${
+                  isActive(item) ? "text-gold" : "text-slate-200"
+                }`}
+              >
+                {item.name}
+                <svg
+                  data-mobile-accordion-chevron
+                  class="w-4 h-4 transition-transform duration-200"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2.5"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+              <div
+                data-mobile-accordion-links
+                class="hidden mt-3 ml-4 space-y-4"
+              >
+                {item.children.map((child) => (
+                  <a
+                    href={child.path}
+                    class={`block text-base font-medium ${
+                      currentPath === child.path.replace(/\/$/, "")
+                        ? "text-gold"
+                        : "text-slate-300"
+                    }`}
+                  >
+                    {child.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={item.path}
+              class={`block text-lg font-medium tracking-tight ${
                 isActive(item) ? "text-gold" : "text-slate-200"
               }`}
             >
               {item.name}
-              <svg
-                data-mobile-accordion-chevron
-                class="w-4 h-4 transition-transform duration-200"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div data-mobile-accordion-links class="hidden mt-3 ml-4 space-y-4">
-              {item.children.map((child) => (
-                <a
-                  href={child.path}
-                  class={`block text-base font-medium ${
-                    currentPath === child.path.replace(/\/$/, "") ? "text-gold" : "text-slate-300"
-                  }`}
-                >
-                  {child.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <a
-            href={item.path}
-            class={`block text-lg font-medium tracking-tight ${
-              isActive(item) ? "text-gold" : "text-slate-200"
-            }`}
-          >
-            {item.name}
-          </a>
+            </a>
+          )
         )
-      ))}
+      }
 
       <a href="/contact/" class="pt-2">
         <Button variant="primary" class="w-full py-4 text-base">Contact</Button>
@@ -228,14 +253,14 @@ const isActive = (item: NavItem) => {
     if (!header || !mobileToggle || !mobileMenu) return;
 
     // Accessibility Fix: Select all focusable elements inside the mobile menu
-    const menuFocusables = mobileMenu.querySelectorAll('button, a');
+    const menuFocusables = mobileMenu.querySelectorAll("button, a");
 
     let isOpen = false;
 
     // Helper to manage focusability (prevents tabbing into hidden menu)
     function updateMenuFocus(opened: boolean) {
-      menuFocusables.forEach(el => {
-        el.setAttribute('tabindex', opened ? '0' : '-1');
+      menuFocusables.forEach((el) => {
+        el.setAttribute("tabindex", opened ? "0" : "-1");
       });
     }
 
@@ -257,11 +282,13 @@ const isActive = (item: NavItem) => {
       isOpen = !isOpen;
       mobileToggle.setAttribute("aria-expanded", String(isOpen));
       mobileMenu.setAttribute("aria-hidden", String(!isOpen));
-      
+
       // Update tabindex for all children
       updateMenuFocus(isOpen);
 
-      mobileMenu.style.maxHeight = isOpen ? `${mobileMenu.scrollHeight}px` : "0";
+      mobileMenu.style.maxHeight = isOpen
+        ? `${mobileMenu.scrollHeight}px`
+        : "0";
       iconOpen?.classList.toggle("hidden", isOpen);
       iconClose?.classList.toggle("hidden", !isOpen);
       document.body.style.overflow = isOpen ? "hidden" : "";
@@ -271,7 +298,9 @@ const isActive = (item: NavItem) => {
     // Desktop dropdowns
     document.querySelectorAll("[data-dropdown-btn]").forEach((btn) => {
       const wrapper = btn.closest(".relative");
-      const menu = wrapper?.querySelector("[data-dropdown-menu]") as HTMLElement | null;
+      const menu = wrapper?.querySelector(
+        "[data-dropdown-menu]"
+      ) as HTMLElement | null;
       const chevron = btn.querySelector("[data-dropdown-chevron]");
 
       if (!menu) return;
@@ -280,9 +309,15 @@ const isActive = (item: NavItem) => {
         e.stopPropagation();
         const isHidden = menu.classList.contains("hidden");
         // Close all other dropdowns
-        document.querySelectorAll("[data-dropdown-menu]").forEach((m) => m.classList.add("hidden"));
-        document.querySelectorAll("[data-dropdown-chevron]").forEach((c) => c.classList.remove("rotate-180"));
-        document.querySelectorAll("[data-dropdown-btn]").forEach((b) => b.setAttribute("aria-expanded", "false"));
+        document
+          .querySelectorAll("[data-dropdown-menu]")
+          .forEach((m) => m.classList.add("hidden"));
+        document
+          .querySelectorAll("[data-dropdown-chevron]")
+          .forEach((c) => c.classList.remove("rotate-180"));
+        document
+          .querySelectorAll("[data-dropdown-btn]")
+          .forEach((b) => b.setAttribute("aria-expanded", "false"));
 
         if (isHidden) {
           menu.classList.remove("hidden");
@@ -294,17 +329,29 @@ const isActive = (item: NavItem) => {
 
     // Close dropdowns on outside click
     document.addEventListener("click", () => {
-      document.querySelectorAll("[data-dropdown-menu]").forEach((m) => m.classList.add("hidden"));
-      document.querySelectorAll("[data-dropdown-chevron]").forEach((c) => c.classList.remove("rotate-180"));
-      document.querySelectorAll("[data-dropdown-btn]").forEach((b) => b.setAttribute("aria-expanded", "false"));
+      document
+        .querySelectorAll("[data-dropdown-menu]")
+        .forEach((m) => m.classList.add("hidden"));
+      document
+        .querySelectorAll("[data-dropdown-chevron]")
+        .forEach((c) => c.classList.remove("rotate-180"));
+      document
+        .querySelectorAll("[data-dropdown-btn]")
+        .forEach((b) => b.setAttribute("aria-expanded", "false"));
     });
 
     // Close on Escape key
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
-        document.querySelectorAll("[data-dropdown-menu]").forEach((m) => m.classList.add("hidden"));
-        document.querySelectorAll("[data-dropdown-chevron]").forEach((c) => c.classList.remove("rotate-180"));
-        document.querySelectorAll("[data-dropdown-btn]").forEach((b) => b.setAttribute("aria-expanded", "false"));
+        document
+          .querySelectorAll("[data-dropdown-menu]")
+          .forEach((m) => m.classList.add("hidden"));
+        document
+          .querySelectorAll("[data-dropdown-chevron]")
+          .forEach((c) => c.classList.remove("rotate-180"));
+        document
+          .querySelectorAll("[data-dropdown-btn]")
+          .forEach((b) => b.setAttribute("aria-expanded", "false"));
       }
     });
 
@@ -320,10 +367,10 @@ const isActive = (item: NavItem) => {
         const isHidden = links.classList.contains("hidden");
         links.classList.toggle("hidden", !isHidden);
         chevron?.classList.toggle("rotate-180", isHidden);
-        
+
         // Dynamic resize for the parent menu to avoid clipping
         if (isOpen) {
-          mobileMenu.style.maxHeight = 'none';
+          mobileMenu.style.maxHeight = "none";
           mobileMenu.style.maxHeight = `${mobileMenu.scrollHeight}px`;
         }
       });

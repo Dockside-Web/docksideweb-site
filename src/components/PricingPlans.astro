@@ -28,7 +28,7 @@ const pricingPlans: Plan[] = [
       "Contact form"
     ],
     optionalFeatures: [],
-    highlighted: false,
+    highlighted: false
   },
   {
     name: "The Navigator",
@@ -45,7 +45,7 @@ const pricingPlans: Plan[] = [
       "Contact form"
     ],
     optionalFeatures: ["$100 one-time fee for each extra page"],
-    highlighted: true,
+    highlighted: true
   },
   {
     name: "The Vessel",
@@ -55,7 +55,7 @@ const pricingPlans: Plan[] = [
       "A one-time build for established businesses that want a polished website with no monthly commitment.",
     features: [
       "Custom website (up to 6 pages)",
-      "Delivery in 3-4 weeks",
+      "Delivery in 2-3 weeks",
       "Search Engine Optimization (SEO)",
       "All design files and assets"
     ],
@@ -63,12 +63,14 @@ const pricingPlans: Plan[] = [
       "$100 one-time fee for each extra page",
       "$79/month care plan (hosting, domain, SSL & unlimited edits)"
     ],
-    highlighted: false,
-  },
+    highlighted: false
+  }
 ];
 ---
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto px-4 lg:items-stretch">
+<div
+  class="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto px-4 lg:items-stretch"
+>
   {
     pricingPlans.map((plan) => (
       <div class={plan.highlighted ? "lg:-my-6 relative z-10" : ""}>
@@ -87,20 +89,28 @@ const pricingPlans: Plan[] = [
           )}
 
           {/* Name & description */}
-          <h3 class={`text-2xl font-semibold mb-1 ${plan.highlighted ? "text-white" : "text-navy"}`}>
+          <h3
+            class={`text-2xl font-semibold mb-1 ${plan.highlighted ? "text-white" : "text-navy"}`}
+          >
             {plan.name}
           </h3>
-          <p class={`text-sm mb-6 leading-relaxed ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}>
+          <p
+            class={`text-sm mb-6 leading-relaxed ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}
+          >
             {plan.description}
           </p>
 
           {/* Price */}
           <div class="mb-6">
-            <span class={`text-5xl tracking-tight ${plan.highlighted ? "text-white" : "text-navy"}`}>
+            <span
+              class={`text-5xl tracking-tight ${plan.highlighted ? "text-white" : "text-navy"}`}
+            >
               {plan.price}
             </span>
             {plan.price !== "Custom" && (
-              <span class={`text-sm ml-2 ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}>
+              <span
+                class={`text-sm ml-2 ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}
+              >
                 {plan.payment}
               </span>
             )}
@@ -108,21 +118,28 @@ const pricingPlans: Plan[] = [
 
           {/* CTA */}
           <a href="/contact/" class="mb-8">
-            <Button variant={plan.highlighted ? "primary" : "outline"} class="w-full" >
+            <Button
+              variant={plan.highlighted ? "primary" : "outline"}
+              class="w-full"
+            >
               Get Started
             </Button>
           </a>
 
           {/* Features */}
           <div class="flex-1">
-            <p class={`text-xs font-semibold uppercase tracking-widest mb-4 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}>
+            <p
+              class={`text-xs font-semibold uppercase tracking-widest mb-4 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
+            >
               What's Included
             </p>
             <div class="space-y-3">
               {plan.features.map((feature) => (
                 <div class="flex items-start gap-3">
                   <Check class="h-4 w-4 mt-0.5 shrink-0 text-teal" />
-                  <span class={`text-sm leading-snug ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}>
+                  <span
+                    class={`text-sm leading-snug ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}
+                  >
                     {feature}
                   </span>
                 </div>
@@ -131,15 +148,21 @@ const pricingPlans: Plan[] = [
 
             {plan.optionalFeatures.length > 0 && (
               <>
-                <div class={`border-t my-5 ${plan.highlighted ? "border-white/10" : "border-navy/10"}`} />
-                <p class={`text-xs font-semibold uppercase tracking-widest mb-4 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}>
+                <div
+                  class={`border-t my-5 ${plan.highlighted ? "border-white/10" : "border-navy/10"}`}
+                />
+                <p
+                  class={`text-xs font-semibold uppercase tracking-widest mb-4 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
+                >
                   Add-Ons (Optional)
                 </p>
                 <div class="space-y-3">
                   {plan.optionalFeatures.map((feature) => (
                     <div class="flex items-start gap-3">
                       <Plus class="h-4 w-4 mt-0.5 shrink-0 text-gold" />
-                      <span class={`text-sm leading-snug ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}>
+                      <span
+                        class={`text-sm leading-snug ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}
+                      >
                         {feature}
                       </span>
                     </div>
@@ -155,6 +178,6 @@ const pricingPlans: Plan[] = [
 </div>
 
 <p class="text-gray-400 text-s text-center px-8 mt-10 lg:mt-12 mx-auto">
-  * Minor content edits have a 1-2 business day turnaround and include text and image
-  updates only; no new pages or structural layout changes.
+  * Minor content edits have a 1-2 business day turnaround and include text and
+  image updates only; no new pages or structural layout changes.
 </p>

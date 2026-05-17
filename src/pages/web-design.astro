@@ -2,37 +2,672 @@
 import Layout from "../layouts/Layout.astro";
 import HeroSecondary from "../components/HeroSecondary.astro";
 import Section from "../components/ui/Section.astro";
+import SectionLabel from "../components/ui/SectionLabel.astro";
+import Heading from "../components/ui/Heading.astro";
+import Text from "../components/ui/Text.astro";
+import Button from "../components/ui/Button.astro";
+import Portfolio from "../components/Portfolio.astro";
+import Reviews from "../components/Reviews.astro";
 import CTAAboveFooter from "../components/CTAAboveFooter.astro";
 
+import { Zap, ShieldCheck, Gauge, Smartphone } from "lucide-astro";
+
+const lighthouseScores = [
+  { label: "Speed", score: 99 },
+  { label: "SEO", score: 98 },
+  { label: "Best Practices", score: 100 },
+  { label: "Accessibility", score: 100 }
+];
+
+const lighthouseChecks = [
+  { label: "Loads in under a second", value: "✓" },
+  { label: "Works on any device", value: "✓" },
+  { label: "No layout jumps or flicker", value: "✓" },
+  { label: "Secure connection (HTTPS)", value: "✓" }
+];
+
+const performanceMinis = [
+  { label: "Loads quickly", sub: "Visitors don't wait", icon: Zap },
+  { label: "Ranks higher", sub: "Google rewards speed", icon: Gauge },
+  { label: "Works on mobile", sub: "Any screen, any device", icon: Smartphone },
+  { label: "Secure & safe", sub: "Protected from day one", icon: ShieldCheck }
+];
+
+const customCodeCards = [
+  {
+    title: "Unlimited Updates Included",
+    body: "Need a photo changed, new services added, or hours updated? Just send it over. We handle ongoing edits for you so your website never falls behind.",
+    icon: `<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>`
+  },
+  {
+    title: "Built to Load Fast",
+    body: "Slow websites lose visitors. Every site we build is lightweight, optimized, and designed to load quickly across mobile and desktop.",
+    icon: `<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>`
+  },
+  {
+    title: "Designed for Google",
+    body: "Clean code and fast performance help your site rank better, feel more trustworthy, and create a smoother experience for visitors.",
+    icon: `<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>`
+  },
+  {
+    title: "Secure by Default",
+    body: "Our sites don't rely on bloated plugins or complicated databases, which means fewer vulnerabilities, fewer headaches, and less maintenance over time.",
+    icon: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>`
+  },
+  {
+    title: "Real Human Support",
+    body: "When you need help, you're talking directly to the person who built your website — not a support queue or outsourced help desk.",
+    icon: `<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/>`
+  },
+  {
+    title: "Fully Custom Design",
+    body: "Every website is designed around your business and goals — not squeezed into a generic template that's been reused hundreds of times.",
+    icon: `<circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>`
+  }
+];
+
+const comparisonRows = [
+  { label: "Unlimited updates included", us: true, wp: false, pb: false },
+  { label: "Custom-built design", us: true, wp: true, pb: false },
+  { label: "Fast load times", us: true, wp: false, pb: false },
+  {
+    label: "Direct support from the developer",
+    us: true,
+    wp: false,
+    pb: false
+  },
+  { label: "No plugins to manage", us: true, wp: false, pb: false },
+  { label: "Minimal ongoing maintenance", us: true, wp: false, pb: true },
+  { label: "Hosting included", us: true, wp: false, pb: false }
+];
+
+const securityPoints = [
+  {
+    heading: "Fast from day one",
+    detail:
+      "Lightweight code helps your site load quickly and feel smooth on every device."
+  },
+  {
+    heading: "Less maintenance",
+    detail:
+      "No plugin updates, broken builders, or constant patching to worry about."
+  },
+  {
+    heading: "Updates handled for you",
+    detail:
+      "Your site stays current because ongoing edits and support are already included."
+  }
+];
+
+const supportCards = [
+  {
+    stat: "Unlimited",
+    label: "content updates included with every hosting & support plan"
+  },
+  {
+    stat: "Direct",
+    label: "communication with the person who built your website"
+  },
+  {
+    stat: "Fast",
+    label: "lightweight websites designed to load quickly on every device"
+  },
+  {
+    stat: "Custom",
+    label: "every site designed specifically for your business and goals"
+  }
+];
+
+const steps = [
+  {
+    n: "01",
+    title: "Discovery Meeting",
+    body: "We kick things off with a relaxed conversation. No pressure, no jargon. You tell me what you need, I'll tell you what's possible, and we'll make sure we're a good fit before anything is signed."
+  },
+  {
+    n: "02",
+    title: "Questionnaire",
+    body: "You'll complete a focused intake form covering your business, your customers, and the look and feel you're after. This is what separates a generic site from one that actually sounds and looks like you."
+  },
+  {
+    n: "03",
+    title: "Design & Review",
+    body: "I'll develop your site and bring you in early for feedback. You'll see real pages, not mockups, and have full opportunity to request changes until it feels exactly right."
+  },
+  {
+    n: "04",
+    title: "Launch & Ongoing Support",
+    body: "Your site launches fast, secure, and ready to rank. I stay on as your point of contact for hosting, updates, and anything that comes up so you never have to figure it out alone."
+  }
+];
+
 const pageTitle = "Web Design";
-const metaDescription = "Professional web design services from Dockside Web Solutions. Custom, mobile-friendly websites built for speed, trust, and conversions to help small businesses grow online.";
+const metaDescription =
+  "Professional web design services from Dockside Web Solutions. Custom, mobile-friendly websites built for speed, trust, and conversions to help small businesses grow online.";
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
-    <HeroSecondary
-        label="Custom Websites"
-        heading="Web Design Services"
-        description="Custom built websites designed to help your business stand out, build trust, and turn visitors into customers with clean design, fast performance, and a seamless user experience."
-    />
+  <HeroSecondary
+    label="Custom Websites"
+    heading="Web Design Services"
+    description="Custom built websites designed to help your business stand out, build trust, and turn visitors into customers with clean design, fast performance, and a seamless user experience."
+  />
 
-    <Section bg="light">
-        <div class="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-            <p class="text-sm font-semibold tracking-[0.2em] text-primary uppercase mb-3">
-            Work In Progress
-            </p>
+  <!-- ── Section 1: Why Dockside ── -->
+  <Section>
+    <div class="mx-auto max-w-6xl">
+      <!-- Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
+        <SectionLabel>Why Dockside Web Solutions</SectionLabel>
+        <Heading> The last time you'll ever worry about your website </Heading>
+        <Text>
+          Every Dockside Web Solutions site is custom coded from scratch and
+          fully managed for you. Hosting, support, and unlimited content updates
+          are all included so you never have to fight with plugins, logins, or
+          confusing dashboards just to keep your website current.
+        </Text>
+      </div>
 
-            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
-            This Page Is Currently Being Built
-            </h2>
+      <!-- Feature cards — staggered reveal-up -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
+        {
+          customCodeCards.map((card, i) => (
+            <div
+              class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm reveal-up opacity-0"
+              style={`transition-delay: ${i * 80}ms`}
+            >
+              <div class="flex h-9 w-9 items-center justify-center rounded-full bg-navy mb-4">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#6dbbb5"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  set:html={card.icon}
+                />
+              </div>
+              <h3 class="text-base font-semibold text-navy mb-1.5">
+                {card.title}
+              </h3>
+              <p class="text-sm leading-relaxed text-navy/60">{card.body}</p>
+            </div>
+          ))
+        }
+      </div>
 
-            <p class="text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            We’re currently putting the finishing touches on this page. Check back soon
-            for more details about our services, pricing, and how we can help your
-            business grow online.
-            </p>
+      <!-- Comparison table — slides up after cards -->
+      <div
+        class="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden reveal-up opacity-0"
+        style="transition-delay: 480ms"
+      >
+        <div
+          class="grid grid-cols-4 text-[11px] uppercase tracking-widest font-semibold border-b border-gray-100 px-6 py-4 text-navy/40"
+        >
+          <span class="col-span-1"></span>
+          <span class="text-center text-teal">Dockside Web Solutions</span>
+          <span class="text-center">WordPress</span>
+          <span class="text-center">Page Builder</span>
         </div>
-    </Section>
 
+        {
+          comparisonRows.map((row) => (
+            <div class="grid grid-cols-4 items-center px-6 py-3.5 border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors">
+              <span class="text-sm text-navy/70 col-span-1">{row.label}</span>
+              <span class="text-center text-base">
+                {row.us ? (
+                  <span class="text-teal font-semibold">✓</span>
+                ) : (
+                  <span class="text-red-400 font-semibold">✕</span>
+                )}
+              </span>
+              <span class="text-center text-base">
+                {row.wp ? (
+                  <span class="text-teal font-semibold">✓</span>
+                ) : (
+                  <span class="text-red-400 font-semibold">✕</span>
+                )}
+              </span>
+              <span class="text-center text-base">
+                {row.pb ? (
+                  <span class="text-teal font-semibold">✓</span>
+                ) : (
+                  <span class="text-red-400 font-semibold">✕</span>
+                )}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Section>
 
-    <CTAAboveFooter />
+  <!-- ── Section 2: Performance & Support ── -->
+  <Section bg="white">
+    <div class="mx-auto max-w-6xl">
+      <div class="grid gap-14 lg:grid-cols-[1.15fr_.85fr] items-center">
+        <!-- Left — slides in from left -->
+        <div class="max-w-2xl reveal-left opacity-0">
+          <SectionLabel>Performance & Support</SectionLabel>
+          <Heading>
+            Fast, reliable websites<br />
+            <span class="text-teal">Without the maintenance</span>
+          </Heading>
+          <Text>
+            <p class="mt-3 text-base text-navy/70 leading-relaxed text-pretty">
+              Most small business websites become slow and outdated because
+              nobody is actively maintaining them. Plugins pile up, builders add
+              bloat, and simple updates become frustrating.
+            </p>
+            <p class="mt-3 text-base text-navy/70 leading-relaxed text-pretty">
+              We build lightweight, custom-coded websites that stay fast,
+              secure, and easy to manage long after launch. When you need
+              something updated, we handle it for you.
+            </p>
+          </Text>
+          <div class="mt-10 space-y-5">
+            {
+              securityPoints.map((item, i) => (
+                <div
+                  class="flex gap-4 items-start reveal-up opacity-0"
+                  style={`transition-delay: ${i * 100 + 200}ms`}
+                >
+                  <div class="mt-1 h-5 w-5 shrink-0 rounded-full bg-teal/15 flex items-center justify-center border border-teal/10">
+                    <svg
+                      width="10"
+                      height="10"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#6dbbb5"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-base font-semibold text-navy">
+                      {item.heading}
+                    </div>
+                    <div class="text-sm text-navy/65 mt-1 leading-relaxed">
+                      {item.detail}
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Right — slides in from right -->
+        <div
+          class="grid grid-cols-2 gap-4 lg:gap-5 self-center reveal-right opacity-0"
+        >
+          {
+            supportCards.map((s) => (
+              <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <div class="text-4xl text-teal leading-none text-center">
+                  {s.stat}
+                </div>
+                <p class="mt-3 text-sm leading-relaxed text-center text-navy/65">
+                  {s.label}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── Section 3: Lighthouse scores dark panel ── -->
+  <Section bg="white" class="py-0!">
+    <div class="relative overflow-hidden rounded-4xl p-10 md:p-16 bg-navy">
+      <div class="relative grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <!-- Left column — slides in from left -->
+        <div class="reveal-left opacity-0">
+          <h2
+            class="mt-4 text-3xl leading-[1.1] tracking-tight md:text-5xl text-white text-balance"
+          >
+            Built to load in
+            <span class="italic text-teal">under a second</span>
+          </h2>
+          <p class="mt-6 max-w-md text-base text-white/65 text-pretty">
+            Sites built with modern tools load nearly instantly which keeps
+            visitors engaged longer and helping you rank higher on Google. No
+            technical knowledge required on your end.
+          </p>
+
+          <div class="mt-10 grid grid-cols-2 gap-4">
+            {
+              performanceMinis.map((m, i) => (
+                <div
+                  class="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur reveal-up opacity-0"
+                  style={`transition-delay: ${i * 80 + 200}ms`}
+                >
+                  <m.icon class="h-4 w-4 text-gold" />
+                  <div class="mt-3 text-lg text-white">{m.label}</div>
+                  <div class="text-[11px] text-white/55 mt-0.5">{m.sub}</div>
+                </div>
+              ))
+            }
+          </div>
+          <a
+            href="/seo/"
+            class="inline-flex items-center gap-2 text-gold hover:gap-3 transition-all duration-300 pt-5 text-center md:text-left"
+          >
+            Explore How SEO Benefits Your Business
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Right column — slides in from right, then scores animate -->
+        <div
+          class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur md:p-8 self-start reveal-right opacity-0"
+        >
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-[11px] uppercase tracking-widest text-white/50">
+                Site health check
+              </div>
+              <div class="text-xl text-white mt-0.5">How your site scores</div>
+            </div>
+            <Gauge class="h-5 w-5 text-teal" />
+          </div>
+
+          <div class="mt-8 grid grid-cols-2 gap-4" id="lighthouse-scores">
+            {
+              lighthouseScores.map((b) => (
+                <div class="text-center">
+                  <div class="relative mx-auto h-20 w-20">
+                    <svg viewBox="0 0 36 36" class="h-full w-full -rotate-90">
+                      <circle
+                        cx="18"
+                        cy="18"
+                        r="15.9"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.1)"
+                        stroke-width="3"
+                      />
+                      <circle
+                        cx="18"
+                        cy="18"
+                        r="15.9"
+                        fill="none"
+                        stroke="#6dbbb5"
+                        stroke-width="3"
+                        stroke-dasharray="0, 100"
+                        stroke-linecap="round"
+                        class="score-ring"
+                        data-score={b.score}
+                      />
+                    </svg>
+                    <div
+                      class="absolute inset-0 flex items-center justify-center text-base text-white score-number"
+                      data-score={b.score}
+                    >
+                      0
+                    </div>
+                  </div>
+                  <div class="mt-2 text-[10px] uppercase tracking-widest text-white/55">
+                    {b.label}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+
+          <div class="mt-8 space-y-3 border-t border-white/10 pt-6">
+            {
+              lighthouseChecks.map((m, i) => (
+                <div
+                  class="flex items-center justify-between text-[12px] reveal-up opacity-0"
+                  style={`transition-delay: ${i * 80}ms`}
+                >
+                  <span class="text-white/65">{m.label}</span>
+                  <span class="text-gold font-semibold">{m.value}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── Section 4: Our Process ── -->
+  <Section bg="white">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
+        <SectionLabel>Our Process</SectionLabel>
+        <Heading>From First Call to Launch</Heading>
+        <Text>
+          We'll hop on a quick call to talk about your business, your goals, and
+          what you need from your website. Once we're aligned, we'll put
+          together a clear agreement and get the project moving.
+        </Text>
+      </div>
+
+      <!-- DESKTOP -->
+      <div class="hidden lg:grid grid-cols-4">
+        {
+          steps.map((s, i) => (
+            <div
+              class="flex flex-col items-center text-center reveal-up opacity-0"
+              style={`transition-delay: ${i * 120}ms`}
+            >
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-teal shadow-md relative z-10">
+                <span class="text-sm font-semibold text-white tracking-wide">
+                  {s.n}
+                </span>
+              </div>
+              <div class="relative w-full h-4 flex items-center justify-center mt-3">
+                <div
+                  class={`absolute top-1/2 -translate-y-1/2 h-px bg-navy/25 ${i === 0 ? "left-1/2" : "left-0"} right-1/2`}
+                />
+                <div
+                  class={`absolute top-1/2 -translate-y-1/2 h-px bg-navy/25 left-1/2 ${i === steps.length - 1 ? "right-1/2" : "right-0"}`}
+                />
+                <div class="relative z-10 h-2 w-2 rounded-full bg-navy" />
+              </div>
+              <div class="mt-5 px-3">
+                <h3 class="text-base font-semibold text-navy">{s.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-navy/65 text-pretty max-w-50 mx-auto">
+                  {s.body}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- MOBILE -->
+      <div class="lg:hidden relative">
+        <div
+          class="absolute w-[1.5px] bg-navy/25 z-0"
+          style="left: 3.7rem; top: 2.6rem; bottom: 2.6rem;"
+        >
+        </div>
+        {
+          steps.map((s, i) => (
+            <div
+              class="relative flex items-start gap-4 py-6 reveal-up opacity-0"
+              style={`transition-delay: ${i * 100}ms`}
+            >
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal shadow-md relative z-10">
+                <span class="text-sm font-semibold text-white tracking-wide">
+                  {s.n}
+                </span>
+              </div>
+              <div class="flex items-center shrink-0 self-start mt-[1.1rem]">
+                <div class="h-2 w-2 rounded-full bg-navy relative z-10" />
+              </div>
+              <div class="pt-1">
+                <h3 class="text-base font-semibold text-navy">{s.title}</h3>
+                <p class="mt-1 text-sm leading-relaxed text-navy/65 text-pretty">
+                  {s.body}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div
+      class="text-center max-w-3xl mx-auto pt-15 reveal-up opacity-0"
+      style="transition-delay: 480ms"
+    >
+      <a href="/contact/">
+        <Button>Book a Discovery Meeting now!</Button>
+      </a>
+    </div>
+  </Section>
+
+  <!-- ── Section 5: Portfolio (navy bg) ── -->
+  <Section bg="navy">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
+      <SectionLabel>Our Work</SectionLabel>
+      <Heading class="text-white">Recent Client Websites</Heading>
+    </div>
+    <Portfolio show="grid" gridLimit={3} />
+  </Section>
+
+  <!-- ── Section 6: Reviews ── -->
+  <Section bg="white">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
+      <SectionLabel>Testimonials</SectionLabel>
+      <Heading
+        >Trusted by businesses that take their web presence seriously.</Heading
+      >
+    </div>
+    <Reviews layout="carousel" count={3} />
+  </Section>
+
+  <CTAAboveFooter />
 </Layout>
+
+<style>
+  /* ── Reveal helpers ── */
+  .reveal-left {
+    transform: translateX(-24px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+  .reveal-right {
+    transform: translateX(24px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+  .reveal-up {
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+  .animate-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+</style>
+
+<script>
+  // ── Shared reveal observer (mirrors SEO page pattern) ──
+  function initRevealAnimations() {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-in");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document
+      .querySelectorAll(".reveal-left, .reveal-right, .reveal-up")
+      .forEach((el) => revealObserver.observe(el));
+  }
+
+  // ── Lighthouse score rings + counters ──
+  function initLighthouseAnimations() {
+    const container = document.getElementById("lighthouse-scores");
+    if (!container) return;
+
+    const rings = container.querySelectorAll<SVGCircleElement>(".score-ring");
+    const numbers = container.querySelectorAll<HTMLElement>(".score-number");
+
+    let animated = false;
+
+    const animate = () => {
+      if (animated) return;
+      animated = true;
+
+      const duration = 1200;
+      const start = performance.now();
+      const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
+      const tick = (now: number) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeOut(progress);
+
+        rings.forEach((ring) => {
+          const target = parseFloat(ring.dataset.score ?? "0");
+          ring.setAttribute(
+            "stroke-dasharray",
+            `${(target * eased).toFixed(2)}, 100`
+          );
+        });
+
+        numbers.forEach((el) => {
+          const target = parseInt(el.dataset.score ?? "0", 10);
+          el.textContent = String(Math.round(target * eased));
+        });
+
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+
+      requestAnimationFrame(tick);
+    };
+
+    const scoreObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          animate();
+          scoreObserver.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    scoreObserver.observe(container);
+  }
+
+  // Run on first load + Astro view transitions
+  function init() {
+    initRevealAnimations();
+    initLighthouseAnimations();
+  }
+
+  init();
+  document.addEventListener("astro:page-load", init);
+</script>

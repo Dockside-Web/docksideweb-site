@@ -1,0 +1,196 @@
+---
+import { Image } from "astro:assets";
+import cjcDetailingMockup from '../assets/clientImages/cjcDetailing-mockup.webp';
+import sweetCarolineSeaportMockup from '../assets/clientImages/sweetCarolineSeaport-mockup.webp';
+import seasideCreekMockup from '../assets/clientImages/seasideCreek-mockup.webp';
+import logoIcon from '../assets/logo/icon-only.png';
+import Button from "./ui/Button.astro";
+
+interface Props {
+  show?: "featured" | "grid" | "both";
+  gridLimit?: number;
+}
+
+const { show = "both", gridLimit } = Astro.props;
+
+const showFeatured = show === "featured" || show === "both";
+const showGrid = show === "grid" || show === "both";
+
+
+const featuredProjects = [
+  {
+    title: "Sweet Caroline Seaport",
+    category: "Tropical Vacation Rental",
+    description: "A high-conversion vacation rental platform featuring an immersive coastal design and a seamless booking experience for travelers.",
+    outcome: "A visually stunning, conversion-focused site that captures the essence of the business and drives more bookings through clear calls-to-action and an immersive design.",
+    image: sweetCarolineSeaportMockup,
+    link: "https://www.sweetcarolineseaport.com/",
+    buttonText: "Discover Our Web Design Process",
+    buttonLink: "/web-design/"
+  },
+  {
+    title: "CJC Detailing",
+    category: "Automotive Detailing",
+    description: "A sleek website for an automotive detailing specialist, optimized for local search and effortless service scheduling.",
+    outcome: "Improved local search visibility, a cleaner service layout, and a site that reflects the quality of the business it represents.",
+    image: cjcDetailingMockup,
+    link: "https://cjcdetailing.com/",
+    buttonText: "Explore How SEO Benefits Your Business",
+    buttonLink: "/seo/"
+  },
+  {
+    title: "Seaside Creek Advisors",
+    category: "Financial Services",
+    description: "A sophisticated financial services site built to establish trust through clean typography, professional layouts, and clear calls-to-action.",
+    outcome: "A simple landing page that highlights the business’s unique value, builds trust, and makes it easy for visitors to get in touch.",
+    image: seasideCreekMockup,
+    link: "https://www.seasidecreek.com/",
+    buttonText: "Explore Our Hosting & Support Services",
+    buttonLink: "/hosting-and-support/"
+  }
+];
+
+const allProjects = [
+  {
+    title: "Sweet Caroline Seaport",
+    description: "A high-conversion vacation rental platform featuring an immersive coastal design and a seamless booking experience for travelers.",
+    image: sweetCarolineSeaportMockup,
+    link: "https://www.sweetcarolineseaport.com/"
+  },
+  {
+    title: "Seaside Creek Advisors",
+    description: "A sophisticated professional landing page built to establish trust through clean typography, professional layouts, and clear calls-to-action.",
+    image: seasideCreekMockup,
+    link: "https://www.seasidecreek.com/"
+  },
+  {
+    title: "CJC Detailing",
+    description: "A sleek, mobile-first website for an automotive detailing specialist, optimized for local search and effortless service scheduling.",
+    image: cjcDetailingMockup,
+    link: "https://cjcdetailing.com/"
+  },
+  {
+    title: "Woodhome Preschool",
+    description: "A warm and inviting educational portal designed to simplify parent enrollment and showcase the school’s unique curriculum and community.",
+    image: seasideCreekMockup,
+    link: "https://woodhomepreschool.com/"
+  },
+  {
+    title: "Clubhouse Center",
+    description: "A robust commercial real estate platform designed to showcase property listings with high-performance filtering and detailed asset data.",
+    image: seasideCreekMockup,
+    link: "https://clubhousecenter.com/"
+  }
+];
+
+const visibleGridProjects = gridLimit ? allProjects.slice(0, gridLimit) : allProjects;
+---
+
+<section>
+  <div class="max-w-6xl mx-auto">
+
+    <!-- FEATURED -->
+    {showFeatured && (
+      <div class="space-y-20 mb-28">
+        {featuredProjects.map((project, index) => (
+          <div class={`group grid md:grid-cols-2 gap-10 md:items-center ${index % 2 !== 0 ? "md:[&>a:first-child]:order-2" : ""}`}>
+
+            <!-- IMAGE SIDE -->
+            <!-- Changed mobile order to 'order-none' so it renders first naturally -->
+            <a href={project.link} class="relative block overflow-hidden rounded-2xl cursor-pointer order-0 md:order-0" target="_blank" rel="noopener noreferrer">
+              <Image
+                src={project.image}
+                alt={project.title}
+                class="w-full object-contain scale-95 transition duration-500 group-hover:scale-100"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span
+                  class="flex items-center gap-2 bg-white/60 text-navy border border-gray-200 px-5 py-2.5 rounded-lg text-sm font-medium backdrop-blur-sm shadow-sm
+                        transition duration-500
+                        opacity-70 scale-95
+                        group-hover:opacity-100 group-hover:scale-100 group-hover:shadow-md group-hover:bg-white"
+                >
+                  Visit Website
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+
+            <!-- CONTENT SIDE -->
+            <div class="order-0 md:order-0">
+              <p class="text-xs tracking-[0.2em] uppercase text-gray-400 font-medium mb-3">
+                {project.category}
+              </p>
+              <a href={project.link}  target="_blank" rel="noopener noreferrer">
+                <h3 class="text-3xl font-bold text-gold md:text-navy mb-4 leading-tight group-hover:text-gold transition-colors duration-300">
+                {project.title}
+              </h3>
+              </a>
+              <p class="text-gray-600 mb-6 leading-relaxed">
+                {project.description}
+              </p>
+              <div class="bg-white border border-gray-200 rounded-xl p-5 mb-8">
+                <p class="text-xs tracking-[0.15em] uppercase text-gray-400 font-medium mb-2">Strategic Outcome</p>
+                <p class="text-navy font-medium leading-snug">{project.outcome}</p>
+              </div>
+              <a href={project.buttonLink} class="inline-flex items-center gap-2 text-navy hover:gap-3 transition-all duration-300">
+                {project.buttonText}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="flex items-center justify-center max-w-5xl mx-auto my-24 px-4">
+            <div class="h-px grow bg-[#C5A059]/40 mx-4"></div>
+            <Image src={logoIcon} alt="" class="w-8 h-8 shrink-0" />
+            <div class="h-px grow bg-[#C5A059]/40 mx-4"></div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <!-- GRID -->
+    {showGrid && (
+      <div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+          {visibleGridProjects.map((project) => (
+            <a
+              href={project.link}
+              class="group block transition-all duration-500 ease-out focus-visible:outline focus-visible:outline-gold" target="_blank" rel="noopener noreferrer"
+            >
+              <div class="relative w-full mb-6">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  class="w-full h-auto duration-500 scale-95 group-hover:scale-100"
+                  loading="lazy"
+                />
+              </div>
+
+              <div class="space-y-2 text-center md:text-left">
+                <h4 class="text-gold text-xl font-bold uppercase tracking-tight transition-colors duration-300 group-hover:text-gold">
+                  {project.title}
+                </h4>
+                <p class="text-white text-sm leading-relaxed max-w-sm group-hover:text-gold">
+                  {project.description}
+                </p>
+              </div>
+              <div class="text-center pt-5">
+                <Button variant="whiteOutline" size="sm">
+                  Visit Website
+                  <svg class="ml-2 inline-block" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    </svg>
+                </Button>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</section>

@@ -1,0 +1,285 @@
+---
+const competitors = [
+  {
+    brand: "facebook.com",
+    title: "Bakeries in Your Area | Facebook",
+    desc: "Browse pages and posts from local bakeries..."
+  },
+  {
+    brand: "tripadvisor.com",
+    title: "The 10 Best Bakeries | Tripadvisor",
+    desc: "Traveler reviews of bakeries in your city..."
+  },
+  {
+    brand: "yelp.com",
+    title: "Top Bakeries Near You | Yelp",
+    desc: "Find local bakeries reviewed by your neighbors..."
+  }
+];
+
+const yourResult = {
+  brand: "yourbakery.com",
+  title: "Sunrise Bakery | Fresh Bread Daily",
+  desc: "Family-owned bakery serving artisan loaves, pastries & cakes. Order online or visit us today."
+};
+---
+
+<div
+  id="serp-wrapper"
+  class="relative mx-auto w-full max-w-md rounded-2xl border border-gray-200 bg-white shadow-lg overflow-hidden"
+>
+  <!-- Browser chrome -->
+  <div class="bg-[#F1F3F4] border-b border-gray-200">
+    <!-- Tab row -->
+    <div class="flex items-end px-2 pt-2 gap-1">
+      <!-- Inactive tab -->
+      <div
+        class="flex items-center gap-1.5 px-3 py-1.5 rounded-t-lg bg-[#E2E5E9] text-[10px] text-gray-400 max-w-25 truncate"
+      >
+        <svg
+          class="w-3 h-3 shrink-0"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg
+        >
+        New Tab
+      </div>
+      <!-- Active tab -->
+      <div
+        class="flex items-center gap-1.5 px-3 py-1.5 rounded-t-lg bg-white text-[10px] text-gray-600 font-medium max-w-35 border-t border-x border-gray-200 -mb-px"
+      >
+        <!-- Generic search favicon: magnifier in a rounded square -->
+        <svg
+          class="w-3 h-3 shrink-0"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="24" height="24" rx="5" fill="#E8F0FE"></rect>
+          <circle cx="10.5" cy="10.5" r="4" stroke="#4A7CF7" stroke-width="2"
+          ></circle>
+          <path
+            d="M15 15l3 3"
+            stroke="#4A7CF7"
+            stroke-width="2"
+            stroke-linecap="round"></path>
+        </svg>
+        Search Results
+      </div>
+      <!-- New tab button -->
+      <div class="px-2 py-1.5 text-gray-400 text-sm leading-none">+</div>
+    </div>
+    <!-- URL bar row -->
+    <div class="flex items-center gap-2 px-3 py-2">
+      <!-- Back arrow -->
+      <svg
+        class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        ><path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15 19l-7-7 7-7"></path></svg
+      >
+      <!-- Forward arrow (dimmed) -->
+      <svg
+        class="w-4 h-4 text-gray-300"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        ><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
+        ></path></svg
+      >
+      <!-- Refresh -->
+      <svg
+        class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        ><path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+        ></path></svg
+      >
+      <!-- URL field -->
+      <div
+        class="flex-1 flex items-center gap-1.5 bg-white rounded-full px-3 py-1 text-xs text-gray-500 border border-gray-200"
+      >
+        <svg
+          class="w-3 h-3 text-teal shrink-0"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          viewBox="0 0 24 24"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg
+        >
+        <span class="text-gray-500">google.com</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search bar -->
+  <div class="p-5">
+    <div
+      class="flex items-center gap-3 rounded-full border border-gray-200 bg-white px-4 py-2.5 shadow-sm"
+    >
+      <svg
+        class="h-4 w-4 text-gray-400 shrink-0"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.3-4.3"></path>
+      </svg>
+
+      <!-- TEXT + CARET WRAPPED TOGETHER -->
+      <div class="flex items-center">
+        <span class="text-sm text-gray-800">best bakery near me</span>
+        <span class="caret ml-1 inline-block h-4 w-px bg-gray-800"></span>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div
+      class="mt-5 flex flex-col gap-3 overflow-hidden"
+      style="height: 320px;"
+    >
+      <!-- YOUR result: starts below competitors, animates up to top when visible -->
+      <div
+        id="your-result"
+        class="rounded-lg border border-blue-300/60 bg-white p-3 shrink-0"
+      >
+        <div class="text-[10px] text-gray-400">{yourResult.brand}</div>
+        <div class="text-sm font-medium text-blue-700">
+          {yourResult.title}
+          <span
+            class="ml-2 inline-block rounded bg-blue-100 px-1.5 py-0.5 text-[9px] font-semibold uppercase text-blue-700"
+          >
+            Your site
+          </span>
+        </div>
+        <div class="mt-0.5 text-xs text-gray-500 line-clamp-2">
+          {yourResult.desc}
+        </div>
+      </div>
+
+      <!-- Competitors -->
+      {
+        competitors.map((r, i) => (
+          <div
+            class="serp-fade rounded-lg border border-gray-100 bg-white p-3 shrink-0"
+            data-delay={i * 0.08}
+          >
+            <div class="text-[10px] text-gray-400">{r.brand}</div>
+            <div class="text-sm font-medium text-gray-800">{r.title}</div>
+            <div class="mt-0.5 text-xs text-gray-500 line-clamp-2">
+              {r.desc}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .caret {
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* Competitors: hidden until .is-visible added by JS */
+  .serp-fade {
+    transform: translateY(6px);
+  }
+  .serp-fade.is-visible {
+    animation: serpFade 0.4s ease-out both;
+    animation-delay: var(--delay, 0s);
+  }
+  @keyframes serpFade {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  #your-result {
+    order: -1;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #your-result.is-visible {
+    animation:
+      serpRise 2.4s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both,
+      serpGlow 2s ease-in-out 2.8s infinite;
+  }
+  @keyframes serpRise {
+    from {
+      opacity: 0.6;
+      transform: translateY(216px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes serpGlow {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    }
+    50% {
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    }
+  }
+</style>
+
+<script>
+  const wrapper = document.getElementById("serp-wrapper");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Stagger competitor rows using data-delay
+          document.querySelectorAll(".serp-fade").forEach((el) => {
+            const delay = el.getAttribute("data-delay") || "0";
+            (el as HTMLElement).style.setProperty("--delay", `${delay}s`);
+            el.classList.add("is-visible");
+          });
+          // Trigger your result rise
+          document.getElementById("your-result")?.classList.add("is-visible");
+          observer.disconnect();
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  if (wrapper) observer.observe(wrapper);
+</script>

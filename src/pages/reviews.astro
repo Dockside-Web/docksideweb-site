@@ -3,21 +3,22 @@ import Layout from "../layouts/Layout.astro";
 import HeroSecondary from "../components/HeroSecondary.astro";
 import Section from "../components/ui/Section.astro";
 import CTAAboveFooter from "../components/CTAAboveFooter.astro";
-import TestimonialCards from "../components/TestimonialCards.astro";
+import ReviewsComponent from "../components/Reviews.astro";
 
 const pageTitle = "Reviews";
-const metaDescription = "See what small business owners say about working with us. Read real client reviews on our website design, SEO, and support services.";
+const metaDescription =
+  "See what small business owners say about working with us. Read real client reviews on our website design, SEO, and support services.";
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
   <HeroSecondary
-      label="What Our Clients Say"
-      heading="Reviews"
-      description="See how we’ve helped small businesses grow with modern websites, better visibility, and dependable support."
+    label="What Our Clients Say"
+    heading="Reviews"
+    description="See how we’ve helped small businesses grow with modern websites, better visibility, and dependable support."
   />
 
-    <Section>
-        <TestimonialCards />
-    </Section>
-    <CTAAboveFooter />
+  <Section>
+    <ReviewsComponent layout="grid" />
+  </Section>
+  <CTAAboveFooter />
 </Layout>

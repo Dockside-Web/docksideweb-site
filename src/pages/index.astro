@@ -6,20 +6,13 @@ import Text from "../components/ui/Text.astro";
 import Button from "../components/ui/Button.astro";
 import SectionLabel from "../components/ui/SectionLabel.astro";
 import PricingPlans from "../components/PricingPlans.astro";
-import OurWork from "../components/OurWork.astro";
-import TestimonialCards from "../components/TestimonialCards.astro";
+import Reviews from "../components/Reviews.astro";
+import Portfolio from "../components/Portfolio.astro";
 import CTAAboveFooter from "../components/CTAAboveFooter.astro";
 import { Image } from "astro:assets";
 import heroImage from "../assets/heroImage.webp";
 
-import {
-  Smartphone,
-  CheckCircle,
-  RefreshCw,
-  Rabbit,
-  Coffee,
-  Anchor
-} from "lucide-astro";
+import { Smartphone, CheckCircle, Eye, Rabbit, Coffee } from "lucide-astro";
 
 const services = [
   {
@@ -28,10 +21,10 @@ const services = [
     subtitle: "Speed keeps people on your site",
     desc: "A fast website feels more professional and keeps customers from leaving. We optimize performance so pages load fast and respond instantly.",
     bullets: [
-      "Faster load times (so people don’t leave)",
+      "Faster load times (so people don't leave)",
       "Smooth scrolling and quick page changes",
-      "Optimized images so your site stays sharp and speedy",
-    ],
+      "Optimized images so your site stays sharp and speedy"
+    ]
   },
   {
     icon: Coffee,
@@ -41,8 +34,8 @@ const services = [
     bullets: [
       "Unlimited minor content updates",
       "Security patches and routine maintenance handled for you",
-      "Managed domains and hosting, with renewals covered",
-    ],
+      "Managed domains and hosting, with renewals covered"
+    ]
   },
   {
     icon: Smartphone,
@@ -51,115 +44,135 @@ const services = [
     desc: "Your site looks sharp and works perfectly on any screen; phone, tablet, or desktop.",
     bullets: [
       "Pages that feel smooth and quick, even on the go",
-      "Text that’s easy to read on small screens",
-      "Fast loading on cellular networks",
-    ],
+      "Text that's easy to read on small screens",
+      "Fast loading on cellular networks"
+    ]
   },
   {
-    icon: RefreshCw,
+    icon: Eye,
     title: "Google Visibility Setup",
     subtitle: "Built to help customers find you",
     desc: "We set up your pages so Google understands what you do and where you serve, giving you a strong foundation to show up in search.",
     bullets: [
       "Unlimited Minor content updates (text, photos, hours, pricing)",
       "Location & service targeting so Google understands what you offer and where you offer it",
-      "Clean structure that's easy for Google and people to navigate",
-    ],
-  },
+      "Clean structure that's easy for Google and people to navigate"
+    ]
+  }
 ];
 
 const benefits = [
   {
     title: "Custom Designed",
-    desc: "Our designs are made by an in-house team, tailored specifically to your brand and business goals.",
-  },
-  {
-    title: "Secure",
-    desc: "This website is secure because there is no backend FIX",
-  },
-  {
-    title: "SEO Optimized",
-    desc: "We explain SEO clearly, how it works, and what we can do to get you ranking on Google.",
-  },
-  {
-    title: "Mobile Ready",
-    desc: "Every website works perfectly on phones and tablets—because that's where your customers are.",
+    desc: "Our designs are made by an in-house team, tailored specifically to your brand and business goals."
   },
   {
     title: "Ongoing Support",
-    desc: "Call or text us anytime. When you reach out, you get the owner and developer directly.",
+    desc: "Call or text us anytime. When you reach out, you get the owner and developer directly."
   },
   {
-    title: "Money Back Guarantee",
-    desc: "If we can't design something you like, you get your money back. We stand by our work.",
+    title: "SEO Optimized",
+    desc: "We explain SEO clearly, how it works, and what we can do to get you ranking on Google."
   },
+  {
+    title: "Mobile Ready",
+    desc: "Every website works perfectly on phones and tablets because that's where your customers are."
+  },
+  {
+    title: "Secure by Design",
+    desc: "No databases, no login portals, no backend servers. Less surface area means less risk."
+  },
+  {
+    title: "Satisfaction Guarantee",
+    desc: "If you're not happy with the final design, we'll keep refining until you are with no extra charge."
+  }
 ];
 
-const metaDescription = "Modern, high-performance web development for small businesses in Charleston and beyond. We build custom sites designed to scale your brand.";
+const metaDescription =
+  "Modern, high-performance web development for small businesses in Charleston and beyond. We build custom sites designed to scale your brand.";
 ---
 
 <Layout description={metaDescription}>
-
-  <!-- HERO SECTION -->
-  <section class="hero-section relative min-h-[75vh] flex items-center overflow-hidden pb-24 bg-navy">
-  
+  <!-- ── HERO — untouched, already has its own animate-fade-in-up ── -->
+  <section
+    class="hero-section relative min-h-[75vh] flex items-center overflow-hidden pb-24 bg-navy"
+  >
     <div class="absolute inset-0 z-0">
-      <Image 
-        src={heroImage} 
-        alt="Dockside background" 
-        quality="mid" 
+      <Image
+        src={heroImage}
+        alt="Dockside background"
+        quality="mid"
         format="webp"
         loading="eager"
         fetchpriority="high"
-        class="w-full h-full object-cover object-right sm:object-center lg:object-right" 
+        class="w-full h-full object-cover object-right sm:object-center lg:object-right"
       />
     </div>
 
-    <div class="absolute inset-0 bg-linear-to-r from-navy via-navy/90 to-navy/25 z-1"></div>
+    <div
+      class="absolute inset-0 bg-linear-to-r from-navy via-navy/90 to-navy/25 z-1"
+    >
+    </div>
     <div class="absolute inset-0 bg-black/20 z-1"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 w-full">
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 w-full"
+    >
       <div class="max-w-175 animate-fade-in-up">
-
-        <div class="flex items-center justify-center sm:justify-start gap-2 mb-6">
-          <div class="h-px w-13 bg-gold"></div>
-          <span class="text-gold font-medium uppercase tracking-widest text-xs" aria-hidden="true"><Anchor/></span>
-          <div class="h-px w-13 bg-gold"></div>
-        </div>
-
-        <h1 class="font-heading font-bold text-white leading-[1.05] mb-4 tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] text-center sm:text-left">
-          <span class="text-gold">Custom Websites</span> Built
-          for <span class="text-gold">Small Businesses</span>
+        <h1
+          class="font-heading font-bold text-white leading-[1.05] mb-4 tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] text-center sm:text-left"
+        >
+          <span class="text-gold">Custom Websites</span> Built for <span
+            class="text-gold">Small Businesses</span
+          >
         </h1>
 
-        <p class="text-base sm:text-lg text-white mb-8 max-w-xl text-center sm:text-left mx-auto sm:mx-0">
-          We build high-performing websites that look professional, load quickly,
-          rank better on Google, and help turn clicks into paying customers.
+        <p
+          class="text-base sm:text-lg text-white mb-8 max-w-xl text-center sm:text-left mx-auto sm:mx-0"
+        >
+          We build high-performing websites <strong
+            >starting at $0 down and $79/mo
+          </strong>that look professional, load quickly, rank better on Google,
+          and help turn clicks into paying customers.
         </p>
 
-        <div class="flex flex-row gap-3 mb-8 items-center justify-center sm:justify-start">
+        <div
+          class="flex flex-row gap-3 mb-8 items-center justify-center sm:justify-start"
+        >
           <a href="/contact/">
             <Button variant="primary" size="lg" class="w-full sm:w-auto">
               Get Started
             </Button>
           </a>
-          <a href="/pricing/">
-            <Button variant="outline" size="lg" class="w-full sm:w-auto text-white border-white/60">
-              See Pricing
+          <a href="/about/">
+            <Button
+              variant="outline"
+              size="lg"
+              class="w-full sm:w-auto text-white border-white/60"
+            >
+              About Us
             </Button>
           </a>
         </div>
 
-        <div class="flex flex-col items-center sm:items-start sm:flex-row flex-wrap gap-2 sm:gap-8 text-white/75">
-          <div class="flex items-center gap-2 animate-fade-in-up [animation-delay:0.5s] opacity-0 [animation-fill-mode:forwards]">
+        <div
+          class="flex flex-col items-center sm:items-start sm:flex-row flex-wrap gap-2 sm:gap-8 text-white/75"
+        >
+          <div
+            class="flex items-center gap-2 animate-fade-in-up [animation-delay:0.5s] opacity-0 [animation-fill-mode:forwards]"
+          >
             <CheckCircle class="w-4 h-4 text-gold shrink-0" />
             <span class="text-sm">Live in 2-3 weeks</span>
           </div>
-          <div class="flex items-center gap-2 animate-fade-in-up [animation-delay:0.6s] opacity-0 [animation-fill-mode:forwards]">
+          <div
+            class="flex items-center gap-2 animate-fade-in-up [animation-delay:0.6s] opacity-0 [animation-fill-mode:forwards]"
+          >
             <CheckCircle class="w-4 h-4 text-gold shrink-0" />
             <span class="text-sm">Unlimited Updates</span>
           </div>
-          <div class="flex items-center gap-2 animate-fade-in-up [animation-delay:0.7s] opacity-0 [animation-fill-mode:forwards]">
+          <div
+            class="flex items-center gap-2 animate-fade-in-up [animation-delay:0.7s] opacity-0 [animation-fill-mode:forwards]"
+          >
             <CheckCircle class="w-4 h-4 text-gold shrink-0" />
             <span class="text-sm">Mobile Responsive</span>
           </div>
@@ -168,30 +181,38 @@ const metaDescription = "Modern, high-performance web development for small busi
     </div>
 
     <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-0 z-10">
-      <svg class="relative block w-full h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <svg
+        class="relative block w-full h-24"
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+      >
         <path
           fill="#F8FAFC"
           d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,218.7C960,235,1056,213,1152,186.7C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-        />
+        ></path>
       </svg>
     </div>
   </section>
 
-  <!-- Services Overview -->
+  <!-- ── Services Overview ── -->
   <Section bg="light" class="relative">
-    <div class="text-center max-w-3xl mx-auto mb-16">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
       <SectionLabel>What We Do</SectionLabel>
       <Heading>Never Worry About Your Website Ever Again</Heading>
       <Text class="mt-4">
-        From your first website to ongoing support, we handle everything you need to look 
-        professional online and make it easy for customers to contact you.
+        From your first website to ongoing support, we handle everything you
+        need to look professional online and make it easy for customers to
+        contact you.
       </Text>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       {
-        services.map((service) => (
-          <div class="p-8 rounded-2xl group border-slate-200 border-2 bg-white hover:bg-navy hover:border-navy transition-all duration-300">
+        services.map((service, i) => (
+          <div
+            class="p-8 rounded-2xl group border-slate-200 border-2 bg-white hover:bg-navy hover:border-navy transition-all duration-300 reveal-up opacity-0"
+            style={`transition-delay: ${i * 100}ms`}
+          >
             <div class="flex items-start space-x-4 mb-6">
               <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-navy scale-110 transition-all duration-300">
                 <service.icon class="h-7 w-7 text-teal-600 group-hover:text-gold" />
@@ -222,19 +243,25 @@ const metaDescription = "Modern, high-performance web development for small busi
     </div>
   </Section>
 
-  <!-- Why Choose Us -->
+  <!-- ── Why Choose Us ── -->
   <Section bg="white">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div class="relative animate-fade-in-left">
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl w-full h-48 lg:h-auto">
+      <!-- LEFT: Image — slides in from left -->
+      <div class="relative reveal-left opacity-0">
+        <div
+          class="relative rounded-3xl overflow-hidden shadow-2xl w-full h-48 lg:h-auto"
+        >
           <Image
             src={heroImage}
             alt="Professional website example"
-            class="w-full h-full object-cover lg:aspect-3/4">
+            class="w-full h-full object-cover lg:aspect-3/4"
+          />
         </div>
       </div>
-      <div>
-        <div class="mb-12 animate-fade-in-up">
+
+      <!-- RIGHT: Text + Benefits — slides in from right -->
+      <div class="reveal-right opacity-0">
+        <div class="mb-12">
           <SectionLabel>What We Offer</SectionLabel>
           <Heading class="mb-4">
             Websites Built for Small Business Success
@@ -244,12 +271,13 @@ const metaDescription = "Modern, high-performance web development for small busi
             Everything you need to succeed online, with no surprises.
           </Text>
         </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           {
-            benefits.map((benefit, index) => (
+            benefits.map((benefit, i) => (
               <div
-                class="space-y-2 animate-fade-in-up"
-                style={`animation-delay: ${index * 100}ms`}
+                class="space-y-2 reveal-up opacity-0"
+                style={`transition-delay: ${i * 80 + 200}ms`}
               >
                 <div class="flex items-start space-x-3">
                   <svg
@@ -279,8 +307,7 @@ const metaDescription = "Modern, high-performance web development for small busi
           }
         </div>
 
-        {/* CTA Button */}
-        <div class="mt-10 animate-fade-in-up" style="animation-delay: 600ms">
+        <div class="mt-10 reveal-up opacity-0" style="transition-delay: 680ms">
           <a href="/contact/">
             <Button variant="primary" size="lg">
               Schedule a Call
@@ -303,15 +330,25 @@ const metaDescription = "Modern, high-performance web development for small busi
     </div>
   </Section>
 
-  <Section bg="light" class="pb-0!">
-    <OurWork />
+  <!-- ── Portfolio ── -->
+  <Section bg="navy">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
+      <SectionLabel>Portfolio</SectionLabel>
+      <Heading class="text-white">Our Recently Completed Projects</Heading>
+      <Text class="text-white">
+        A look at some of the small businesses we've helped build a stronger
+        online presence by turning visitors into paying customers.
+      </Text>
+    </div>
+
+    <Portfolio show="grid" gridLimit={3} />
   </Section>
 
-  <!-- Pricing -->
+  <!-- ── Pricing ── -->
   <Section bg="light">
-    <div class="text-center max-w-3xl mx-auto mb-16">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
       <SectionLabel>Pricing Plans</SectionLabel>
-      <Heading> Simple, Transparent Pricing Plans </Heading>
+      <Heading>Simple, Transparent Pricing Plans</Heading>
       <Text>
         Choose the plan that fits your small business needs. No hidden fees, no
         surprises.
@@ -320,18 +357,62 @@ const metaDescription = "Modern, high-performance web development for small busi
     <PricingPlans />
   </Section>
 
+  <!-- ── Reviews ── -->
   <Section bg="white" id="reviews">
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <SectionLabel>
-        Real Growth, Real Results
-      </SectionLabel>
-      <Heading>
-        Client Testimonials
-      </Heading>
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
+      <SectionLabel>Real Growth, Real Results</SectionLabel>
+      <Heading>Client Testimonials</Heading>
     </div>
-    <TestimonialCards />
+    <Reviews layout="carousel" count={3} />
   </Section>
 
   <CTAAboveFooter />
-
 </Layout>
+
+<style>
+  .reveal-left {
+    transform: translateX(-24px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+  .reveal-right {
+    transform: translateX(24px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+  .reveal-up {
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+  .animate-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+</style>
+
+<script>
+  function initRevealAnimations() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-in");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document
+      .querySelectorAll(".reveal-left, .reveal-right, .reveal-up")
+      .forEach((el) => observer.observe(el));
+  }
+
+  initRevealAnimations();
+  document.addEventListener("astro:page-load", initRevealAnimations);
+</script>
