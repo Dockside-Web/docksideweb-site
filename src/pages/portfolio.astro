@@ -8,14 +8,19 @@ import CTAAboveFooter from "../components/CTAAboveFooter.astro";
 import PortfolioComponent from "../components/Portfolio.astro";
 
 const pageTitle = "Portfolio";
-const metaDescription = "Browse our portfolio of custom websites for small businesses. See modern designs built for leads, speed, and growth.";
+const metaDescription =
+  "Browse our portfolio of custom websites for small businesses. See modern designs built for leads, speed, and growth.";
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
-  <HeroSecondary label="Businesses We've Worked With" heading="Portfolio" description="Check out some of our latest projects and see how we can help your business grow." />
+  <HeroSecondary
+    label="Businesses We've Worked With"
+    heading="Portfolio"
+    description="Check out some of our latest projects and see how we can help your business grow."
+  />
 
   <Section bg="light">
-    <PortfolioComponent show="featured" />
+    <PortfolioComponent layout="featured" projects="featured" />
 
     <div class="flex flex-wrap justify-center gap-4">
       <a href="/contact/">
@@ -29,10 +34,10 @@ const metaDescription = "Browse our portfolio of custom websites for small busin
 
   <Section bg="navy">
     <div class="text-center max-w-3xl mx-auto pb-12">
-      <Heading class="text-white">All Projects</Heading>
+      <Heading class="text-white">More Projects</Heading>
     </div>
 
-    <PortfolioComponent show="grid" />
+    <PortfolioComponent layout="grid" projects="more" />
   </Section>
 
   <CTAAboveFooter />

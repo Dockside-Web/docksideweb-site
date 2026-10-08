@@ -139,7 +139,8 @@ const steps = [
 ];
 
 const pageTitle = "Web Design";
-const metaDescription = "Professional web design services from Dockside Web Solutions. Custom, mobile-friendly websites built for speed, trust, and conversions to help small businesses grow online.";
+const metaDescription =
+  "Professional web design services from Dockside Web Solutions. Custom, mobile-friendly websites built for speed, trust, and conversions to help small businesses grow online.";
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
@@ -157,8 +158,9 @@ const metaDescription = "Professional web design services from Dockside Web Solu
         <SectionLabel>Why Dockside Web Solutions</SectionLabel>
         <Heading> The last time you'll ever worry about your website </Heading>
         <Text>
-          Every Dockside Web Solutions site is custom coded from scratch and fully managed for you. Hosting, support, and unlimited content updates are all included so you never have to fight with
-          plugins, logins, or confusing dashboards just to keep your website current.
+          Every Dockside Web Solutions site is custom coded from scratch and fully managed for you.
+          Hosting, support, and unlimited content updates are all included so you never have to
+          fight with plugins, logins, or confusing dashboards just to keep your website current.
         </Text>
       </div>
 
@@ -166,9 +168,21 @@ const metaDescription = "Professional web design services from Dockside Web Solu
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
         {
           customCodeCards.map((card, i) => (
-            <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm reveal-up opacity-0" style={`transition-delay: ${i * 80}ms`}>
+            <div
+              class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm reveal-up opacity-0"
+              style={`transition-delay: ${i * 80}ms`}>
               <div class="flex h-9 w-9 items-center justify-center rounded-full bg-navy mb-4">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6dbbb5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={card.icon} />
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#6dbbb5"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  set:html={card.icon}
+                />
               </div>
               <h3 class="text-base font-semibold text-navy mb-1.5">{card.title}</h3>
               <p class="text-sm leading-relaxed text-navy/60">{card.body}</p>
@@ -178,8 +192,11 @@ const metaDescription = "Professional web design services from Dockside Web Solu
       </div>
 
       <!-- Comparison table — slides up after cards -->
-      <div class="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden reveal-up opacity-0" style="transition-delay: 480ms">
-        <div class="grid grid-cols-4 text-[11px] uppercase tracking-widest font-semibold border-b border-gray-100 px-6 py-4 text-navy/40">
+      <div
+        class="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden reveal-up opacity-0"
+        style="transition-delay: 480ms">
+        <div
+          class="grid grid-cols-4 text-[11px] uppercase tracking-widest font-semibold border-b border-gray-100 px-6 py-4 text-navy/40">
           <span class="col-span-1"></span>
           <span class="text-center text-teal">Dockside Web Solutions</span>
           <span class="text-center">WordPress</span>
@@ -190,9 +207,27 @@ const metaDescription = "Professional web design services from Dockside Web Solu
           comparisonRows.map(row => (
             <div class="grid grid-cols-4 items-center px-6 py-3.5 border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors">
               <span class="text-sm text-navy/70 col-span-1">{row.label}</span>
-              <span class="text-center text-base">{row.us ? <span class="text-teal font-semibold">✓</span> : <span class="text-red-400 font-semibold">✕</span>}</span>
-              <span class="text-center text-base">{row.wp ? <span class="text-teal font-semibold">✓</span> : <span class="text-red-400 font-semibold">✕</span>}</span>
-              <span class="text-center text-base">{row.pb ? <span class="text-teal font-semibold">✓</span> : <span class="text-red-400 font-semibold">✕</span>}</span>
+              <span class="text-center text-base">
+                {row.us ? (
+                  <span class="text-teal font-semibold">✓</span>
+                ) : (
+                  <span class="text-red-400 font-semibold">✕</span>
+                )}
+              </span>
+              <span class="text-center text-base">
+                {row.wp ? (
+                  <span class="text-teal font-semibold">✓</span>
+                ) : (
+                  <span class="text-red-400 font-semibold">✕</span>
+                )}
+              </span>
+              <span class="text-center text-base">
+                {row.pb ? (
+                  <span class="text-teal font-semibold">✓</span>
+                ) : (
+                  <span class="text-red-400 font-semibold">✕</span>
+                )}
+              </span>
             </div>
           ))
         }
@@ -213,18 +248,31 @@ const metaDescription = "Professional web design services from Dockside Web Solu
           </Heading>
           <Text>
             <p class="mt-3 text-base text-navy/70 leading-relaxed text-pretty">
-              Most small business websites become slow and outdated because nobody is actively maintaining them. Plugins pile up, builders add bloat, and simple updates become frustrating.
+              Most small business websites become slow and outdated because nobody is actively
+              maintaining them. Plugins pile up, builders add bloat, and simple updates become
+              frustrating.
             </p>
             <p class="mt-3 text-base text-navy/70 leading-relaxed text-pretty">
-              We build lightweight, custom-coded websites that stay fast, secure, and easy to manage long after launch. When you need something updated, we handle it for you.
+              We build lightweight, custom-coded websites that stay fast, secure, and easy to manage
+              long after launch. When you need something updated, we handle it for you.
             </p>
           </Text>
           <div class="mt-10 space-y-5">
             {
               securityPoints.map((item, i) => (
-                <div class="flex gap-4 items-start reveal-up opacity-0" style={`transition-delay: ${i * 100 + 200}ms`}>
+                <div
+                  class="flex gap-4 items-start reveal-up opacity-0"
+                  style={`transition-delay: ${i * 100 + 200}ms`}>
                   <div class="mt-1 h-5 w-5 shrink-0 rounded-full bg-teal/15 flex items-center justify-center border border-teal/10">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#6dbbb5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <svg
+                      width="10"
+                      height="10"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#6dbbb5"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
@@ -259,18 +307,22 @@ const metaDescription = "Professional web design services from Dockside Web Solu
       <div class="relative grid gap-12 lg:grid-cols-2 lg:gap-16">
         <!-- Left column — slides in from left -->
         <div class="reveal-left opacity-0">
-          <h2 class="mt-4 text-3xl leading-[1.1] tracking-tight md:text-5xl text-white text-balance">
+          <h2
+            class="mt-4 text-3xl leading-[1.1] tracking-tight md:text-5xl text-white text-balance">
             Built to load in
             <span class="italic text-teal">under a second</span>
           </h2>
           <p class="mt-6 max-w-md text-base text-white/65 text-pretty">
-            Sites built with modern tools load nearly instantly which keeps visitors engaged longer and helping you rank higher on Google. No technical knowledge required on your end.
+            Sites built with modern tools load nearly instantly which keeps visitors engaged longer
+            and helping you rank higher on Google. No technical knowledge required on your end.
           </p>
 
           <div class="mt-10 grid grid-cols-2 gap-4">
             {
               performanceMinis.map((m, i) => (
-                <div class="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur reveal-up opacity-0" style={`transition-delay: ${i * 80 + 200}ms`}>
+                <div
+                  class="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur reveal-up opacity-0"
+                  style={`transition-delay: ${i * 80 + 200}ms`}>
                   <m.icon class="h-4 w-4 text-gold" />
                   <div class="mt-3 text-lg text-white">{m.label}</div>
                   <div class="text-[11px] text-white/55 mt-0.5">{m.sub}</div>
@@ -278,19 +330,32 @@ const metaDescription = "Professional web design services from Dockside Web Solu
               ))
             }
           </div>
-          <a href="/seo/" class="inline-flex items-center gap-2 text-gold hover:gap-3 transition-all duration-300 pt-5 text-center md:text-left">
+          <a
+            href="/seo/"
+            class="inline-flex items-center gap-2 text-gold hover:gap-3 transition-all duration-300 pt-5 text-center md:text-left">
             Explore How SEO Benefits Your Business
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
               <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
             </svg>
           </a>
         </div>
 
         <!-- Right column — slides in from right, then scores animate -->
-        <div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur md:p-8 self-start reveal-right opacity-0">
+        <div
+          class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur md:p-8 self-start reveal-right opacity-0">
           <div class="flex items-center justify-between">
             <div>
-              <div class="text-[11px] uppercase tracking-widest text-white/50">Site health check</div>
+              <div class="text-[11px] uppercase tracking-widest text-white/50">
+                Site health check
+              </div>
               <div class="text-xl text-white mt-0.5">How your site scores</div>
             </div>
             <Gauge class="h-5 w-5 text-teal" />
@@ -302,14 +367,36 @@ const metaDescription = "Professional web design services from Dockside Web Solu
                 <div class="text-center">
                   <div class="relative mx-auto h-20 w-20">
                     <svg viewBox="0 0 36 36" class="h-full w-full -rotate-90">
-                      <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="3" />
-                      <circle cx="18" cy="18" r="15.9" fill="none" stroke="#6dbbb5" stroke-width="3" stroke-dasharray="0, 100" stroke-linecap="round" class="score-ring" data-score={b.score} />
+                      <circle
+                        cx="18"
+                        cy="18"
+                        r="15.9"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.1)"
+                        stroke-width="3"
+                      />
+                      <circle
+                        cx="18"
+                        cy="18"
+                        r="15.9"
+                        fill="none"
+                        stroke="#6dbbb5"
+                        stroke-width="3"
+                        stroke-dasharray="0, 100"
+                        stroke-linecap="round"
+                        class="score-ring"
+                        data-score={b.score}
+                      />
                     </svg>
-                    <div class="absolute inset-0 flex items-center justify-center text-base text-white score-number" data-score={b.score}>
+                    <div
+                      class="absolute inset-0 flex items-center justify-center text-base text-white score-number"
+                      data-score={b.score}>
                       0
                     </div>
                   </div>
-                  <div class="mt-2 text-[10px] uppercase tracking-widest text-white/55">{b.label}</div>
+                  <div class="mt-2 text-[10px] uppercase tracking-widest text-white/55">
+                    {b.label}
+                  </div>
                 </div>
               ))
             }
@@ -318,7 +405,9 @@ const metaDescription = "Professional web design services from Dockside Web Solu
           <div class="mt-8 space-y-3 border-t border-white/10 pt-6">
             {
               lighthouseChecks.map((m, i) => (
-                <div class="flex items-center justify-between text-[12px] reveal-up opacity-0" style={`transition-delay: ${i * 80}ms`}>
+                <div
+                  class="flex items-center justify-between text-[12px] reveal-up opacity-0"
+                  style={`transition-delay: ${i * 80}ms`}>
                   <span class="text-white/65">{m.label}</span>
                   <span class="text-gold font-semibold">{m.value}</span>
                 </div>
@@ -337,7 +426,9 @@ const metaDescription = "Professional web design services from Dockside Web Solu
         <SectionLabel>Our Process</SectionLabel>
         <Heading>From First Call to Launch</Heading>
         <Text>
-          We'll hop on a quick call to talk about your business, your goals, and what you need from your website. Once we're aligned, we'll put together a clear agreement and get the project moving.
+          We'll hop on a quick call to talk about your business, your goals, and what you need from
+          your website. Once we're aligned, we'll put together a clear agreement and get the project
+          moving.
         </Text>
       </div>
 
@@ -345,18 +436,26 @@ const metaDescription = "Professional web design services from Dockside Web Solu
       <div class="hidden lg:grid grid-cols-4">
         {
           steps.map((s, i) => (
-            <div class="flex flex-col items-center text-center reveal-up opacity-0" style={`transition-delay: ${i * 120}ms`}>
+            <div
+              class="flex flex-col items-center text-center reveal-up opacity-0"
+              style={`transition-delay: ${i * 120}ms`}>
               <div class="flex h-10 w-10 items-center justify-center rounded-full bg-teal shadow-md relative z-10">
                 <span class="text-sm font-semibold text-white tracking-wide">{s.n}</span>
               </div>
               <div class="relative w-full h-4 flex items-center justify-center mt-3">
-                <div class={`absolute top-1/2 -translate-y-1/2 h-px bg-navy/25 ${i === 0 ? "left-1/2" : "left-0"} right-1/2`} />
-                <div class={`absolute top-1/2 -translate-y-1/2 h-px bg-navy/25 left-1/2 ${i === steps.length - 1 ? "right-1/2" : "right-0"}`} />
+                <div
+                  class={`absolute top-1/2 -translate-y-1/2 h-px bg-navy/25 ${i === 0 ? "left-1/2" : "left-0"} right-1/2`}
+                />
+                <div
+                  class={`absolute top-1/2 -translate-y-1/2 h-px bg-navy/25 left-1/2 ${i === steps.length - 1 ? "right-1/2" : "right-0"}`}
+                />
                 <div class="relative z-10 h-2 w-2 rounded-full bg-navy" />
               </div>
               <div class="mt-5 px-3">
                 <h3 class="text-base font-semibold text-navy">{s.title}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-navy/65 text-pretty max-w-50 mx-auto">{s.body}</p>
+                <p class="mt-2 text-sm leading-relaxed text-navy/65 text-pretty max-w-50 mx-auto">
+                  {s.body}
+                </p>
               </div>
             </div>
           ))
@@ -365,10 +464,15 @@ const metaDescription = "Professional web design services from Dockside Web Solu
 
       <!-- MOBILE -->
       <div class="lg:hidden relative">
-        <div class="absolute w-[1.5px] bg-navy/25 z-0" style="left: 3.7rem; top: 2.6rem; bottom: 2.6rem;"></div>
+        <div
+          class="absolute w-[1.5px] bg-navy/25 z-0"
+          style="left: 3.7rem; top: 2.6rem; bottom: 2.6rem;">
+        </div>
         {
           steps.map((s, i) => (
-            <div class="relative flex items-start gap-4 py-6 reveal-up opacity-0" style={`transition-delay: ${i * 100}ms`}>
+            <div
+              class="relative flex items-start gap-4 py-6 reveal-up opacity-0"
+              style={`transition-delay: ${i * 100}ms`}>
               <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal shadow-md relative z-10">
                 <span class="text-sm font-semibold text-white tracking-wide">{s.n}</span>
               </div>
@@ -385,7 +489,9 @@ const metaDescription = "Professional web design services from Dockside Web Solu
       </div>
     </div>
 
-    <div class="text-center max-w-3xl mx-auto pt-15 reveal-up opacity-0" style="transition-delay: 480ms">
+    <div
+      class="text-center max-w-3xl mx-auto pt-15 reveal-up opacity-0"
+      style="transition-delay: 480ms">
       <a href="/contact/">
         <Button>Book a Discovery Meeting now!</Button>
       </a>
@@ -398,7 +504,7 @@ const metaDescription = "Professional web design services from Dockside Web Solu
       <SectionLabel>Our Work</SectionLabel>
       <Heading class="text-white">Recent Client Websites</Heading>
     </div>
-    <Portfolio show="grid" gridLimit={3} />
+    <Portfolio layout="grid" projects="featured" />
   </Section>
 
   <!-- ── Section 6: Reviews ── -->
@@ -454,7 +560,9 @@ const metaDescription = "Professional web design services from Dockside Web Solu
       { threshold: 0.15 }
     );
 
-    document.querySelectorAll(".reveal-left, .reveal-right, .reveal-up").forEach(el => revealObserver.observe(el));
+    document
+      .querySelectorAll(".reveal-left, .reveal-right, .reveal-up")
+      .forEach(el => revealObserver.observe(el));
   }
 
   // ── Lighthouse score rings + counters ──
