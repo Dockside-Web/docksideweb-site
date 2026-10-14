@@ -9,6 +9,8 @@ const blog = defineCollection({
     author: z.string(),
     tags: z.array(z.string()),
     coverImage: z.string(),
+    /** Describes what's in the cover photo, for screen readers and search engines */
+    coverImageAlt: z.string(),
     featured: z.boolean().optional()
   })
 });

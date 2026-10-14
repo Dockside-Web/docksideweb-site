@@ -1,0 +1,124 @@
+---
+import { Image } from "astro:assets";
+import CTABackgroundImage from "../assets/CTABackgroundImage.webp";
+import Button from "./ui/Button.astro";
+
+interface Props {
+  /** Match the background of the section above so the card doesn't sit on a band */
+  bg?: "white" | "light";
+  /** Add top spacing when the section above has a different background (e.g. navy) */
+  spaceTop?: boolean;
+}
+
+const { bg = "light", spaceTop = false } = Astro.props;
+
+const bgColors = {
+  white: "var(--color-white, #fff)",
+  light: "var(--color-slate-50)"
+};
+---
+
+<!-- The bottom of the section is navy so the card overlaps into the footer below -->
+<section
+  class={`cta-card-section ${spaceTop ? "pt-12 md:pt-20" : ""}`}
+  style={`--cta-section-bg: ${bgColors[bg]}`}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div
+      class="cta-card relative isolate overflow-hidden rounded-4xl md:rounded-[3rem] min-h-105 md:min-h-130 flex items-center justify-center shadow-xl">
+      <!-- Background Image (scales down as the card scrolls into view) -->
+      <Image
+        src={CTABackgroundImage}
+        alt="Ocean scene with yachts at marina"
+        class="cta-card-bg absolute inset-0 -z-10 w-full h-full object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+      <!-- Navy tint so the white text stays legible over the bright sky -->
+      <div class="absolute inset-0 -z-10 bg-navy/55"></div>
+
+      <!-- Content -->
+      <div class="relative flex flex-col items-center gap-6 md:gap-8 px-6 text-center max-w-2xl">
+        <h2 class="text-4xl md:text-6xl text-white tracking-wide leading-tight drop-shadow-md">
+          Ready to make some waves?
+        </h2>
+        <p class="text-lg md:text-xl text-white/90 max-w-lg drop-shadow">
+          Tell us about your business and we'll build a website that brings in more calls and more
+          customers.
+        </p>
+        <a href="/contact/" class="inline-block">
+          <Button variant="primary" size="lg" withArrow>Get Started</Button>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-card-section {
+    --cta-overlap: 4rem;
+    background: linear-gradient(
+      to bottom,
+      var(--cta-section-bg) calc(100% - var(--cta-overlap)),
+      var(--color-navy) calc(100% - var(--cta-overlap))
+    );
+  }
+
+  @media (min-width: 768px) {
+    .cta-card-section {
+      --cta-overlap: 6rem;
+    }
+  }
+
+  .cta-card-bg {
+    transform: scale(var(--cta-scale, 1.25));
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-card-bg {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  const MAX_SCALE = 1.25;
+  let listening = false;
+
+  function initCTACards() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let ticking = false;
+
+    const update = () => {
+      const vh = window.innerHeight;
+      document.querySelectorAll<HTMLElement>(".cta-card").forEach(card => {
+        const rect = card.getBoundingClientRect();
+        // 0 when the card's top enters the bottom of the viewport, 1 when the card is centered
+        const start = vh;
+        const end = (vh - rect.height) / 2;
+        const progress = Math.min(Math.max((start - rect.top) / (start - end), 0), 1);
+        const scale = MAX_SCALE - (MAX_SCALE - 1) * progress;
+        card.style.setProperty("--cta-scale", scale.toFixed(4));
+      });
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
+    if (listening) return;
+    listening = true;
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+  }
+
+  initCTACards();
+  document.addEventListener("astro:page-load", initCTACards);
+</script>

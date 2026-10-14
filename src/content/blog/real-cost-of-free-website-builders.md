@@ -1,10 +1,11 @@
 ---
-title: "The Real Cost of a 'Free' Website Builder"
-pubDate: 07-11-2026
-description: "Free website builders can be an easy way to get online, but the trade-offs can become expensive as your business grows. Here is what small businesses should consider before choosing one."
+title: "The Real Cost of Free Website Builders"
+pubDate: 2026-07-11
+description: "Free website builders look cheap at first, but the trade-offs add up as you grow. What small businesses should know before choosing one."
 author: "Riley Caldwell"
 featured: false
 coverImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+coverImageAlt: "Person sorting through tax forms with a calculator and pen"
 tags: ["web-design", "small-business", "seo", "budgeting"]
 ---
 
@@ -220,6 +221,6 @@ At Dockside Web Solutions, we build websites for small businesses that want a pr
 
 If you are ready to move beyond a basic website builder, [view our web design services](/web-design/) or [contact Dockside Web Solutions](/contact/).
 
-You can also read our related articles on [why a social media page is not enough for your small business](/blog/why-social-media-is-not-enough-for-small-businesses/) and [why small businesses should not rely entirely on AI for their website](/blog/why-small-businesses-should-not-rely-entirely-on-ai-for-their-website/).
+You can also read our related articles on [why a social media page is not enough for your small business](/blog/why-social-media-alone-isnt-enough/) and [why small businesses should not rely entirely on AI for their website](/blog/should-ai-build-your-business-website/).
 
 ---

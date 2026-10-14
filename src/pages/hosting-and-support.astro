@@ -1,13 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import HeroSecondary from "../components/HeroSecondary.astro";
+import PageHeader from "../components/PageHeader.astro";
 import Section from "../components/ui/Section.astro";
 import Heading from "../components/ui/Heading.astro";
 import Text from "../components/ui/Text.astro";
 import SectionLabel from "../components/ui/SectionLabel.astro";
 import Button from "../components/ui/Button.astro";
 import FAQ from "../components/FAQ.astro";
-import CTAAboveFooter from "../components/CTAAboveFooter.astro";
+import CTACard from "../components/CTACard.astro";
 
 import { LifeBuoy, ShieldCheck, Zap, MessageSquare, Globe, Key } from "lucide-astro";
 
@@ -58,10 +58,9 @@ const metaDescription = "Reliable hosting and website support from Dockside Web 
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
-  <HeroSecondary
-    label="UNLIMITED UPDATES"
+  <PageHeader
     heading="Hosting & Support Services"
-    description="Dependable hosting and ongoing website support to keep your site secure, updated, fast, and running smoothly so you can stay focused on your business."
+    description="We keep your site fast, secure, and up to date, so you don't have to."
   />
 
   <Section>
@@ -151,7 +150,7 @@ const metaDescription = "Reliable hosting and website support from Dockside Web 
       <Heading>Support FAQs</Heading>
     </div>
 
-    <FAQ selectedCategories={["Plans"]} />
+    <FAQ selectedCategories={["After Launch"]} />
 
     <div class="text-center">
       <a href="/faq/">
@@ -160,5 +159,5 @@ const metaDescription = "Reliable hosting and website support from Dockside Web 
     </div>
   </Section>
 
-  <CTAAboveFooter />
+  <CTACard bg="white" />
 </Layout>

@@ -1,7 +1,7 @@
 ---
 interface Props {
   class?: string;
-  bg?: "white" | "light" | "navy" | "teal";
+  bg?: "white" | "light" | "tealLight" | "navy" | "teal";
   id?: string;
   pad?: boolean;
 }
@@ -11,6 +11,7 @@ const { class: className = "", bg = "light", id, pad = true } = Astro.props;
 const bgStyles = {
   white: "bg-white",
   light: "bg-slate-50",
+  tealLight: "bg-teal-light",
   navy: "bg-navy text-white",
   teal: "bg-teal text-white"
 };

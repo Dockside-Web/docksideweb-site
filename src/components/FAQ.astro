@@ -1,85 +1,88 @@
 ---
-import { FAQs } from "../data/faq.ts";
+import { FAQs, faqCategories, faqCategoryId, faqCategoryIcons } from "../data/faq.ts";
 
 interface Props {
   selectedCategories?: string[];
+  /** A hand-picked list, shown as one ungrouped list */
+  items?: typeof FAQs;
 }
 
-const { selectedCategories } = Astro.props;
-
-// Categories come from the data, in the order they first appear
-const allCategories = [...new Set(FAQs.map(faq => faq.category))];
+const { selectedCategories, items } = Astro.props;
 
 const categories = selectedCategories?.length
-  ? allCategories.filter(cat => selectedCategories.includes(cat))
-  : allCategories;
+  ? faqCategories.filter(cat => selectedCategories.includes(cat))
+  : faqCategories;
 
-const faqs = FAQs.filter(faq => categories.includes(faq.category));
-const firstCategory = categories[0];
+// With more than one category, each gets its own titled section (anchored for "Jump to" links)
+const groups = items
+  ? [{ category: "", items }]
+  : categories.map(category => ({ category, items: FAQs.filter(faq => faq.category === category) }));
+const showHeadings = groups.length > 1;
 
 // Unique per category combination, so IDs don't collide if used twice on a page
-const uid =
-  "faq-" +
-  categories
-    .join("-")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-");
+const uid = items ? "faq-picked" : "faq-" + categories.map(faqCategoryId).join("-");
+
+// Running index so answer IDs stay unique across groups
+let index = 0;
 ---
 
 <div class="max-w-4xl mx-auto px-4 py-12" data-faq>
-  {
-    categories.length > 1 && (
-      <div
-        class="flex flex-wrap gap-3 justify-center mb-10"
-        role="group"
-        aria-label="FAQ categories">
-        {categories.map((cat, idx) => (
-          <button
-            type="button"
-            class="faq-filter px-6 py-2.5 rounded-lg border border-navy/20 text-navy text-base font-semibold transition-colors duration-200 cursor-pointer hover:border-navy aria-pressed:bg-navy aria-pressed:border-navy aria-pressed:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
-            data-category={cat}
-            aria-pressed={idx === 0 ? "true" : "false"}>
-            {cat}
-          </button>
-        ))}
-      </div>
-    )
-  }
-
-  <div class="space-y-2">
+  <!-- With several topics, each sits in its own white card -->
+  <div class="space-y-6">
     {
-      faqs.map((item, i) => (
-        <div
-          class="faq-item border-b border-navy/10"
-          data-category={item.category}
-          data-open="false"
-          hidden={item.category !== firstCategory}>
-          <button
-            type="button"
-            class="faq-question flex justify-between items-center w-full py-5 text-left text-lg font-semibold text-navy hover:text-teal transition-colors duration-200 gap-4 cursor-pointer bg-transparent border-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
-            aria-expanded="false"
-            aria-controls={`${uid}-answer-${i}`}
-            id={`${uid}-btn-${i}`}>
-            <span>{item.question}</span>
-            <span class="faq-chevron shrink-0 text-teal">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <path
-                  d="M5 7.5L10 12.5L15 7.5"
-                  stroke="currentColor"
-                  stroke-width="1.75"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </span>
-          </button>
+      groups.map(group => (
+        <section
+          class:list={[showHeadings && "rounded-3xl bg-white p-6 md:p-8 shadow-sm ring-1 ring-navy/5"]}
+          aria-labelledby={showHeadings ? faqCategoryId(group.category) : undefined}>
+          {showHeadings && (() => {
+            const Icon = faqCategoryIcons[group.category];
+            return (
+              <h2 id={faqCategoryId(group.category)} class="scroll-mt-28 mb-2 flex items-center gap-3 text-2xl md:text-3xl font-semibold text-navy">
+                {Icon && (
+                  <span class="grid size-10 shrink-0 place-items-center rounded-xl bg-teal-light text-navy">
+                    <Icon class="size-5" stroke-width={1.75} />
+                  </span>
+                )}
+                {group.category}
+              </h2>
+            );
+          })()}
 
-          <div class="faq-answer" id={`${uid}-answer-${i}`}>
-            <div>
-              <p class="pb-5 pr-12 text-navy/80 text-[0.9375rem] leading-7">{item.answer}</p>
-            </div>
+          <div class="space-y-2">
+            {group.items.map(item => {
+              const i = index++;
+              return (
+                <div class:list={["faq-item border-b border-navy/10", showHeadings && "last:border-b-0"]} data-open="false">
+                  <button
+                    type="button"
+                    class="faq-question flex justify-between items-center w-full py-5 text-left text-lg font-semibold text-navy hover:text-teal transition-colors duration-200 gap-4 cursor-pointer bg-transparent border-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+                    aria-expanded="false"
+                    aria-controls={`${uid}-answer-${i}`}
+                    id={`${uid}-btn-${i}`}>
+                    <span>{item.question}</span>
+                    <span class="faq-chevron shrink-0 text-teal">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                        <path
+                          d="M5 7.5L10 12.5L15 7.5"
+                          stroke="currentColor"
+                          stroke-width="1.75"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </button>
+
+                  <div class="faq-answer" id={`${uid}-answer-${i}`}>
+                    <div>
+                      <p class="pb-5 pr-12 text-navy/80 text-[0.9375rem] leading-7">{item.answer}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        </div>
+        </section>
       ))
     }
   </div>
@@ -127,25 +130,12 @@ const uid =
       if (root.dataset.ready) return; // never bind the same instance twice
       root.dataset.ready = "true";
 
-      const filters = root.querySelectorAll<HTMLButtonElement>(".faq-filter");
       const items = root.querySelectorAll<HTMLElement>(".faq-item");
 
       function setOpen(item: HTMLElement, open: boolean) {
         item.dataset.open = String(open);
         item.querySelector(".faq-question")?.setAttribute("aria-expanded", String(open));
       }
-
-      // Category filter
-      filters.forEach(btn => {
-        btn.addEventListener("click", () => {
-          filters.forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
-          items.forEach(item => {
-            const match = item.dataset.category === btn.dataset.category;
-            item.hidden = !match;
-            if (!match) setOpen(item, false);
-          });
-        });
-      });
 
       // Accordion (one open at a time)
       root.addEventListener("click", e => {

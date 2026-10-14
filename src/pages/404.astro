@@ -1,13 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import HeroSecondary from "../components/HeroSecondary.astro";
-import CTAAboveFooter from "../components/CTAAboveFooter.astro";
+import PageHeader from "../components/PageHeader.astro";
+import CTACard from "../components/CTACard.astro";
 const pageTitle = "Page Not Found";
 const metaDescription = "This page doesn't exist.";
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
-  <HeroSecondary label="404 Error" heading="This page doesn't exist." description="" />
+  <PageHeader heading="This page doesn't exist." />
 
-  <CTAAboveFooter />
+  <CTACard spaceTop />
 </Layout>

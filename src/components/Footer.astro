@@ -1,108 +1,120 @@
 ---
 import Logo from "../assets/logo/logo-horizontal-light.svg";
-import Button from "./ui/Button.astro";
-import { Mail, Phone, MapPin } from "lucide-astro";
-import { contactInfo } from "../data/info.ts";
+import { Mail, Phone, Linkedin, MapPin } from "lucide-astro";
+import { contactInfo } from "../data/businessInfo.ts";
 
 const currentYear = new Date().getFullYear();
 
-const navigationLinks = [
-  "Home",
-  "Pricing",
-  "Web-Design",
-  "SEO",
-  "Contact",
-  "FAQ",
-  "Portfolio",
-  "About"
+const linkGroups = [
+  {
+    title: "Services",
+    links: [
+      { label: "Web Design", href: "/web-design/" },
+      { label: "SEO", href: "/seo/" },
+      { label: "Hosting & Support", href: "/hosting-and-support/" },
+      { label: "Pricing", href: "/pricing/" }
+    ]
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "/about/" },
+      { label: "Portfolio", href: "/portfolio/" },
+      { label: "Reviews", href: "/reviews/" }
+    ]
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Blog", href: "/blog/" },
+      { label: "FAQ", href: "/faq/" },
+      { label: "Contact", href: "/contact/" }
+    ]
+  }
 ];
+
+const { locations } = contactInfo;
 ---
 
-<div class="w-full">
-  <footer class="relative bg-linear-to-b bg-navy text-white pb-8 -mt-1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-        <!-- Logo / CTA -->
-        <div class="space-y-4 flex flex-col items-center md:items-start">
-          <Logo class="h-25 w-auto" aria-label="Dockside Web Solutions Logo" />
-          <p class="text-slate-400 text-sm leading-relaxed">
-            Fast, modern websites for small businesses
-          </p>
-          <a href="/contact/" class="flex items-center space-x-2">
-            <Button variant="primary" size="sm">Get Started Today</Button>
+<footer class="relative bg-navy text-white -mt-1">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 md:pt-16 pb-8">
+    <div class="grid grid-cols-2 md:grid-cols-12 gap-x-8 gap-y-10">
+      <!-- Brand + profiles -->
+      <div class="col-span-2 md:col-span-12 lg:col-span-3">
+        <a href="/" class="inline-block" aria-label="Dockside Web Solutions home">
+          <Logo class="h-16 w-auto" aria-hidden="true" />
+        </a>
+        <p class="mt-4 max-w-sm text-slate-300 leading-relaxed">
+          Fast, modern websites that help small businesses get found and win more customers.
+        </p>
+        <div class="mt-6 flex items-center gap-3">
+          <a href={contactInfo.social.linkedIn} target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-gold hover:text-gold">
+            <Linkedin class="size-4 text-teal" />
+            LinkedIn
           </a>
-        </div>
-
-        <!-- Navigation -->
-        <div class="flex flex-col items-center">
-          <div>
-            <h3 class="text-gold font-bold uppercase tracking-wider text-sm mb-6">Quick Links</h3>
-            <ul class="grid grid-cols-2 gap-x-8 gap-y-3 w-fit">
-              {
-                navigationLinks.map(item => (
-                  <li>
-                    <a
-                      href={item === "Home" ? "/" : `/${item.toLowerCase()}/`}
-                      class="text-slate-300 hover:text-teal transition-colors text-sm">
-                      {item}
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
-
-        <!-- Contact -->
-        <div class="flex flex-col items-center md:items-start">
-          <div>
-            <h3 class="text-gold font-bold uppercase tracking-wider text-sm mb-6">Contact</h3>
-            <ul class="space-y-4">
-              <li class="flex items-start space-x-3 text-slate-300 text-sm">
-                <Mail class="h-5 w-5 text-teal shrink-0" />
-                <a href={`mailto:${contactInfo.email}`} class="hover:text-teal">
-                  {contactInfo.email}
-                </a>
-              </li>
-              <li class="flex items-start space-x-3 text-slate-300 text-sm">
-                <Phone class="h-5 w-5 text-teal shrink-0" />
-                <a href={contactInfo.phoneHref} class="hover:text-teal"> {contactInfo.phone} </a>
-              </li>
-              <li class="flex items-start space-x-3 text-slate-300 text-sm">
-                <MapPin class="h-5 w-5 text-teal shrink-0" />
-                <span>Baltimore, MD</span>
-              </li>
-              <li class="flex items-start space-x-3 text-slate-300 text-sm">
-                <MapPin class="h-5 w-5 text-teal shrink-0" />
-                <span>Charleston, SC</span>
-              </li>
-            </ul>
-          </div>
+          <a href={contactInfo.social.googleBusinessProfile} target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-gold hover:text-gold">
+            <MapPin class="size-4 text-teal" />
+            Google
+          </a>
         </div>
       </div>
 
-      <div
-        class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
-        <p class="text-slate-500 text-sm">
-          © {currentYear}
-          {contactInfo.businessNameFormal}. All rights reserved.
-        </p>
-        <div class="flex space-x-3 mt-4 md:mt-0">
-          <a
-            href="/legal/privacy-policy/"
-            class="text-slate-400 hover:text-yellow-500 transition-colors text-sm"
-            aria-label="Privacy Policy">
-            <p>Privacy Policy</p>
-          </a>
-          <p class="text-slate-400">|</p>
-          <a
-            href="/legal/terms-of-service/"
-            class="text-slate-400 hover:text-yellow-500 transition-colors text-sm"
-            aria-label="Terms of Service">
-            <p>Terms of Service</p>
-          </a>
-        </div>
+      <!-- Link groups -->
+      {
+        linkGroups.map(group => (
+          <nav class="md:col-span-3 lg:col-span-2" aria-label={group.title}>
+            <h3 class="text-gold font-semibold uppercase tracking-wider text-sm mb-4">
+              {group.title}
+            </h3>
+            <ul class="space-y-2.5">
+              {group.links.map(link => (
+                <li>
+                  <a href={link.href} class="text-slate-300 hover:text-white transition-colors">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
+
+      <!-- Contact + service area -->
+      <div class="col-span-2 md:col-span-3 lg:col-span-3">
+        <h3 class="text-gold font-semibold uppercase tracking-wider text-sm mb-4">Contact</h3>
+        <ul class="space-y-2.5 text-slate-300">
+          <li>
+            <a href={`mailto:${contactInfo.email}`} class="inline-flex items-center gap-2.5 hover:text-white transition-colors">
+              <Mail class="size-4 text-teal shrink-0" />
+              {contactInfo.email}
+            </a>
+          </li>
+          <li>
+            <a href={contactInfo.phoneHref} class="inline-flex items-center gap-2.5 hover:text-white transition-colors">
+              <Phone class="size-4 text-teal shrink-0" />
+              {contactInfo.phone}
+            </a>
+          </li>
+          {
+            locations.map(location => (
+              <li class="flex items-center gap-2.5">
+                <MapPin class="size-4 text-teal shrink-0" />
+                {location}
+              </li>
+            ))
+          }
+        </ul>
       </div>
     </div>
-  </footer>
-</div>
+
+    <!-- Bottom bar -->
+    <div
+      class="mt-12 border-t border-white/10 pt-6 flex flex-col-reverse gap-3 md:flex-row md:items-center md:justify-between text-sm text-slate-400">
+      <p>© {currentYear} {contactInfo.businessNameFormal}. All rights reserved.</p>
+      <div class="flex items-center gap-5">
+        <a href="/legal/privacy-policy/" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="/legal/terms-of-service/" class="hover:text-white transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>

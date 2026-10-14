@@ -1,102 +1,101 @@
 ---
 import {
-  services,
-  benefits,
   lighthouseScores,
   lighthouseChecks,
   performanceMinis
-} from "../data/indexInfo.ts";
+} from "../data/performanceInfo.ts";
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/ui/Section.astro";
-import Heading from "../components/ui/Heading.astro";
-import Text from "../components/ui/Text.astro";
 import Button from "../components/ui/Button.astro";
-import SectionLabel from "../components/ui/SectionLabel.astro";
 import PricingPlans from "../components/PricingPlans.astro";
-import Reviews from "../components/Reviews.astro";
-import Portfolio from "../components/Portfolio.astro";
-import CTAAboveFooter from "../components/CTAAboveFooter.astro";
+import { startingMonthlyPrice } from "../data/pricing.ts";
+import ReviewsFeatured from "../components/ReviewsFeatured.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { clientProjects } from "../data/clientInfo.ts";
+import CTACard from "../components/CTACard.astro";
 import { Image } from "astro:assets";
-import heroImage from "../assets/heroImage.webp";
+import heroDock from "../assets/hero-dock.webp";
+import heroDockForeground from "../assets/hero-dock-foreground.webp";
 import dockImage from "../assets/dock.jpg";
 
-import { CheckCircle, Gauge } from "lucide-astro";
+import { Gauge, Rabbit, Coffee, Search, MapPin, Phone, Moon, Star, BadgeCheck, ArrowRight } from "lucide-astro";
 
 const metaDescription =
   "Modern, high-performance web development for small businesses in Charleston and beyond. We build custom sites designed to scale your brand.";
+
+const featuredProjects = clientProjects.filter(p => p.featured);
 ---
 
 <Layout description={metaDescription}>
   <!-- ── HERO ── -->
-  <section
-    class="hero-section relative min-h-screen flex items-center overflow-hidden pb-24 bg-navy">
-    <div class="absolute inset-0 z-0">
-      <Image
-        src={heroImage}
-        alt="Dockside background"
-        quality="mid"
-        format="webp"
-        loading="eager"
-        fetchpriority="high"
-        class="w-full h-full object-cover object-right sm:object-center lg:object-right"
-      />
-    </div>
+  <!-- Three layers: full photo (sky) → headline → cutout foreground (sky removed). The headline
+       drifts down slower than the page scrolls, so the dock and water slide up over it. -->
+  <section id="hero" class="relative h-svh min-h-160 overflow-hidden bg-navy">
+    <!-- Back layer: full photo with sky -->
+    <Image
+      src={heroDock}
+      alt=""
+      widths={[828, 1280, 1672]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      class="absolute inset-0 h-full w-full object-cover object-bottom"
+    />
+    <!-- Navy wash at the top so the white nav stays readable over the light sky -->
+    <div class="absolute inset-x-0 top-0 h-48 bg-linear-to-b from-navy/80 to-transparent"></div>
 
+    <!-- Headline (between the sky and the foreground) -->
     <div
-      class="absolute inset-0 bg-linear-to-b md:bg-linear-to-r from-navy via-navy/50 md:via-navy/90 to-navy/25 z-1">
+      id="hero-headline"
+      class="absolute inset-x-0 top-[18%] md:top-[20%] px-4 text-center will-change-transform">
+      <h1
+        class="mx-auto max-w-4xl font-bold text-navy leading-[1.02] tracking-tight text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-balance animate-fade-in-up">
+        Custom websites built for <span class="italic">small businesses.</span>
+      </h1>
     </div>
-    <div class="absolute inset-0 bg-black/20 z-1"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 w-full">
-      <div class="max-w-2xl sm:max-w-175 animate-fade-in-up">
-        <h1
-          class="font-heading font-bold text-white leading-[1.05] mb-4 tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] text-center sm:text-left">
-          <span class="text-gold">Custom Websites</span> Built for <span class="text-gold"
-            >Small Businesses</span
-          >
-        </h1>
+    <!-- Front layer: same photo with the sky cut out -->
+    <Image
+      src={heroDockForeground}
+      alt="Wooden dock and calm blue water on a sunny day"
+      widths={[828, 1280, 1672]}
+      sizes="100vw"
+      loading="eager"
+      class="pointer-events-none absolute inset-0 h-full w-full object-cover object-bottom"
+    />
+    <!-- Navy fade at the bottom for the supporting copy -->
+    <div
+      class="absolute inset-x-0 bottom-0 h-[55%] bg-linear-to-t from-navy/90 via-navy/50 to-transparent">
+    </div>
 
-        <p
-          class="text-base sm:text-lg text-white mb-8 max-w-xl text-center sm:text-left mx-auto sm:mx-0">
-          We build high-performing websites <strong>starting at $0 down and $68/mo </strong>that
-          look professional, load quickly, rank better on Google, and help turn clicks into paying
-          customers.
-        </p>
-
-        <div class="flex flex-row gap-3 mb-8 items-center justify-center sm:justify-start">
-          <a href="/contact/">
-            <Button variant="primary" size="lg"> Get Started </Button>
-          </a>
-          <a href="/web-design/">
-            <Button variant="outline" size="lg" class="text-white border-white/60">
-              Services
-            </Button>
-          </a>
-        </div>
-
-        <div
-          class="flex flex-row flex-wrap gap-x-6 gap-y-2 justify-center sm:justify-start text-white/75">
-          <div
-            class="flex items-center gap-2 animate-fade-in-up [animation-delay:0.5s] opacity-0 [animation-fill-mode:forwards]">
-            <CheckCircle class="w-4 h-4 text-gold shrink-0" />
-            <span class="text-sm">Live in 2-3 weeks</span>
-          </div>
-          <div
-            class="flex items-center gap-2 animate-fade-in-up [animation-delay:0.6s] opacity-0 [animation-fill-mode:forwards]">
-            <CheckCircle class="w-4 h-4 text-gold shrink-0" />
-            <span class="text-sm">Unlimited Updates</span>
-          </div>
-          <div
-            class="flex items-center gap-2 animate-fade-in-up [animation-delay:0.7s] opacity-0 [animation-fill-mode:forwards]">
-            <CheckCircle class="w-4 h-4 text-gold shrink-0" />
-            <span class="text-sm">Mobile Responsive</span>
-          </div>
-        </div>
+    <!-- Supporting copy + actions -->
+    <div class="absolute inset-x-0 bottom-0 px-4 pb-32 md:pb-36 text-center">
+      <p
+        class="mx-auto max-w-xl text-xl md:text-2xl font-medium leading-snug text-white text-pretty drop-shadow-md">
+        A fast, professional website that brings in customers.
+        <br />
+        <span class="text-gold">As low as $0 down and {startingMonthlyPrice}/month.</span>
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/contact/" class="w-full sm:w-auto">
+          <Button variant="gold" size="lg" withArrow class="w-full sm:w-auto px-10 shadow-navy/40">
+            Get Your Website
+          </Button>
+        </a>
+        <a href="/portfolio/" class="w-full sm:w-auto">
+          <Button variant="white" size="lg" class="w-full sm:w-auto px-10 shadow-navy/40">
+            See Our Work
+          </Button>
+        </a>
       </div>
     </div>
 
-    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-0 z-10">
-      <svg class="relative block w-full h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-0">
+      <svg
+        class="relative block w-full h-16 md:h-24"
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+        aria-hidden="true">
         <path
           fill="#F8FAFC"
           d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,218.7C960,235,1056,213,1152,186.7C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
@@ -106,84 +105,263 @@ const metaDescription =
   </section>
 
   <!-- ── Services Overview ── -->
-  <Section bg="light" class="relative">
-    <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
-      <SectionLabel>What We Do</SectionLabel>
-      <Heading>Never Worry About Your Website Ever Again</Heading>
-      <Text class="mt-4">
+  <Section bg="light">
+    <div
+      class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-end mb-12 md:mb-16 reveal-up opacity-0">
+      <h2
+        class="lg:col-span-7 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-navy">
+        Never worry about your website again.
+      </h2>
+      <p class="lg:col-span-5 text-lg md:text-xl text-slate-600 leading-relaxed">
         From your first website to ongoing support, we handle everything you need to look
-        professional online and make it easy for customers to contact you.
-      </Text>
+        professional online and make it easy for customers to reach you.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      {
-        services.map((service, i) => (
-          <a
-            href={service.href}
-            class="p-8 rounded-2xl group border-slate-200 border-2 bg-white hover:bg-navy hover:border-navy transition-all duration-300 reveal-up opacity-0 flex flex-col"
-            style={`transition-delay: ${i * 100}ms`}>
-            <div class="flex items-start space-x-4 mb-6">
-              <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-navy scale-110 transition-all duration-300">
-                <service.icon class="h-7 w-7 text-teal-600 group-hover:text-gold" />
-              </div>
-              <div>
-                <h3 class="text-2xl font-bold group-hover:text-white mb-2 transition-colors duration-300">
-                  {service.title}
-                </h3>
-                <p class="text-slate-600 group-hover:text-slate-400 text-sm transition-colors duration-300">
-                  {service.subtitle}
-                </p>
-              </div>
-            </div>
-            <p class="text-slate-700 group-hover:text-slate-300 leading-relaxed mb-6 transition-colors duration-300">
-              {service.desc}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5">
+      <!-- Performance -->
+      <a href="/web-design/" class="group flex flex-col gap-5 reveal-up opacity-0">
+        <div
+          class="flex flex-col aspect-4/5 p-8 rounded-4xl overflow-hidden transition duration-300 group-hover:-translate-y-1.5 group-hover:shadow-xl bg-teal text-navy">
+          <h3 class="text-2xl md:text-3xl font-semibold leading-tight text-navy">
+            Loads before<br />they blink.
+          </h3>
+          <div class="mt-auto">
+            <Rabbit class="h-9 w-9 mb-3" stroke-width={1.75} />
+            <p class="font-display text-7xl md:text-8xl font-bold leading-none">99</p>
+            <p class="mt-2 text-sm font-semibold uppercase tracking-wider text-navy/70">
+              Google speed score
             </p>
-            <div class="space-y-3 mb-8">
-              {service.bullets.map(bullet => (
-                <div class="flex items-center space-x-3 text-sm text-slate-600 group-hover:text-slate-400 transition-colors duration-300">
-                  <div class="w-1.5 h-1.5 bg-teal group-hover:bg-gold rounded-full transition-colors duration-300" />
-                  <span>{bullet}</span>
-                </div>
-              ))}
+          </div>
+        </div>
+        <p class="text-slate-600 leading-relaxed">
+          <strong class="font-semibold text-navy">Performance.</strong> A fast site feels more professional
+          and keeps customers from leaving. Pages load fast and respond instantly.
+        </p>
+      </a>
+
+      <!-- Hosting -->
+      <a
+        href="/hosting-and-support/"
+        class="group flex flex-col gap-5 reveal-up opacity-0"
+        style="transition-delay: 100ms">
+        <div
+          class="flex flex-col aspect-4/5 p-8 rounded-4xl overflow-hidden transition duration-300 group-hover:-translate-y-1.5 group-hover:shadow-xl bg-navy text-white">
+          <h3 class="text-2xl md:text-3xl font-semibold leading-tight text-white">
+            You run the business.<br />We run the site.
+          </h3>
+          <div class="mt-auto flex flex-col gap-4">
+            <Coffee class="h-10 w-10 text-gold" stroke-width={1.75} />
+            <ul class="space-y-2 text-white/80">
+              <li>Hosting &amp; security</li>
+              <li>Unlimited updates</li>
+              <li>Live in 2-3 weeks</li>
+            </ul>
+          </div>
+        </div>
+        <p class="text-slate-600 leading-relaxed">
+          <strong class="font-semibold text-navy">Hosting &amp; updates.</strong> We handle hosting, security,
+          and content changes so your site stays online, current, and worry-free.
+        </p>
+      </a>
+
+      <!-- Mobile -->
+      <a
+        href="/web-design/"
+        class="group flex flex-col gap-5 reveal-up opacity-0"
+        style="transition-delay: 200ms">
+        <div
+          class="flex flex-col aspect-4/5 p-8 rounded-4xl overflow-hidden transition duration-300 group-hover:-translate-y-1.5 group-hover:shadow-xl relative isolate text-white">
+          <Image
+            src={dockImage}
+            alt="Wooden dock stretching into the water at sunset"
+            class="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            widths={[400, 700]}
+            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+            loading="lazy"
+          />
+          <div
+            class="absolute inset-0 -z-10 bg-linear-to-b from-navy/60 via-navy/10 to-transparent">
+          </div>
+          <h3 class="text-2xl md:text-3xl font-semibold leading-tight text-white drop-shadow">
+            Made for the phone in their pocket.
+          </h3>
+        </div>
+        <p class="text-slate-600 leading-relaxed">
+          <strong class="font-semibold text-navy">Mobile friendly.</strong> Most customers visit from
+          their phone. Your site looks sharp and loads fast on any screen, even on cellular.
+        </p>
+      </a>
+
+      <!-- SEO -->
+      <a
+        href="/seo/"
+        class="group flex flex-col gap-5 reveal-up opacity-0"
+        style="transition-delay: 300ms">
+        <div
+          class="flex flex-col aspect-4/5 p-8 rounded-4xl overflow-hidden transition duration-300 group-hover:-translate-y-1.5 group-hover:shadow-xl bg-gold text-navy">
+          <h3 class="text-2xl md:text-3xl font-semibold leading-tight text-navy">
+            Found by the<br />folks next door.
+          </h3>
+          <div class="mt-auto flex flex-col gap-3">
+            <div class="flex items-center gap-3 rounded-full bg-white px-4 py-3 shadow-md">
+              <Search class="h-5 w-5 shrink-0 text-slate-500" />
+              <span class="text-sm text-slate-700 truncate">best bakery near me</span>
             </div>
-            <div class="mt-auto transition-colors duration-300">
-              <span class="inline-flex items-center gap-2 text-sm font-semibold text-teal-600 group-hover:text-gold transition-colors duration-300">
-                Learn More
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 translate-x-0 group-hover:translate-x-1 transition-transform duration-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2.5">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </span>
+            <div class="flex items-center gap-3 rounded-2xl bg-white/60 px-4 py-3">
+              <MapPin class="h-5 w-5 shrink-0 text-navy" />
+              <span class="text-sm font-semibold">Your Business</span>
             </div>
-          </a>
-        ))
-      }
+          </div>
+        </div>
+        <p class="text-slate-600 leading-relaxed">
+          <strong class="font-semibold text-navy">Local SEO.</strong> We structure your pages so Google
+          knows exactly what you do and who you serve, so you show up on Search and Maps for the searches that matter.
+        </p>
+      </a>
     </div>
   </Section>
 
-  <Section bg="light" class="py-0!">
-    <div class="relative overflow-hidden rounded-4xl p-10 md:p-16 bg-navy">
-      <div class="relative grid gap-12 lg:grid-cols-2 lg:gap-16">
+  <!-- ── Why a Website ── -->
+  <!-- Follows how a customer finds a local business today, step by step, with arrows between the steps on desktop -->
+  <Section bg="tealLight">
+    <h2 class="max-w-3xl text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-navy text-balance reveal-up opacity-0">
+      Your next customer is looking for you <span class="italic text-teal-hover">right now.</span>
+    </h2>
+
+    <!-- Each card is a 3-row subgrid (visual, heading, text) so headings line up across a row even when one visual is taller -->
+    <ol class="mt-12 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10">
+      <!-- 1. Search -->
+      <li class="relative grid grid-rows-subgrid row-span-3 gap-y-0 rounded-4xl bg-white p-7 shadow-sm reveal-up opacity-0">
+        <div class="self-center">
+          <div id="search-box" class="flex items-center gap-2.5 rounded-full border border-slate-200 bg-slate-50 px-4 py-3" aria-hidden="true">
+            <Search class="size-4 shrink-0 text-teal-hover" />
+            <span class="flex min-w-0 items-center text-sm text-slate-700">
+              <span id="search-typing" class="truncate">roofer near me</span>
+              <span class="ml-0.5 h-4 w-px shrink-0 bg-navy animate-caret-blink motion-reduce:animate-none"></span>
+            </span>
+          </div>
+        </div>
+        <h3 class="mt-6 text-2xl font-semibold text-navy">They search.</h3>
+        <p class="mt-2 text-slate-600 leading-relaxed">
+          People look on Google before they pick up the phone. If you're not there, you're not
+          an option.
+        </p>
+        <span class="absolute top-1/2 -right-9 z-10 hidden size-8 -translate-y-1/2 place-items-center rounded-full bg-white text-teal-hover shadow-md lg:grid" aria-hidden="true"><ArrowRight class="size-4" /></span>
+      </li>
+
+      <!-- 2. Size you up -->
+      <li class="relative grid grid-rows-subgrid row-span-3 gap-y-0 rounded-4xl bg-white p-7 shadow-sm reveal-up opacity-0" style="transition-delay: 100ms">
+        <div class="self-center">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3" aria-hidden="true">
+            <div class="flex items-center gap-1.5">
+              <p class="truncate text-sm font-semibold text-navy">Your Business</p>
+              <BadgeCheck class="size-4 shrink-0 text-teal-hover" />
+            </div>
+            <div class="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
+              <span class="font-semibold text-navy">5.0</span>
+              <span class="flex gap-0.5 text-gold">
+                <Star class="size-3 fill-current" /><Star class="size-3 fill-current" /><Star class="size-3 fill-current" /><Star class="size-3 fill-current" /><Star class="size-3 fill-current" />
+              </span>
+              <span>(48 reviews)</span>
+            </div>
+          </div>
+        </div>
+        <h3 class="mt-6 text-2xl font-semibold text-navy">They size you up.</h3>
+        <p class="mt-2 text-slate-600 leading-relaxed">
+          In a few seconds they decide if you look trustworthy. A professional site makes that
+          an easy yes.
+        </p>
+        <span class="absolute top-1/2 -right-9 z-10 hidden size-8 -translate-y-1/2 place-items-center rounded-full bg-white text-teal-hover shadow-md lg:grid" aria-hidden="true"><ArrowRight class="size-4" /></span>
+      </li>
+
+      <!-- 3. Reach out -->
+      <li class="relative grid grid-rows-subgrid row-span-3 gap-y-0 rounded-4xl bg-white p-7 shadow-sm reveal-up opacity-0" style="transition-delay: 200ms">
+        <!-- Buttons share a row when they fit, and wrap when the card is too narrow -->
+        <div class="self-center flex flex-wrap gap-2" aria-hidden="true">
+          <span class="flex flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gold px-3 py-2 text-xs font-semibold text-navy">
+            <Phone class="size-3.5" /> Call now
+          </span>
+          <span class="flex flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-navy/20 px-3 py-2 text-xs font-semibold text-navy">
+            <MapPin class="size-3.5" /> Get directions
+          </span>
+        </div>
+        <h3 class="mt-6 text-2xl font-semibold text-navy">They reach out.</h3>
+        <p class="mt-2 text-slate-600 leading-relaxed">
+          Calling, booking, or finding your door is one tap away, so interest turns into
+          business.
+        </p>
+        <span class="absolute top-1/2 -right-9 z-10 hidden size-8 -translate-y-1/2 place-items-center rounded-full bg-white text-teal-hover shadow-md lg:grid" aria-hidden="true"><ArrowRight class="size-4" /></span>
+      </li>
+
+      <!-- 4. Works while you sleep -->
+      <li class="relative grid grid-rows-subgrid row-span-3 gap-y-0 rounded-4xl bg-white p-7 shadow-sm reveal-up opacity-0" style="transition-delay: 300ms">
+        <div class="self-center">
+          <div class="flex items-center gap-3 rounded-2xl bg-navy px-4 py-3" aria-hidden="true">
+            <span class="grid size-8 shrink-0 place-items-center rounded-full bg-white/10">
+              <Moon class="size-4 text-gold" />
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-white leading-tight">New inquiry</p>
+              <p class="text-xs text-white/60">Sunday, 11:42 PM</p>
+            </div>
+          </div>
+        </div>
+        <h3 class="mt-6 text-2xl font-semibold text-navy">It works while you sleep.</h3>
+        <p class="mt-2 text-slate-600 leading-relaxed">
+          Your site answers questions and takes inquiries around the clock, even when you're
+          closed.
+        </p>
+      </li>
+    </ol>
+  </Section>
+
+  <!-- ── Portfolio ── -->
+  <Section bg="light">
+    <div
+      class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14 reveal-up opacity-0">
+      <h2
+        class="max-w-2xl text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-navy text-balance">
+        Websites we're proud to put our name on.
+      </h2>
+      <a
+        href="/portfolio/"
+        class="inline-flex items-center gap-2 font-semibold text-navy hover:text-teal-hover hover:gap-3 transition-all duration-300 shrink-0">
+        See all projects
+        <svg
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+    <div class="reveal-up opacity-0">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        {featuredProjects.map(project => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── Performance ── -->
+  <Section bg="navy" class="md:py-28!">
+    <div class="relative">
+      <div class="relative grid gap-12 lg:grid-cols-2 lg:gap-20 items-center">
         <!-- Left column — slides in from left -->
         <div class="reveal-left opacity-0">
           <h2
-            class="mt-4 text-3xl leading-[1.1] tracking-tight md:text-5xl text-white text-balance">
+            class="text-4xl leading-[1.05] tracking-tight md:text-5xl lg:text-6xl font-bold text-white text-balance">
             Built to load in
-            <span class="italic text-teal">under a second</span>
+            <span class="italic text-teal">under a second.</span>
           </h2>
-          <p class="mt-6 max-w-md text-base text-white/65 text-pretty">
-            Sites built with modern tools load nearly instantly which keeps visitors engaged longer
-            and helping you rank higher on Google. No technical knowledge required on your end.
+          <p class="mt-6 max-w-md text-lg text-white/75 text-pretty">
+            Sites built with modern tools load almost instantly, which keeps visitors around longer
+            and helps you rank higher on Google. No technical knowledge required on your end.
           </p>
 
           <div class="mt-10 grid grid-cols-2 gap-4">
@@ -194,15 +372,15 @@ const metaDescription =
                   style={`transition-delay: ${i * 80 + 200}ms`}>
                   <m.icon class="h-4 w-4 text-gold" />
                   <div class="mt-3 text-lg text-white">{m.label}</div>
-                  <div class="text-[11px] text-white/55 mt-0.5">{m.sub}</div>
+                  <div class="text-sm text-white/65 mt-0.5">{m.sub}</div>
                 </div>
               ))
             }
           </div>
           <a
             href="/seo/"
-            class="inline-flex items-center gap-2 text-gold hover:gap-3 transition-all duration-300 pt-5 text-center md:text-left">
-            Explore How SEO Benefits Your Business
+            class="inline-flex items-center gap-2 text-gold font-semibold hover:gap-3 transition-all duration-300 mt-8">
+            See how speed helps you rank
             <svg
               width="14"
               height="14"
@@ -219,13 +397,11 @@ const metaDescription =
 
         <!-- Right column — slides in from right, then scores animate -->
         <div
-          class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur md:p-8 self-start reveal-right opacity-0">
+          class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur md:p-10 reveal-right opacity-0">
           <div class="flex items-center justify-between">
             <div>
-              <div class="text-[11px] uppercase tracking-widest text-white/50">
-                Site health check
-              </div>
-              <div class="text-xl text-white mt-0.5">How your site scores</div>
+              <div class="text-xs uppercase tracking-widest text-white/60">Google Lighthouse</div>
+              <div class="text-2xl text-white mt-1">What our sites score</div>
             </div>
             <Gauge class="h-5 w-5 text-teal" />
           </div>
@@ -234,7 +410,7 @@ const metaDescription =
             {
               lighthouseScores.map(b => (
                 <div class="text-center">
-                  <div class="relative mx-auto h-20 w-20">
+                  <div class="relative mx-auto h-24 w-24">
                     <svg viewBox="0 0 36 36" class="h-full w-full -rotate-90">
                       <circle
                         cx="18"
@@ -258,14 +434,12 @@ const metaDescription =
                       />
                     </svg>
                     <div
-                      class="absolute inset-0 flex items-center justify-center text-base text-white score-number"
+                      class="absolute inset-0 flex items-center justify-center text-xl font-semibold text-white score-number"
                       data-score={b.score}>
                       0
                     </div>
                   </div>
-                  <div class="mt-2 text-[10px] uppercase tracking-widest text-white/55">
-                    {b.label}
-                  </div>
+                  <div class="mt-2 text-xs uppercase tracking-widest text-white/65">{b.label}</div>
                 </div>
               ))
             }
@@ -275,9 +449,9 @@ const metaDescription =
             {
               lighthouseChecks.map((m, i) => (
                 <div
-                  class="flex items-center justify-between text-[12px] reveal-up opacity-0"
+                  class="flex items-center justify-between text-sm reveal-up opacity-0"
                   style={`transition-delay: ${i * 80}ms`}>
-                  <span class="text-white/65">{m.label}</span>
+                  <span class="text-white/75">{m.label}</span>
                   <span class="text-gold font-semibold">{m.value}</span>
                 </div>
               ))
@@ -288,140 +462,64 @@ const metaDescription =
     </div>
   </Section>
 
-  <!-- ── Why Choose Us ── -->
-  <Section bg="light">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <!-- LEFT: Image — slides in from left -->
-      <div class="relative reveal-left opacity-0">
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl w-full h-48 lg:h-auto">
-          <Image
-            src={dockImage}
-            alt="Professional website example"
-            class="w-full h-full object-cover lg:aspect-3/4"
-          />
-        </div>
-      </div>
-
-      <!-- RIGHT: Text + Benefits — slides in from right -->
-      <div class="reveal-right opacity-0">
-        <div class="mb-12">
-          <SectionLabel>What We Offer</SectionLabel>
-          <Heading class="mb-4"> Websites Built for Small Business Success </Heading>
-          <Text>
-            We offer transparent pricing, fast turnaround, and ongoing support. Everything you need
-            to succeed online, with no surprises.
-          </Text>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {
-            benefits.map((benefit, i) => (
-              <div
-                class="space-y-2 reveal-up opacity-0"
-                style={`transition-delay: ${i * 80 + 200}ms`}>
-                <div class="flex items-start space-x-3">
-                  <svg
-                    class="h-6 w-6 text-teal shrink-0 mt-0.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <div>
-                    <h3 class="font-bold text-navy text-lg mb-1">{benefit.title}</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">{benefit.desc}</p>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-
-        <div class="mt-10 reveal-up opacity-0" style="transition-delay: 680ms">
-          <a href="/contact/">
-            <Button variant="primary" size="lg">
-              Schedule a Call
-              <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </Button>
-          </a>
-        </div>
-      </div>
-    </div>
-  </Section>
-
-  <!-- ── Portfolio ── -->
-  <Section bg="navy">
-    <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
-      <SectionLabel>Portfolio</SectionLabel>
-      <Heading class="text-white">Our Recently Completed Projects</Heading>
-      <Text class="text-white">
-        A look at some of the small businesses we've helped build a stronger online presence by
-        turning visitors into paying customers.
-      </Text>
-    </div>
-
-    <Portfolio layout="grid" projects="featured" />
-  </Section>
-
   <!-- ── Pricing ── -->
   <Section bg="light">
-    <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
-      <SectionLabel>Pricing Plans</SectionLabel>
-      <Heading>Simple, Transparent Pricing Plans</Heading>
-      <Text>
-        Choose the plan that fits your small business needs. No hidden fees, no surprises.
-      </Text>
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14 md:mb-20 reveal-up opacity-0">
+      <h2 class="max-w-2xl text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-navy text-balance">
+        Simple pricing. No surprises.
+      </h2>
+      <a
+        href="/pricing/#pricing-faq"
+        class="inline-flex items-center gap-2 font-semibold text-navy hover:text-teal-hover hover:gap-3 transition-all duration-300 shrink-0">
+        Pricing FAQs
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+        </svg>
+      </a>
     </div>
     <PricingPlans />
+    <p class="mt-14 md:mt-16 text-center text-slate-600">
+      Want help with your Google Business Profile or reviews too?
+      <a
+        href="/pricing/#add-ons"
+        class="ml-1 font-semibold text-navy underline decoration-teal decoration-2 underline-offset-4 hover:text-teal-hover">
+        See add-on services
+      </a>
+    </p>
   </Section>
 
   <!-- ── Reviews ── -->
   <Section bg="white" id="reviews">
-    <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
-      <SectionLabel>Real Growth, Real Results</SectionLabel>
-      <Heading>Client Testimonials</Heading>
+    <div
+      class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14 reveal-up opacity-0">
+      <h2
+        class="max-w-2xl text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-navy text-balance">
+        Don't just take our word for it.
+      </h2>
+      <a
+        href="/reviews/"
+        class="inline-flex items-center gap-2 font-semibold text-navy hover:text-teal-hover hover:gap-3 transition-all duration-300 shrink-0">
+        All reviews
+        <svg
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+        </svg>
+      </a>
     </div>
-    <Reviews layout="carousel" count={4} />
+    <div class="reveal-up opacity-0">
+      <ReviewsFeatured />
+    </div>
   </Section>
 
-  <CTAAboveFooter />
+  <CTACard bg="white" />
 </Layout>
-
-<style>
-  .reveal-left {
-    transform: translateX(-24px);
-    transition:
-      opacity 0.6s ease,
-      transform 0.6s ease;
-  }
-  .reveal-right {
-    transform: translateX(24px);
-    transition:
-      opacity 0.6s ease,
-      transform 0.6s ease;
-  }
-  .reveal-up {
-    transform: translateY(20px);
-    transition:
-      opacity 0.6s ease,
-      transform 0.6s ease;
-  }
-  .animate-in {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-</style>
 
 <script>
   // ── Shared reveal observer (mirrors SEO page pattern) ──
@@ -496,7 +594,81 @@ const metaDescription =
   }
 
   // Run on first load + Astro view transitions
+  // ── Hero: headline drifts down slower than the page so the dock slides over it ──
+  let heroListening = false;
+  function initHeroParallax() {
+    if (heroListening || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    heroListening = true;
+
+    let ticking = false;
+    const update = () => {
+      const hero = document.getElementById("hero");
+      const headline = document.getElementById("hero-headline");
+      if (hero && headline) {
+        const y = Math.min(window.scrollY, hero.offsetHeight);
+        headline.style.transform = `translateY(${(y * 0.6).toFixed(1)}px)`;
+      }
+      ticking = false;
+    };
+
+    update();
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true }
+    );
+  }
+
+  // ── "They search." card: types out local searches like someone using Google ──
+  let typingStarted = false;
+  function initSearchTyping() {
+    const box = document.getElementById("search-box");
+    const text = document.getElementById("search-typing");
+    if (!box || !text || typingStarted || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    typingStarted = true;
+
+    const searches = ["roofer near me", "plumber near me", "best bakery near me", "dentist open saturday"];
+    const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+    const run = async () => {
+      for (let i = 0; ; i = (i + 1) % searches.length) {
+        const search = searches[i];
+        // Slightly uneven speed so it reads as a person typing
+        for (let n = 1; n <= search.length; n++) {
+          text.textContent = search.slice(0, n);
+          await wait(70 + Math.random() * 70);
+        }
+        await wait(1800);
+        for (let n = search.length - 1; n >= 0; n--) {
+          text.textContent = search.slice(0, n);
+          await wait(35);
+        }
+        await wait(400);
+      }
+    };
+
+    // Start once the card is on screen; until then it shows the first search in full
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting) {
+          observer.disconnect();
+          text.textContent = "";
+          run();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(box);
+  }
+
   function init() {
+    initHeroParallax();
+    initSearchTyping();
     initRevealAnimations();
     initLighthouseAnimations();
   }

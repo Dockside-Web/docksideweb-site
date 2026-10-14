@@ -1,8 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import HeroSecondary from "../../components/HeroSecondary.astro";
-import CTAAboveFooter from "../../components/CTAAboveFooter.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import CTACard from "../../components/CTACard.astro";
 import readingTime from "reading-time";
 import headshot from "../../assets/headshot.webp";
 
@@ -13,8 +13,10 @@ const mainPost = allPosts[0];
 const remainingPosts = allPosts.slice(1);
 ---
 
-<Layout title="Blog" description="Thoughts, updates, and insights from Dockside Web Solutions.">
-  <HeroSecondary label="The Dockside Blog" heading="Digital Strategies for Growing Small Businesses" />
+<Layout
+  title="Blog"
+  description="Practical tips on websites, SEO, and Google Business Profiles to help small businesses get found online and win more customers.">
+  <PageHeader heading="Digital Strategies for Growing Small Businesses" />
 
   <div class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12">
     <div>
@@ -24,19 +26,20 @@ const remainingPosts = allPosts.slice(1);
           <div class="rounded-xl overflow-hidden border border-slate-200 shadow-sm mb-10">
             {mainPost.data.coverImage && (
               <div class="overflow-hidden h-64">
-                <img src={mainPost.data.coverImage} alt={mainPost.data.title} class="w-full h-full object-cover" />
+                <img src={mainPost.data.coverImage} alt={mainPost.data.coverImageAlt} width="1200" height="630" class="w-full h-full object-cover" />
               </div>
             )}
             <div class="p-6">
               <div class="flex items-center md:gap-3 gap-1 mb-3">
-                <img src={headshot.src} alt={mainPost.data.author} class="w-8 h-8 rounded-full object-cover" />
+                <img src={headshot.src} alt="" width="32" height="32" class="w-8 h-8 rounded-full object-cover" />
                 <span class="text-sm text-slate-600">{mainPost.data.author}</span>
                 <span class="text-slate-300">·</span>
                 <time class="text-sm text-slate-600">
                   {mainPost.data.pubDate.toLocaleDateString("en-US", {
                     month: "short",
                     day: "numeric",
-                    year: "numeric"
+                    year: "numeric",
+                    timeZone: "UTC"
                   })}
                 </time>
                 <span class="text-slate-300">·</span>
@@ -61,7 +64,7 @@ const remainingPosts = allPosts.slice(1);
             <div class="rounded-xl overflow-hidden border border-slate-200 shadow-sm flex flex-col sm:flex-row">
               {post.data.coverImage ? (
                 <div class="sm:w-48 sm:shrink-0 overflow-hidden h-48 sm:h-auto">
-                  <img src={post.data.coverImage} alt={post.data.title} class="w-full h-full object-cover" />
+                  <img src={post.data.coverImage} alt={post.data.coverImageAlt} width="384" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover" />
                 </div>
               ) : (
                 <div class="sm:w-48 sm:shrink-0 bg-slate-100 h-48 sm:h-auto" />
@@ -69,14 +72,15 @@ const remainingPosts = allPosts.slice(1);
               <div class="p-6 flex flex-col justify-between">
                 <div>
                   <div class="flex items-center md:gap-3 gap-1 mb-2 flex-wrap">
-                    <img src={headshot.src} alt={post.data.author} class="w-7 h-7 rounded-full object-cover" />
+                    <img src={headshot.src} alt="" width="28" height="28" loading="lazy" class="w-7 h-7 rounded-full object-cover" />
                     <span class="text-sm text-slate-600">{post.data.author}</span>
                     <span class="text-slate-300">·</span>
                     <time class="text-sm text-slate-600">
                       {post.data.pubDate.toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",
-                        year: "numeric"
+                        year: "numeric",
+                        timeZone: "UTC"
                       })}
                     </time>
                     <span class="text-slate-300">·</span>
@@ -108,7 +112,7 @@ const remainingPosts = allPosts.slice(1);
               <a href={`/blog/${post.slug}/`} class="flex gap-3 group">
                 {post.data.coverImage ? (
                   <div class="w-16 h-16 rounded-lg overflow-hidden shrink-0">
-                    <img src={post.data.coverImage} alt={post.data.title} class="w-full h-full object-cover" />
+                    <img src={post.data.coverImage} alt="" width="64" height="64" loading="lazy" decoding="async" class="w-full h-full object-cover" />
                   </div>
                 ) : (
                   <div class="w-16 h-16 rounded-lg bg-slate-100 shrink-0" />
@@ -119,7 +123,8 @@ const remainingPosts = allPosts.slice(1);
                     {post.data.pubDate.toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
-                      year: "numeric"
+                      year: "numeric",
+                      timeZone: "UTC"
                     })}
                   </time>
                   <p class="text-xs text-slate-500">{readingTime(post.body).text}</p>
@@ -141,5 +146,5 @@ const remainingPosts = allPosts.slice(1);
     </aside>
   </div>
 
-  <CTAAboveFooter />
+  <CTACard />
 </Layout>

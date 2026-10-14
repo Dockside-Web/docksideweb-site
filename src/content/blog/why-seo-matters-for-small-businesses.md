@@ -1,10 +1,11 @@
 ---
-title: "Why SEO Matters for Small Businesses More Than Ever"
-pubDate: 05-23-2026
-description: "A beautiful website means little if potential customers cannot find it. Learn why SEO matters for small businesses and how a strong search strategy can help attract customers over time."
+title: "Why SEO Matters for Small Businesses"
+pubDate: 2026-05-23
+description: "A great website means little if customers can't find it. Learn why SEO matters for small businesses and how it brings in customers over time."
 author: "Riley Caldwell"
 featured: true
 coverImage: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=1851&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+coverImageAlt: "Google Search Console chart showing clicks, impressions, and average position over six months"
 tags: ["seo", "marketing", "small-business"]
 ---
 
@@ -86,7 +87,7 @@ Important areas to focus on include:
 
 For many small businesses, becoming more visible in their local market is much more realistic and valuable than trying to compete for broad national search terms.
 
-If you want to learn more about improving your Google Business Profile, check out our guide on [how to optimize your Google Business Profile for small businesses](/blog/how-to-optimize-your-google-business-profile-for-small-businesses/).
+If you want to learn more about improving your Google Business Profile, check out our guide on [how to optimize your Google Business Profile for small businesses](/blog/optimize-your-google-business-profile/).
 
 ---
 
@@ -255,6 +256,6 @@ At Dockside Web Solutions, we build websites with SEO, performance, usability, a
 
 If your business has a website but is struggling to get found online, [learn more about our SEO services](/seo/) or [contact Dockside Web Solutions](/contact/) to discuss your options.
 
-You can also read our related articles on [how to optimize your Google Business Profile for small businesses](/blog/how-to-optimize-your-google-business-profile-for-small-businesses/) and [5 common small business website mistakes](/blog/5-mistakes-costing-small-businesses-customers/).
+You can also read our related articles on [how to optimize your Google Business Profile for small businesses](/blog/optimize-your-google-business-profile/) and [5 common small business website mistakes](/blog/5-website-mistakes-costing-you-customers/).
 
 ---

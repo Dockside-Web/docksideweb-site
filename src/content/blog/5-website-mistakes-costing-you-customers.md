@@ -1,10 +1,11 @@
 ---
-title: "5 Common Small Business Website Mistakes (And How to Fix Them)"
-pubDate: 05-20-26
-description: "Discover five common small business website mistakes and learn how to improve your site's speed, mobile experience, SEO, and ability to convert visitors into customers."
+title: "5 Website Mistakes Costing You Customers"
+pubDate: 2026-05-20
+description: "Five common small business website mistakes that cost you customers, and simple ways to fix your site's speed, mobile experience, and SEO."
 author: "Riley Caldwell"
 featured: false
 coverImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200"
+coverImageAlt: "Laptop showing code on a desk beside a desktop monitor, coffee mug, and headphones"
 tags: ["web-design", "small-business", "seo"]
 ---
 

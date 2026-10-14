@@ -1,10 +1,11 @@
 ---
-title: "Why Small Businesses Should Not Rely Entirely on AI for Their Website"
-pubDate: 05-29-2026
-description: "AI website builders can make it easier than ever to launch a website, but speed and convenience do not replace strategy. Here is what small businesses should know before relying entirely on AI."
+title: "Should AI Build Your Business Website?"
+pubDate: 2026-05-29
+description: "AI can build a website fast, but speed isn't strategy. What small businesses should know before letting AI build their entire website."
 author: "Riley Caldwell"
 featured: true
 coverImage: "https://images.unsplash.com/photo-1745674684539-d90293d659a9?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+coverImageAlt: "Laptop screen showing an AI search tool asking \"What do you want to know?\""
 tags: ["ai", "web-design", "small-business", "seo"]
 ---
 
@@ -279,6 +280,6 @@ At Dockside Web Solutions, we use modern development tools—including AI where 
 
 If you are considering rebuilding your website or trying to decide between an AI website builder and a more customized approach, [view our web design services](/web-design/) or [contact Dockside Web Solutions](/contact/).
 
-You can also read our related articles on [why social media alone is not enough for small businesses](/blog/why-social-media-is-not-enough-for-small-businesses/) and [the real cost of a "free" website builder](/blog/the-real-cost-of-a-free-website-builder/).
+You can also read our related articles on [why social media alone is not enough for small businesses](/blog/why-social-media-alone-isnt-enough/) and [the real cost of a "free" website builder](/blog/real-cost-of-free-website-builders/).
 
 ---

@@ -1,0 +1,66 @@
+---
+import { Image } from "astro:assets";
+import { ArrowUpRight } from "lucide-astro";
+import type { clientProjects } from "../data/clientInfo.ts";
+
+interface Props {
+  project: (typeof clientProjects)[number];
+  /** Light text for navy sections */
+  dark?: boolean;
+  /** Show the short description and a "Visit website" line under the name */
+  details?: boolean;
+  sizes?: string;
+}
+
+const {
+  project,
+  dark = false,
+  details = false,
+  sizes = "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+} = Astro.props;
+
+const domain = new URL(project.link).hostname.replace(/^www\./, "");
+---
+
+<a href={project.link} target="_blank" rel="noopener noreferrer" class="group block">
+  <!-- Browser frame -->
+  <div
+    class:list={[
+      "overflow-hidden rounded-xl shadow-lg transition duration-300 group-hover:-translate-y-1.5 group-hover:shadow-2xl",
+      dark ? "ring-1 ring-white/10" : "ring-1 ring-slate-200"
+    ]}>
+    <div class="flex items-center gap-1.5 bg-white border-b border-slate-100 px-3 py-2">
+      <span class="size-2 rounded-full bg-slate-300"></span>
+      <span class="size-2 rounded-full bg-slate-300"></span>
+      <span class="size-2 rounded-full bg-slate-300"></span>
+      <span class="ml-2 truncate text-xs text-slate-400">{domain}</span>
+    </div>
+    <Image
+      src={project.image}
+      alt={`${project.client} website homepage`}
+      widths={[480, 800, 1200]}
+      sizes={sizes}
+      loading="lazy"
+      class="block w-full aspect-16/10 object-cover object-top"
+    />
+  </div>
+
+  <!-- Name + industry -->
+  <div class="mt-5 flex items-start justify-between gap-4">
+    <div>
+      <h3 class:list={["text-xl font-semibold leading-tight", dark ? "text-white" : "text-navy"]}>
+        {project.client}
+      </h3>
+      <p class:list={["mt-1 text-sm", dark ? "text-white/60" : "text-slate-500"]}>{project.industry}</p>
+    </div>
+    <ArrowUpRight
+      class:list={[
+        "size-5 shrink-0 mt-1 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
+        dark ? "text-gold" : "text-teal-hover"
+      ]}
+      aria-hidden="true"
+    />
+  </div>
+  {details && <p class="mt-3 text-slate-600 leading-relaxed">{project.description}</p>}
+  <span class="sr-only">(opens in a new tab)</span>
+</a>

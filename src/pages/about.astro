@@ -2,25 +2,25 @@
 import { Image } from "astro:assets";
 import aboutImage from "../assets/about.webp";
 import Layout from "../layouts/Layout.astro";
-import HeroSecondary from "../components/HeroSecondary.astro";
+import PageHeader from "../components/PageHeader.astro";
 import Section from "../components/ui/Section.astro";
 import Heading from "../components/ui/Heading.astro";
 import Text from "../components/ui/Text.astro";
 import SectionLabel from "../components/ui/SectionLabel.astro";
 import Button from "../components/ui/Button.astro";
-import CTAAboveFooter from "../components/CTAAboveFooter.astro";
-import Reviews from "../components/Reviews.astro";
+import CTACard from "../components/CTACard.astro";
+import ReviewsCarousel from "../components/ReviewsCarousel.astro";
+import { startingMonthlyPrice } from "../data/pricing.ts";
 
 const pageTitle = "About Us";
 const metaDescription =
-  "Learn about Dockside Web Solutions, a website development studio creating custom, high-performing static websites with hosting services, modern design, and dependable support for small businesses.";
+  "Meet Dockside Web Solutions, a small studio building fast, custom websites for small businesses, with hosting and ongoing support included.";
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
-  <HeroSecondary
-    label="About Us"
+  <PageHeader
     heading="About Dockside Web Solutions"
-    description="Learn who we are, what we value, and how Dockside Web Solutions builds custom websites that help small businesses grow with modern design, reliable support, and a straightforward process."
+    description="Small studio, real relationships, websites built to last."
   />
 
   <Section>
@@ -59,7 +59,7 @@ const metaDescription =
             </Text>
 
             <Text>
-              High-quality web design works best when it's accessible. Professional, custom builds start at <strong>$0 down and $79 a month</strong> to keep your cash flow steady. With hosting, security,
+              High-quality web design works best when it's accessible. Professional, custom builds start at <strong>$0 down and {startingMonthlyPrice} a month</strong> to keep your cash flow steady. With hosting, security,
               and ongoing updates completely handled, you stay focused on running your business while the technical heavy lifting is taken care of.
             </Text>
           </div>
@@ -79,8 +79,8 @@ const metaDescription =
       <SectionLabel>Testimonials</SectionLabel>
       <Heading>Trusted to build your website for you</Heading>
     </div>
-    <Reviews layout="carousel" count={3} />
+    <ReviewsCarousel count={3} />
   </Section>
 
-  <CTAAboveFooter />
+  <CTACard bg="white" />
 </Layout>

@@ -1,13 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import HeroSecondary from "../components/HeroSecondary.astro";
+import PageHeader from "../components/PageHeader.astro";
 import Section from "../components/ui/Section.astro";
 import SectionLabel from "../components/ui/SectionLabel.astro";
 import Heading from "../components/ui/Heading.astro";
 import Text from "../components/ui/Text.astro";
 import GoogleSEOGraphic from "../components/ui/GoogleSEOGraphic.astro";
 import Button from "../components/ui/Button.astro";
-import CTAAboveFooter from "../components/CTAAboveFooter.astro";
+import CTACard from "../components/CTACard.astro";
 
 import { Search, FileText, MapPin, Zap, PenTool } from "lucide-astro";
 
@@ -62,14 +62,13 @@ const chartHeights = [20, 35, 25, 45, 60, 55, 80, 75, 95, 100];
 
 const pageTitle = "SEO";
 const metaDescription =
-  "Improve your visibility online with SEO services from Dockside Web Solutions. We build fast, search-friendly websites and optimize your online presence to help local businesses rank higher and attract more customers.";
+  "SEO services from Dockside Web Solutions. We build fast, search-friendly websites that help local businesses show up on Google and win customers.";
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
-  <HeroSecondary
-    label="SEO"
+  <PageHeader
     heading="Search Engine Optimization"
-    description="Learn how Dockside Web Solutions helps businesses grow through smart SEO strategies, fast website performance, local search optimization, and search-friendly design built to increase visibility and generate leads."
+    description="Show up when local customers search for what you do."
   />
 
   <Section id="google-search">
@@ -306,7 +305,7 @@ const metaDescription =
     </div>
   </Section>
 
-  <CTAAboveFooter />
+  <CTACard />
 </Layout>
 
 <script>

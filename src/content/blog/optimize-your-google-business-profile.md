@@ -1,10 +1,11 @@
 ---
-title: "How to Optimize Your Google Business Profile for Small Businesses"
-pubDate: 10-08-26
+title: "Optimize Your Google Business Profile"
+pubDate: 2026-10-08
 description: "Learn how to optimize your Google Business Profile to improve local visibility, attract more customers, and help your small business stand out on Google."
 author: "Riley Caldwell"
 featured: true
 coverImage: "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=1200"
+coverImageAlt: "Google logo in glowing neon letters on a dark wall"
 tags: ["google-business-profile", "local-seo", "small-business"]
 ---
 

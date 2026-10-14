@@ -1,37 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import HeroSecondary from "../components/HeroSecondary.astro";
+import PageHeader from "../components/PageHeader.astro";
 import Section from "../components/ui/Section.astro";
 import SectionLabel from "../components/ui/SectionLabel.astro";
 import Heading from "../components/ui/Heading.astro";
 import Text from "../components/ui/Text.astro";
 import Button from "../components/ui/Button.astro";
-import Portfolio from "../components/Portfolio.astro";
-import Reviews from "../components/Reviews.astro";
-import CTAAboveFooter from "../components/CTAAboveFooter.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { clientProjects } from "../data/clientInfo.ts";
+import ReviewsFeatured from "../components/ReviewsFeatured.astro";
+import CTACard from "../components/CTACard.astro";
 
-import { Zap, ShieldCheck, Gauge, Smartphone } from "lucide-astro";
-
-const lighthouseScores = [
-  { label: "Speed", score: 99 },
-  { label: "SEO", score: 98 },
-  { label: "Best Practices", score: 100 },
-  { label: "Accessibility", score: 100 }
-];
-
-const lighthouseChecks = [
-  { label: "Loads in under a second", value: "✓" },
-  { label: "Works on any device", value: "✓" },
-  { label: "No layout jumps or flicker", value: "✓" },
-  { label: "Secure connection (HTTPS)", value: "✓" }
-];
-
-const performanceMinis = [
-  { label: "Loads quickly", sub: "Visitors don't wait", icon: Zap },
-  { label: "Ranks higher", sub: "Google rewards speed", icon: Gauge },
-  { label: "Works on mobile", sub: "Any screen, any device", icon: Smartphone },
-  { label: "Secure & safe", sub: "Protected from day one", icon: ShieldCheck }
-];
+import { Gauge } from "lucide-astro";
+import { lighthouseScores, lighthouseChecks, performanceMinis } from "../data/performanceInfo.ts";
 
 const customCodeCards = [
   {
@@ -140,14 +121,15 @@ const steps = [
 
 const pageTitle = "Web Design";
 const metaDescription =
-  "Professional web design services from Dockside Web Solutions. Custom, mobile-friendly websites built for speed, trust, and conversions to help small businesses grow online.";
+  "Custom web design for small businesses. Fast, mobile-friendly websites from Dockside Web Solutions, built to earn trust and bring in more customers.";
+
+const featuredProjects = clientProjects.filter(p => p.featured);
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
-  <HeroSecondary
-    label="Custom Websites"
+  <PageHeader
     heading="Web Design Services"
-    description="Custom built websites designed to help your business stand out, build trust, and turn visitors into customers with clean design, fast performance, and a seamless user experience."
+    description="Custom websites that make your business look as good as it is."
   />
 
   <!-- ── Section 1: Why Dockside ── -->
@@ -498,52 +480,51 @@ const metaDescription =
     </div>
   </Section>
 
-  <!-- ── Section 5: Portfolio (navy bg) ── -->
-  <Section bg="navy">
-    <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
-      <SectionLabel>Our Work</SectionLabel>
-      <Heading class="text-white">Recent Client Websites</Heading>
+  <!-- ── Section 5: Portfolio ── -->
+  <Section bg="light">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14 reveal-up opacity-0">
+      <h2 class="max-w-2xl text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-navy text-balance">
+        Websites we're proud to put our name on.
+      </h2>
+      <a
+        href="/portfolio/"
+        class="inline-flex items-center gap-2 font-semibold text-navy hover:text-teal-hover hover:gap-3 transition-all duration-300 shrink-0">
+        See all projects
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+        </svg>
+      </a>
     </div>
-    <Portfolio layout="grid" projects="featured" />
+    <div class="reveal-up opacity-0">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        {featuredProjects.map(project => <ProjectCard project={project} />)}
+      </div>
+    </div>
   </Section>
 
   <!-- ── Section 6: Reviews ── -->
   <Section bg="white">
-    <div class="text-center max-w-3xl mx-auto mb-16 reveal-up opacity-0">
-      <SectionLabel>Testimonials</SectionLabel>
-      <Heading>Trusted by businesses that take their web presence seriously.</Heading>
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14 reveal-up opacity-0">
+      <h2 class="max-w-3xl text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-navy text-balance">
+        Trusted by businesses that take their web presence seriously.
+      </h2>
+      <a
+        href="/reviews/"
+        class="inline-flex items-center gap-2 font-semibold text-navy hover:text-teal-hover hover:gap-3 transition-all duration-300 shrink-0">
+        All reviews
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+        </svg>
+      </a>
     </div>
-    <Reviews layout="carousel" count={3} />
+    <div class="reveal-up opacity-0">
+      <ReviewsFeatured />
+    </div>
   </Section>
 
-  <CTAAboveFooter />
+  <CTACard bg="white" />
 </Layout>
 
-<style>
-  /* ── Reveal helpers ── */
-  .reveal-left {
-    transform: translateX(-24px);
-    transition:
-      opacity 0.6s ease,
-      transform 0.6s ease;
-  }
-  .reveal-right {
-    transform: translateX(24px);
-    transition:
-      opacity 0.6s ease,
-      transform 0.6s ease;
-  }
-  .reveal-up {
-    transform: translateY(20px);
-    transition:
-      opacity 0.6s ease,
-      transform 0.6s ease;
-  }
-  .animate-in {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-</style>
 
 <script>
   // ── Shared reveal observer (mirrors SEO page pattern) ──

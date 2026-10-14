@@ -1,10 +1,11 @@
 ---
-title: "Why a Social Media Page Is Not Enough for Your Small Business"
-pubDate: 05-28-26
-description: "Social media can be a powerful marketing tool, but it should not be your entire online presence. Here is why a dedicated website gives your small business more control, credibility, and opportunities to reach customers."
+title: "Why Social Media Alone Isn't Enough"
+pubDate: 2026-05-28
+description: "Social media is a great tool, but it shouldn't be your whole online presence. Why your small business needs a website you control."
 author: "Riley Caldwell"
 featured: false
 coverImage: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1548&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+coverImageAlt: "App icons for Instagram, Twitter, TikTok, Spotify, Discord, Netflix, and Figma on dark tiles"
 tags: ["business-tips", "web-design", "marketing"]
 ---
 

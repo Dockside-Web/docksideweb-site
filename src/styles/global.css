@@ -62,6 +62,44 @@
   animation: fade-in-up 0.6s ease-out forwards;
 }
 
+/* Text cursor: hard on/off blink, like a real caret */
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@utility animate-caret-blink {
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+/* Scroll reveals — pair with opacity-0; page scripts add .animate-in when the element scrolls into view */
+@utility reveal-up {
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+@utility reveal-left {
+  transform: translateX(-24px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+@utility reveal-right {
+  transform: translateX(24px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+@utility animate-in {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 @utility hero-parallax {
   background-attachment: scroll;
   @media (hover: hover) and (min-width: 1024px) {
@@ -70,4 +108,4 @@
 }
 
 /* Force hover to work on all devices (especially laptops with touchscreens) */
-@variant hover (&:hover);
+@custom-variant hover (&:hover);

@@ -1,289 +1,356 @@
 ---
 import Button from "./ui/Button.astro";
 import Logo from "../assets/logo/logo-horizontal-light.svg";
+import { contactInfo } from "../data/businessInfo.ts";
+import {
+  Monitor,
+  Search,
+  LifeBuoy,
+  Anchor,
+  Star,
+  CircleHelp,
+  Phone,
+  ChevronDown,
+  ArrowRight,
+  Menu,
+  X
+} from "lucide-astro";
+
+interface NavChild {
+  name: string;
+  path: string;
+  icon: typeof Monitor;
+}
 
 interface NavItem {
   name: string;
-  path: string;
-  children?: { name: string; path: string }[];
+  path?: string;
+  children?: NavChild[];
 }
 
-const rawPath = Astro.url.pathname;
-const currentPath = rawPath === "/" ? "/" : rawPath.replace(/\/$/, "");
-
+// The logo links home, so there is no separate "Home" item
 const navigation: NavItem[] = [
-  { name: "Home", path: "/" },
   {
     name: "Services",
-    path: "",
     children: [
-      { name: "Web Design", path: "/web-design/" },
-      { name: "SEO", path: "/seo/" },
-      { name: "Hosting & Support", path: "/hosting-and-support/" }
+      { name: "Web Design", path: "/web-design/", icon: Monitor },
+      { name: "SEO", path: "/seo/", icon: Search },
+      { name: "Hosting & Support", path: "/hosting-and-support/", icon: LifeBuoy }
     ]
   },
   { name: "Portfolio", path: "/portfolio/" },
   {
-    name: "About",
-    path: "",
+    name: "Company",
     children: [
-      { name: "Reviews", path: "/reviews/" },
-      { name: "FAQ", path: "/faq/" },
-      { name: "About Us", path: "/about/" }
+      { name: "About Us", path: "/about/", icon: Anchor },
+      { name: "Reviews", path: "/reviews/", icon: Star },
+      { name: "FAQ", path: "/faq/", icon: CircleHelp }
     ]
   },
   { name: "Pricing", path: "/pricing/" },
   { name: "Blog", path: "/blog/" }
 ];
 
-const isActive = (item: NavItem) => {
-  const normalizedPath = item.path.replace(/\/$/, "");
-  if (currentPath === normalizedPath) return true;
-  if (item.children) {
-    return item.children.some(child => currentPath === child.path.replace(/\/$/, ""));
-  }
-  return false;
-};
+const normalize = (path: string) => (path === "/" ? "/" : path.replace(/\/$/, ""));
+const currentPath = normalize(Astro.url.pathname);
+
+const isCurrent = (path: string) => currentPath === normalize(path);
+const isActive = (item: NavItem) =>
+  item.path ? isCurrent(item.path) : !!item.children?.some(child => isCurrent(child.path));
 ---
 
-<header id="site-header" class="fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-500">
-  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
-    <a href="/" class="group flex items-center">
-      <Logo class="h-12 md:h-16 w-auto group-hover:opacity-90" aria-label="Dockside Web Solutions Logo" />
+<header id="site-header" class="fixed top-0 inset-x-0 z-50 transition-[background-color,box-shadow] duration-500">
+  <div
+    id="header-bar"
+    class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-4 sm:px-6 lg:px-8 py-5 transition-[padding] duration-500 lg:grid lg:grid-cols-[1fr_auto_1fr]">
+    <a href="/" aria-label="Dockside Web Solutions home" class="shrink-0 justify-self-start transition-opacity hover:opacity-90">
+      <Logo id="site-logo" class="h-12 md:h-16 w-auto transition-[height] duration-500" aria-hidden="true" />
     </a>
 
-    <nav class="hidden md:flex items-center gap-8">
+    <!-- Desktop: three columns (logo, links, actions) with equal-width sides, so the links sit in the true center of the page -->
+    <nav class="hidden lg:flex items-center gap-8" aria-label="Main">
       {
         navigation.map(item =>
           item.children ? (
-            <div class="relative group">
+            <div class="group/dd relative" data-dropdown>
               <button
+                type="button"
                 aria-expanded="false"
                 aria-haspopup="true"
                 data-dropdown-btn
-                class={`flex items-center gap-1 text-sm font-semibold tracking-wide uppercase transition-colors hover:text-gold cursor-pointer bg-transparent ${
+                class:list={[
+                  "flex items-center gap-1 text-sm font-semibold tracking-wide uppercase transition-colors hover:text-gold cursor-pointer",
                   isActive(item) ? "text-gold" : "text-white/90"
-                }`}>
+                ]}>
                 {item.name}
-                <svg data-dropdown-chevron class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
-                </svg>
+                <ChevronDown class="size-4 transition-transform duration-200 group-data-open/dd:rotate-180" />
               </button>
 
-              <div data-dropdown-menu class="absolute top-full left-1/2 -translate-x-1/2 w-44 bg-white rounded-xl shadow-2xl overflow-hidden z-10 hidden group-hover:block border-b-4 border-teal">
-                <div class="absolute -top-4 left-0 w-full h-4" />
-                <div class="py-2 relative">
+              <!-- pt-4 bridges the gap so the menu stays open while the mouse moves down to it -->
+              <div class="invisible absolute left-1/2 top-full -translate-x-1/2 translate-y-2 pt-4 opacity-0 transition duration-200 group-data-open/dd:visible group-data-open/dd:translate-y-0 group-data-open/dd:opacity-100">
+                <div class="w-60 rounded-2xl bg-white p-2 shadow-2xl ring-1 ring-navy/5">
                   {item.children.map(child => (
                     <a
                       href={child.path}
-                      class={`block px-4 py-2.5 text-sm font-medium tracking-wide transition-colors hover:bg-gray-50 hover:text-gold ${
-                        currentPath === child.path.replace(/\/$/, "") ? "text-gold" : "text-navy"
-                      }`}>
-                      {child.name}
+                      aria-current={isCurrent(child.path) ? "page" : undefined}
+                      class:list={[
+                        "group/item flex items-center gap-3 rounded-xl p-2.5 outline-none transition-colors hover:bg-teal-light focus-visible:bg-teal-light",
+                        isCurrent(child.path) && "bg-slate-50"
+                      ]}>
+                      <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-teal-light text-navy transition-colors group-hover/item:bg-white group-focus-visible/item:bg-white">
+                        <child.icon class="size-5" stroke-width={1.75} />
+                      </span>
+                      <span class="font-semibold text-navy">{child.name}</span>
                     </a>
                   ))}
                 </div>
               </div>
             </div>
           ) : (
-            <a href={item.path} data-nav-link class={`text-sm font-semibold tracking-wide uppercase transition-colors duration-300 hover:text-gold ${isActive(item) ? "text-gold" : "text-white/90"}`}>
+            <a
+              href={item.path}
+              aria-current={isActive(item) ? "page" : undefined}
+              class:list={[
+                "text-sm font-semibold tracking-wide uppercase transition-colors duration-300 hover:text-gold",
+                isActive(item) ? "text-gold" : "text-white/90"
+              ]}>
               {item.name}
             </a>
           )
         )
       }
+    </nav>
 
+    <div class="hidden lg:flex items-center justify-self-end gap-5">
+      <a
+        href={contactInfo.phoneHref}
+        class="flex items-center gap-2 text-sm font-semibold text-white/90 transition-colors hover:text-gold">
+        <Phone class="size-4" />
+        <span class="hidden xl:inline">{contactInfo.phone}</span>
+        <span class="sr-only xl:hidden">Call {contactInfo.phone}</span>
+      </a>
       <a href="/contact/">
         <Button variant="primary" size="sm">Contact</Button>
       </a>
-    </nav>
+    </div>
 
-    <button id="mobile-toggle" aria-label="Toggle menu" aria-expanded="false" class="md:hidden p-2 focus:outline-none">
-      <svg
-        id="icon-open"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="text-white transition-colors duration-500">
-        <line x1="4" x2="20" y1="12" y2="12"></line>
-        <line x1="4" x2="20" y1="6" y2="6"></line>
-        <line x1="4" x2="20" y1="18" y2="18"></line>
-      </svg>
-      <svg
-        id="icon-close"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="text-white hidden transition-colors duration-500">
-        <path d="M18 6 6 18"></path>
-        <path d="m6 6 12 12"></path>
-      </svg>
-    </button>
+    <!-- Mobile & tablet controls -->
+    <div class="flex items-center gap-2 lg:hidden">
+      <a
+        href={contactInfo.phoneHref}
+        aria-label={`Call ${contactInfo.phone}`}
+        class="grid size-11 place-items-center rounded-full text-white transition-colors hover:bg-white/10">
+        <Phone class="size-5" stroke-width={1.75} />
+      </a>
+      <button
+        id="mobile-toggle"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        class="grid size-11 place-items-center rounded-full text-white transition-colors hover:bg-white/10 cursor-pointer">
+        <Menu id="icon-open" class="size-6" stroke-width={1.75} />
+        <X id="icon-close" class="hidden size-6" stroke-width={1.75} />
+      </button>
+    </div>
   </div>
 
-  <div id="mobile-menu" class="md:hidden overflow-hidden max-h-0 transition-[max-height] duration-500 ease-in-out bg-navy/98 backdrop-blur-xl" aria-hidden="true">
-    <nav class="flex flex-col gap-6 px-6 py-8">
-      {
-        navigation.map(item =>
-          item.children ? (
-            <div>
-              <button data-mobile-accordion-btn class={`flex items-center gap-2 w-full text-lg font-medium tracking-tight ${isActive(item) ? "text-gold" : "text-slate-200"}`}>
-                {item.name}
-                <svg data-mobile-accordion-chevron class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <div data-mobile-accordion-links class="hidden mt-3 ml-4 space-y-4">
-                {item.children.map(child => (
-                  <a href={child.path} class={`block text-base font-medium ${currentPath === child.path.replace(/\/$/, "") ? "text-gold" : "text-slate-300"}`}>
-                    {child.name}
-                  </a>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <a href={item.path} class={`block text-lg font-medium tracking-tight ${isActive(item) ? "text-gold" : "text-slate-200"}`}>
-              {item.name}
-            </a>
-          )
-        )
-      }
+  <!-- Mobile menu: capped at the screen height and scrolls on its own -->
+  <div
+    id="mobile-menu"
+    inert
+    class="lg:hidden max-h-0 overflow-y-auto overscroll-contain border-t border-white/10 bg-navy transition-[max-height] duration-500 ease-in-out">
+    <nav class="px-4 sm:px-6 pt-2 pb-8" aria-label="Mobile">
+      <ul class="divide-y divide-white/10">
+        {
+          navigation.map(item => (
+            <li>
+              {item.children ? (
+                <>
+                  <button
+                    type="button"
+                    aria-expanded="false"
+                    data-mobile-accordion-btn
+                    class:list={[
+                      "flex w-full items-center justify-between py-4 text-lg font-semibold cursor-pointer",
+                      isActive(item) ? "text-gold" : "text-white"
+                    ]}>
+                    {item.name}
+                    <ChevronDown data-mobile-accordion-chevron class="size-5 text-white/50 transition-transform duration-200" />
+                  </button>
+                  <div data-mobile-accordion-links class="hidden gap-1 pb-4">
+                    {item.children.map(child => (
+                      <a
+                        href={child.path}
+                        aria-current={isCurrent(child.path) ? "page" : undefined}
+                        class:list={[
+                          "flex items-center gap-3 rounded-xl p-2.5 transition-colors hover:bg-white/5",
+                          isCurrent(child.path) && "bg-white/5"
+                        ]}>
+                        <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-white/10 text-teal">
+                          <child.icon class="size-5" stroke-width={1.75} />
+                        </span>
+                        <span class:list={["font-semibold", isCurrent(child.path) ? "text-gold" : "text-white"]}>
+                          {child.name}
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <a
+                  href={item.path}
+                  aria-current={isActive(item) ? "page" : undefined}
+                  class:list={[
+                    "flex items-center justify-between py-4 text-lg font-semibold",
+                    isActive(item) ? "text-gold" : "text-white"
+                  ]}>
+                  {item.name}
+                  <ArrowRight class="size-5 text-white/30" />
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
 
-      <a href="/contact/" class="pt-2">
-        <Button variant="primary" class="w-full py-4 text-base">Contact</Button>
-      </a>
+      <div class="mt-6 grid grid-cols-2 gap-3">
+        <a href={contactInfo.phoneHref}>
+          <Button variant="whiteOutline" class="w-full py-3">
+            <Phone class="mr-2 size-4" /> Call us
+          </Button>
+        </a>
+        <a href="/contact/">
+          <Button variant="primary" class="w-full py-3">Contact</Button>
+        </a>
+      </div>
     </nav>
   </div>
 </header>
 
 <script>
-  function initHeader() {
-    const header = document.getElementById("site-header");
-    const mobileToggle = document.getElementById("mobile-toggle");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const iconOpen = document.getElementById("icon-open");
-    const iconClose = document.getElementById("icon-close");
+  const header = document.getElementById("site-header")!;
+  const bar = document.getElementById("header-bar")!;
+  const logo = document.getElementById("site-logo");
+  const mobileToggle = document.getElementById("mobile-toggle")!;
+  const mobileMenu = document.getElementById("mobile-menu")!;
+  const iconOpen = document.getElementById("icon-open");
+  const iconClose = document.getElementById("icon-close");
 
-    if (!header || !mobileToggle || !mobileMenu) return;
+  let isOpen = false;
 
-    // Accessibility Fix: Select all focusable elements inside the mobile menu
-    const menuFocusables = mobileMenu.querySelectorAll("button, a");
-
-    let isOpen = false;
-
-    // Helper to manage focusability (prevents tabbing into hidden menu)
-    function updateMenuFocus(opened: boolean) {
-      menuFocusables.forEach(el => {
-        el.setAttribute("tabindex", opened ? "0" : "-1");
-      });
-    }
-
-    // Run once on init to ensure menu starts un-tabbable
-    updateMenuFocus(false);
-
-    // Scroll behavior
-    function handleScroll() {
-      const active = window.scrollY > 50 || isOpen;
-      header?.classList.toggle("py-3", active);
-      header?.classList.toggle("py-5", !active);
-      header?.classList.toggle("bg-navy/95", active);
-      header?.classList.toggle("backdrop-blur-md", active);
-      header?.classList.toggle("shadow-xl", active);
-    }
-
-    // Mobile toggle
-    mobileToggle.addEventListener("click", () => {
-      isOpen = !isOpen;
-      mobileToggle.setAttribute("aria-expanded", String(isOpen));
-      mobileMenu.setAttribute("aria-hidden", String(!isOpen));
-
-      // Update tabindex for all children
-      updateMenuFocus(isOpen);
-
-      mobileMenu.style.maxHeight = isOpen ? `${mobileMenu.scrollHeight}px` : "0";
-      iconOpen?.classList.toggle("hidden", isOpen);
-      iconClose?.classList.toggle("hidden", !isOpen);
-      document.body.style.overflow = isOpen ? "hidden" : "";
-      handleScroll();
-    });
-
-    // Desktop dropdowns
-    document.querySelectorAll("[data-dropdown-btn]").forEach(btn => {
-      const wrapper = btn.closest(".relative");
-      const menu = wrapper?.querySelector("[data-dropdown-menu]") as HTMLElement | null;
-      const chevron = btn.querySelector("[data-dropdown-chevron]");
-
-      if (!menu) return;
-
-      btn.addEventListener("click", e => {
-        e.stopPropagation();
-        const isHidden = menu.classList.contains("hidden");
-        // Close all other dropdowns
-        document.querySelectorAll("[data-dropdown-menu]").forEach(m => m.classList.add("hidden"));
-        document.querySelectorAll("[data-dropdown-chevron]").forEach(c => c.classList.remove("rotate-180"));
-        document.querySelectorAll("[data-dropdown-btn]").forEach(b => b.setAttribute("aria-expanded", "false"));
-
-        if (isHidden) {
-          menu.classList.remove("hidden");
-          chevron?.classList.add("rotate-180");
-          btn.setAttribute("aria-expanded", "true");
-        }
-      });
-    });
-
-    // Close dropdowns on outside click
-    document.addEventListener("click", () => {
-      document.querySelectorAll("[data-dropdown-menu]").forEach(m => m.classList.add("hidden"));
-      document.querySelectorAll("[data-dropdown-chevron]").forEach(c => c.classList.remove("rotate-180"));
-      document.querySelectorAll("[data-dropdown-btn]").forEach(b => b.setAttribute("aria-expanded", "false"));
-    });
-
-    // Close on Escape key
-    document.addEventListener("keydown", e => {
-      if (e.key === "Escape") {
-        document.querySelectorAll("[data-dropdown-menu]").forEach(m => m.classList.add("hidden"));
-        document.querySelectorAll("[data-dropdown-chevron]").forEach(c => c.classList.remove("rotate-180"));
-        document.querySelectorAll("[data-dropdown-btn]").forEach(b => b.setAttribute("aria-expanded", "false"));
-      }
-    });
-
-    // Mobile accordions
-    document.querySelectorAll("[data-mobile-accordion-btn]").forEach(btn => {
-      const wrapper = btn.closest("div");
-      const links = wrapper?.querySelector("[data-mobile-accordion-links]");
-      const chevron = btn.querySelector("[data-mobile-accordion-chevron]");
-
-      if (!links) return;
-
-      btn.addEventListener("click", () => {
-        const isHidden = links.classList.contains("hidden");
-        links.classList.toggle("hidden", !isHidden);
-        chevron?.classList.toggle("rotate-180", isHidden);
-
-        // Dynamic resize for the parent menu to avoid clipping
-        if (isOpen) {
-          mobileMenu.style.maxHeight = "none";
-          mobileMenu.style.maxHeight = `${mobileMenu.scrollHeight}px`;
-        }
-      });
-    });
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
+  // Transparent at the top of the page, solid (with a smaller logo) once scrolled or when the menu is open
+  function updateHeader() {
+    const solid = window.scrollY > 50 || isOpen;
+    header.classList.toggle("bg-navy/95", solid);
+    header.classList.toggle("backdrop-blur-md", solid);
+    header.classList.toggle("shadow-xl", solid);
+    bar.classList.toggle("py-3", solid);
+    bar.classList.toggle("py-5", !solid);
+    logo?.classList.toggle("h-10", solid);
+    logo?.classList.toggle("md:h-12", solid);
+    logo?.classList.toggle("h-12", !solid);
+    logo?.classList.toggle("md:h-16", !solid);
   }
 
-  // Load logic for Astro View Transitions
-  initHeader();
-  document.addEventListener("astro:page-load", initHeader);
+  // ── Desktop dropdowns: hover with a mouse, click/tap or keyboard otherwise ──
+  const dropdowns = Array.from(document.querySelectorAll<HTMLElement>("[data-dropdown]"));
+
+  function setDropdown(dropdown: HTMLElement, open: boolean) {
+    dropdown.toggleAttribute("data-open", open);
+    dropdown.querySelector("[data-dropdown-btn]")?.setAttribute("aria-expanded", String(open));
+  }
+
+  function closeDropdowns(except?: HTMLElement) {
+    dropdowns.forEach(dropdown => dropdown !== except && setDropdown(dropdown, false));
+  }
+
+  dropdowns.forEach(dropdown => {
+    const btn = dropdown.querySelector("[data-dropdown-btn]")!;
+    let closeTimer: number | undefined;
+
+    dropdown.addEventListener("pointerenter", e => {
+      if (e.pointerType !== "mouse") return;
+      clearTimeout(closeTimer);
+      closeDropdowns(dropdown);
+      setDropdown(dropdown, true);
+    });
+
+    dropdown.addEventListener("pointerleave", e => {
+      if (e.pointerType !== "mouse") return;
+      closeTimer = window.setTimeout(() => setDropdown(dropdown, false), 150);
+    });
+
+    btn.addEventListener("click", () => {
+      const open = !dropdown.hasAttribute("data-open");
+      closeDropdowns(dropdown);
+      setDropdown(dropdown, open);
+    });
+
+    // Close when keyboard focus moves out of the menu
+    dropdown.addEventListener("focusout", e => {
+      if (!dropdown.contains(e.relatedTarget as Node | null)) setDropdown(dropdown, false);
+    });
+  });
+
+  document.addEventListener("click", e => {
+    if (!(e.target as Element).closest("[data-dropdown]")) closeDropdowns();
+  });
+
+  // ── Mobile menu ──
+  function sizeMobileMenu() {
+    const available = window.innerHeight - bar.offsetHeight;
+    mobileMenu.style.maxHeight = isOpen ? `${Math.min(mobileMenu.scrollHeight, available)}px` : "0";
+  }
+
+  function setMobileMenu(open: boolean) {
+    isOpen = open;
+    mobileToggle.setAttribute("aria-expanded", String(open));
+    mobileToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    // inert keeps links in the closed menu out of the tab order
+    mobileMenu.inert = !open;
+    iconOpen?.classList.toggle("hidden", open);
+    iconClose?.classList.toggle("hidden", !open);
+    document.body.style.overflow = open ? "hidden" : "";
+    updateHeader();
+    sizeMobileMenu();
+  }
+
+  mobileToggle.addEventListener("click", () => setMobileMenu(!isOpen));
+
+  document.querySelectorAll("[data-mobile-accordion-btn]").forEach(btn => {
+    const links = btn.nextElementSibling;
+    const chevron = btn.querySelector("[data-mobile-accordion-chevron]");
+
+    btn.addEventListener("click", () => {
+      const open = links?.classList.contains("hidden") ?? false;
+      links?.classList.toggle("hidden", !open);
+      links?.classList.toggle("grid", open);
+      chevron?.classList.toggle("rotate-180", open);
+      btn.setAttribute("aria-expanded", String(open));
+      sizeMobileMenu();
+    });
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Escape") return;
+    const openDropdown = dropdowns.find(dropdown => dropdown.hasAttribute("data-open"));
+    if (openDropdown) {
+      setDropdown(openDropdown, false);
+      openDropdown.querySelector<HTMLElement>("[data-dropdown-btn]")?.focus();
+    }
+    if (isOpen) {
+      setMobileMenu(false);
+      mobileToggle.focus();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    // The mobile menu doesn't exist at desktop widths
+    if (isOpen && window.matchMedia("(min-width: 1024px)").matches) setMobileMenu(false);
+    else if (isOpen) sizeMobileMenu();
+  });
+
+  window.addEventListener("scroll", updateHeader, { passive: true });
+  updateHeader();
 </script>

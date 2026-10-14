@@ -1,167 +1,100 @@
 ---
 import { Check, Plus } from "lucide-astro";
 import Button from "./ui/Button.astro";
-
-type Plan = {
-  name: string;
-  price: string;
-  payment: string;
-  description: string;
-  features: string[];
-  optionalFeatures: string[];
-  highlighted: boolean;
-};
-
-const pricingPlans: Plan[] = [
-  {
-    name: "The Beacon",
-    price: "$68",
-    payment: "Per Month",
-    description:
-      "A simple, professionally managed one-page site built to get your business online fast.",
-    features: [
-      "Custom single page website",
-      "Unlimited minor content edits*",
-      "Hosting, domain, & SSL",
-      "Search Engine Optimization (SEO)",
-      "Delivery in 1 week",
-      "Contact form"
-    ],
-    optionalFeatures: ["$20/month blog management"],
-    highlighted: false
-  },
-  {
-    name: "The Navigator",
-    price: "$155",
-    payment: "Per Month",
-    description:
-      "A fully managed, high-performance business website designed to grow alongside your company.",
-    features: [
-      "Custom website (up to 6 pages)",
-      "Unlimited minor content edits*",
-      "Hosting, domain, & SSL",
-      "Search Engine Optimization (SEO)",
-      "Delivery in 2-3 weeks",
-      "Contact form"
-    ],
-    optionalFeatures: ["$100 one-time fee for each extra page", "$20/month blog management"],
-    highlighted: true
-  },
-  {
-    name: "The Vessel",
-    price: "$2,750",
-    payment: "One Time Cost",
-    description: "A custom-built website for established businesses that prefer full ownership.",
-    features: [
-      "Custom website (up to 6 pages)",
-      "Delivery in 2-3 weeks",
-      "Search Engine Optimization (SEO)",
-      "Full ownership of all assets"
-    ],
-    optionalFeatures: [
-      "$100 one-time fee for each extra page",
-      "$45/month care plan (hosting, domain, SSL & unlimited edits)",
-      "$200 one-time fee for blog setup"
-    ],
-    highlighted: false
-  }
-];
+import { pricingPlans, formatPrice } from "../data/pricing.ts";
 ---
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto px-4 lg:items-stretch">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-4 max-w-5xl mx-auto lg:items-stretch">
   {
-    pricingPlans.map(plan => (
-      <div class={plan.highlighted ? "lg:-my-6 relative z-10" : ""}>
-        <div
-          class={`rounded-2xl flex flex-col h-full transition-shadow duration-300 p-8 ${
-            plan.highlighted
-              ? "bg-navy text-white shadow-2xl"
-              : "bg-white border border-navy/10 text-navy hover:shadow-md"
-          }`}>
-          {/* Badge */}
-          {plan.highlighted && (
-            <span class="inline-block self-start mb-4 bg-gold text-navy text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full">
-              Most Popular
-            </span>
-          )}
-
-          {/* Name & description */}
-          <h3
-            class={`text-2xl font-semibold mb-1 ${plan.highlighted ? "text-white" : "text-navy"}`}>
-            {plan.name}
-          </h3>
-          <p
-            class={`text-sm mb-6 leading-relaxed ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}>
-            {plan.description}
-          </p>
-
-          {/* Price */}
-          <div class="mb-6">
-            <span
-              class={`text-5xl tracking-tight ${plan.highlighted ? "text-white" : "text-navy"}`}>
-              {plan.price}
-            </span>
-            {plan.price !== "Custom" && (
-              <span class={`text-sm ml-2 ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}>
-                {plan.payment}
+    pricingPlans.map(plan => {
+      const muted = plan.highlighted ? "text-white/75" : "text-slate-600";
+      return (
+        <div class={plan.highlighted ? "lg:-my-6 relative z-10" : ""}>
+          <div
+            class:list={[
+              "rounded-3xl flex flex-col h-full p-8 transition-shadow duration-300",
+              plan.highlighted
+                ? "bg-navy text-white shadow-2xl"
+                : "bg-white border border-navy/10 text-navy hover:shadow-md"
+            ]}>
+            {plan.highlighted && (
+              <span class="self-start mb-4 rounded-full bg-gold px-3 py-1 text-sm font-semibold text-navy">
+                Most popular
               </span>
             )}
-          </div>
 
-          {/* CTA */}
-          <a href="/contact/" class="mb-8">
-            <Button variant={plan.highlighted ? "primary" : "outline"} class="w-full">
-              Get Started
-            </Button>
-          </a>
+            <h3
+              class:list={[
+                "text-2xl font-semibold",
+                plan.highlighted ? "text-white" : "text-navy"
+              ]}>
+              {plan.name}
+            </h3>
+            <p class:list={["mt-2 leading-relaxed", muted]}>{plan.bestFor}</p>
 
-          {/* Features */}
-          <div class="flex-1">
-            <p
-              class={`text-xs font-semibold uppercase tracking-widest mb-4 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}>
-              What's Included
-            </p>
-            <div class="space-y-3">
-              {plan.features.map(feature => (
-                <div class="flex items-start gap-3">
-                  <Check class="h-4 w-4 mt-0.5 shrink-0 text-teal" />
-                  <span
-                    class={`text-sm leading-snug ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}>
-                    {feature}
-                  </span>
-                </div>
-              ))}
+            {/* Price */}
+            <div class="mt-6 flex items-baseline gap-1.5">
+              <span
+                class:list={[
+                  "text-5xl font-bold tracking-tight",
+                  plan.highlighted ? "text-white" : "text-navy"
+                ]}>
+                {formatPrice(plan.price)}
+              </span>
+              {plan.unit && <span class:list={["text-lg", muted]}>{plan.unit}</span>}
             </div>
-            {plan.optionalFeatures.length > 0 && (
-              <>
+            <p
+              class:list={[
+                "mt-1 font-semibold",
+                plan.highlighted ? "text-gold" : "text-teal-hover"
+              ]}>
+              {plan.note}
+            </p>
+
+            <a href="/contact/" class="mt-6 mb-8">
+              <Button variant={plan.highlighted ? "gold" : "navyOutline"} class="w-full">
+                Choose this plan
+              </Button>
+            </a>
+
+            {/* What's included */}
+            <div class="flex-1">
+              <ul class="space-y-3">
+                {plan.features.map((feature, i) => (
+                  <li class="flex items-start gap-3">
+                    <Check class="h-5 w-5 shrink-0 text-teal" />
+                    <span class:list={["leading-snug", muted, i === 0 && "font-semibold"]}>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {plan.addOns.length > 0 && (
                 <div
-                  class={`border-t my-5 ${plan.highlighted ? "border-white/10" : "border-navy/10"}`}
-                />
-                <p
-                  class={`text-xs font-semibold uppercase tracking-widest mb-4 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}>
-                  Add-Ons (Optional)
-                </p>
-                <div class="space-y-3">
-                  {plan.optionalFeatures.map(feature => (
-                    <div class="flex items-start gap-3">
-                      <Plus class="h-4 w-4 mt-0.5 shrink-0 text-gold" />
-                      <span
-                        class={`text-sm leading-snug ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}>
-                        {feature}
-                      </span>
-                    </div>
-                  ))}
+                  class:list={[
+                    "mt-6 pt-6 border-t",
+                    plan.highlighted ? "border-white/10" : "border-navy/10"
+                  ]}>
+                  <p
+                    class:list={[
+                      "mb-3 font-semibold",
+                      plan.highlighted ? "text-white" : "text-navy"
+                    ]}>
+                    Add-ons
+                  </p>
+                  <ul class="space-y-3">
+                    {plan.addOns.map(addOn => (
+                      <li class="flex items-start gap-3">
+                        <Plus class="h-5 w-5 shrink-0 text-gold" />
+                        <span class:list={["text-sm leading-snug", muted]}>{addOn}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </>
-            )}
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    ))
+      );
+    })
   }
 </div>
-
-<p class="text-gray-400 text-s text-center px-8 mt-10 lg:mt-12 mx-auto">
-  * Minor content edits have a 1-2 business day turnaround and include text and image updates only;
-  no new pages or structural layout changes.
-</p>

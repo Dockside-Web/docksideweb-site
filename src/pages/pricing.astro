@@ -5,21 +5,154 @@ import Heading from "../components/ui/Heading.astro";
 import PricingPlans from "../components/PricingPlans.astro";
 import Button from "../components/ui/Button.astro";
 import FAQ from "../components/FAQ.astro";
-import CTAAboveFooter from "../components/CTAAboveFooter.astro";
-import HeroSecondary from "../components/HeroSecondary.astro";
+import CTACard from "../components/CTACard.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { Check } from "lucide-astro";
+import { addOnServices, addOnExtras, googleBusinessProfile, formatPrice, startingMonthlyPrice } from "../data/pricing.ts";
+import { Image } from "astro:assets";
+import docksideProfile from "../assets/dockside-gbp.webp";
 
 const pageTitle = "Pricing";
-const metaDescription = "Transparent pricing for premium web development. Explore our subscription-based models and custom project rates designed to fit your business goals.";
+const metaDescription = `Simple, transparent pricing for custom small business websites. Monthly plans from ${startingMonthlyPrice} with $0 down, or own your site outright. No hidden fees.`;
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
-  <HeroSecondary label="Pricing" heading="Simple, Transparent Pricing" description="We offer straightforward pricing that scales with your business needs." />
+  <PageHeader heading="Simple, Transparent Pricing" description="No surprises. Pick a plan and we handle the rest." />
 
   <Section bg="light">
     <PricingPlans />
   </Section>
 
-  <Section bg="white">
+  <Section bg="tealLight" id="add-ons">
+    <div class="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+      <Heading>Add-ons to help you get found</Heading>
+      <p class="mt-4 text-lg text-slate-600 leading-relaxed">
+        Pair any plan with these extras. Your website brings them in, and these keep the calls coming.
+      </p>
+    </div>
+    <div class="max-w-5xl mx-auto">
+      <!-- Featured: Google Business Profile -->
+      <div
+        class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 rounded-3xl bg-white border border-navy/10 p-8 md:p-10">
+        <div class="lg:col-span-3 flex flex-col">
+          <span class="self-start mb-4 rounded-full bg-gold-light px-3 py-1 text-sm font-semibold text-navy">
+            Most requested
+          </span>
+          <h3 class="text-2xl md:text-3xl font-semibold text-navy">Google Business Profile</h3>
+          <p class="mt-2 text-slate-600 leading-relaxed">
+            The box that shows up on Google Maps when someone searches "near me." For many local
+            businesses, it brings in more calls than the website.
+          </p>
+
+          <!-- Short labels so every item fits on one line -->
+          <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+            {
+              [
+                "Profile claimed & verified",
+                "The right categories chosen",
+                "Services, hours & area filled in",
+                "Description written for search",
+                "Photos & logo added",
+                "Linked to your website"
+              ].map(feature => (
+                <li class="flex items-center gap-3">
+                  <Check class="h-5 w-5 shrink-0 text-teal" />
+                  <span class="text-slate-600">{feature}</span>
+                </li>
+              ))
+            }
+          </ul>
+
+          <!-- Two pricing options, side by side -->
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="rounded-2xl bg-slate-50 p-5">
+              <p class="text-sm font-semibold uppercase tracking-wider text-teal-hover">Setup</p>
+              <p class="mt-2">
+                <span class="text-3xl font-bold tracking-tight text-navy">{formatPrice(googleBusinessProfile.setup)}</span>
+                <span class="text-slate-600">one-time</span>
+              </p>
+              <p class="mt-2 text-sm text-slate-600">Everything above, done right once.</p>
+            </div>
+            <div class="rounded-2xl bg-slate-50 p-5">
+              <p class="text-sm font-semibold uppercase tracking-wider text-teal-hover">Monthly care</p>
+              <p class="mt-2">
+                <span class="text-3xl font-bold tracking-tight text-navy">{formatPrice(googleBusinessProfile.monthly)}</span>
+                <span class="text-slate-600">/month</span>
+              </p>
+              <p class="mt-2 text-sm text-slate-600">Review replies & hours kept current.</p>
+            </div>
+          </div>
+          <p class="mt-3 text-sm text-slate-600">
+            <span class="font-semibold text-navy">Dockside website clients:</span> monthly care is just {formatPrice(googleBusinessProfile.clientMonthly)}/month.
+          </p>
+
+          <a href="/contact/" class="mt-6 self-start">
+            <Button variant="secondary">Get on the map</Button>
+          </a>
+        </div>
+
+        <!-- Our own Google Business Profile, as it appears in search -->
+        <div class="lg:col-span-2 flex items-center">
+          <Image
+            src={docksideProfile}
+            alt="Dockside Web Solutions' Google Business Profile showing a 5.0 star rating, call and website buttons, hours, and reviews"
+            class="mx-auto w-full max-w-sm lg:max-w-none rounded-2xl shadow-lg"
+            widths={[455]}
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Ongoing services -->
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {
+          addOnServices.map(service => (
+            <div class="flex flex-col rounded-3xl bg-white border border-navy/10 p-8 transition-shadow duration-300 hover:shadow-md">
+              <service.icon class="h-8 w-8 text-teal-hover" stroke-width={1.75} />
+              <h3 class="mt-4 text-2xl font-semibold text-navy">{service.name}</h3>
+              <p class="mt-2 text-slate-600 leading-relaxed">{service.tagline}</p>
+              <p class="mt-5">
+                <span class="text-4xl font-bold tracking-tight text-navy">{service.price}</span>
+                <span class="text-slate-600">{service.unit}</span>
+              </p>
+              <ul class="mt-6 space-y-3 flex-1">
+                {service.features.map(feature => (
+                  <li class="flex items-start gap-3">
+                    <Check class="h-5 w-5 shrink-0 text-teal" />
+                    <span class="leading-snug text-slate-600">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- One-time extras -->
+      <div class="mt-6 rounded-3xl bg-white border border-navy/10 p-8">
+        <p class="font-semibold text-navy">One-time extras</p>
+        <ul class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {
+            addOnExtras.map(extra => (
+              <li class="flex items-start gap-4">
+                <span class="grid size-10 shrink-0 place-items-center rounded-full bg-teal-light">
+                  <extra.icon class="size-5 text-navy" />
+                </span>
+                <div>
+                  <p class="font-semibold text-navy">
+                    {extra.name} <span class="text-teal-hover">· {extra.price}</span>
+                  </p>
+                  <p class="mt-1 text-sm text-slate-600 leading-snug">{extra.detail}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="white" id="pricing-faq">
     <div class="text-center max-w-3xl mx-auto">
       <Heading>Pricing FAQs</Heading>
     </div>
@@ -33,5 +166,5 @@ const metaDescription = "Transparent pricing for premium web development. Explor
     </div>
   </Section>
 
-  <CTAAboveFooter />
+  <CTACard bg="white" />
 </Layout>
