@@ -15,15 +15,18 @@ export interface Props {
 const { title, description, article } = Astro.props;
 
 const brandName = "Dockside Web Solutions";
-const homepageTagline = "Websites Built for Small Businesses";
+const homepageTagline = "Small Business Web Design in Baltimore & Charleston";
 // Articles share their own cover photo; other pages use the site-wide image
 const socialImageURL = article?.image ?? new URL("/og-main.jpg", Astro.site).href;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 
 // If a title exists (About, Gallery, etc.), show "Page | Brand"
-// If no title exists (Home), show "Brand | Tagline"
-const siteTitle = title ? `${title} | ${brandName}` : `${brandName} | ${homepageTagline}`;
+// If no title exists (Home), show "Tagline | Brand" so the search keywords come first
+const siteTitle = `${title ?? homepageTagline} | ${brandName}`;
+
+const logoURL = new URL("/android-chrome-512x512.png", Astro.site).href;
+const aboutURL = new URL("/about/", Astro.site).href;
 
 // Structured data for the business itself (homepage only), so Google can connect
 // the site to the Google Business Profile and LinkedIn page
@@ -35,14 +38,15 @@ const businessSchema = isHomepage && {
   legalName: contactInfo.businessNameFormal,
   description,
   url: Astro.site?.href,
-  logo: new URL("/android-chrome-512x512.png", Astro.site).href,
-  image: new URL("/android-chrome-512x512.png", Astro.site).href,
+  logo: logoURL,
+  image: logoURL,
   telephone: contactInfo.phoneHref.replace("tel:", ""),
   email: contactInfo.email,
   areaServed: [
     ...contactInfo.locations.map(location => ({ "@type": "City", name: location })),
     { "@type": "Country", name: "United States" }
   ],
+  founder: { "@type": "Person", name: contactInfo.founder, url: aboutURL },
   sameAs: [contactInfo.social.linkedIn, contactInfo.social.googleBusinessProfile]
 };
 
@@ -54,9 +58,30 @@ const articleSchema = article && {
   description,
   image: socialImageURL,
   datePublished: article.publishedTime.toISOString(),
-  author: { "@type": "Person", name: article.author },
-  publisher: { "@type": "Organization", name: brandName, url: Astro.site?.href },
+  author: {
+    "@type": "Person",
+    name: article.author,
+    // Only the founder has a bio page to point to
+    ...(article.author === contactInfo.founder && { url: aboutURL })
+  },
+  publisher: {
+    "@type": "Organization",
+    name: brandName,
+    url: Astro.site?.href,
+    logo: { "@type": "ImageObject", url: logoURL }
+  },
   mainEntityOfPage: canonicalURL
+};
+
+// Home > Blog > Post trail that Google can show in place of the raw URL
+const breadcrumbSchema = article && {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: Astro.site?.href },
+    { "@type": "ListItem", position: 2, name: "Blog", item: new URL("/blog/", Astro.site).href },
+    { "@type": "ListItem", position: 3, name: title, item: canonicalURL }
+  ]
 };
 ---
 
@@ -100,3 +125,4 @@ const articleSchema = article && {
 
 {businessSchema && <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />}
 {articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}
+{breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}

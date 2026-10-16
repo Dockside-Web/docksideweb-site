@@ -4,6 +4,10 @@
   "main": "worker.js",
   "assets": {
     "directory": "./dist",
+    // Lets worker.js read the built files as env.ASSETS
+    "binding": "ASSETS",
+    // Run worker.js on every request (not just missing files) so the www and trailing-slash redirects apply
+    "run_worker_first": true,
     "not_found_handling": "404-page"
   },
   "observability": {
